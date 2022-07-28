@@ -20,6 +20,7 @@ const User = ({ onSaveData}) => {
         setForm({
             author: '',
             groupName:'',
+            title: '',
             thumbnail: '',
             content: '',
 
@@ -38,10 +39,13 @@ const User = ({ onSaveData}) => {
                     <input required placeholder="please enter the group name" type="text" name="groupName" value={form.groupName} onChange ={handleChange}/>
                 </label>
                 <label htmlFor="thumbnail">
-                    <input required placeholder="please enter the group name" type="text" name="thumbnail" value={form.thumbnail} onChange ={handleChange}/>
+                    <input required placeholder="please enter the thumbnail" type="text" name="thumbnail" value={form.thumbnail} onChange ={handleChange}/>
+                </label>
+                <label htmlFor="title">
+                    <input required placeholder="please enter the title" type="text" name="title" value={form.title} onChange ={handleChange}/>
                 </label>
                 <label htmlFor="content">
-                    <input required placeholder="please enter the group name" type="text" name="content" value={form.content} onChange ={handleChange}/>
+                    <input required placeholder="please enter the content" type="text" name="content" value={form.content} onChange ={handleChange}/>
                 </label>
             </div>
             <div>

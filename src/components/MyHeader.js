@@ -4,13 +4,13 @@ const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatti
     const navigate = useNavigate();
 
     return <header>
-        <div className="head_Home" onClick={()=>{  navigate("/home");}}>
+        <div className="head_Home" onClick={()=>{  navigate("/");}}>
             {head_Home}
         </div>
-        <div className="head_lecture" onClick={()=>{ navigate("/lecturelist");}}>
+        <div className="head_lecture" onClick={()=>{ navigate("/lecture");}}>
             {head_lecture}
         </div>
-        <div className="head_group" onClick={()=>{ navigate("/grouplist");}}>
+        <div className="head_group" onClick={()=>{ navigate("/group");}}>
             {head_group}
         </div>
         <div className="head_mypage" onClick={()=>{ navigate("/mypage");}}>

@@ -1,23 +1,42 @@
-import React, { Component } from 'react';
-import groups from './groups';
+import React, { useState } from 'react';
+import MyButton from '../MyButton';
+import { useNavigate } from 'react-router';
+import RecommendGroupList from "./RecommendGroupList";
+import MyGroupList from './MyGroupList';
+import GroupSearch from './GroupSearch';
 
-class groupList extends Component {
-  static defaultData = {
-    data: []
-  }
+const GroupList= ({groupList})=> {
 
-  render() {
-    const { data } = this.props;
-    const list = data.map(
-      info => (<groups key={info.id} info={info}/>)
-    );
+    // const navigate = useNavigate();
 
     return (
-      <div>
-        {list}    
+      <div className="GroupList">
+        <GroupSearch/>
+
+
+        <p className='group_title'> Recommend Group List</p>
+        <div className="RecommendGroupList">
+        
+             {groupList.map((it) => (
+                <RecommendGroupList key = {it.id} {...it}/>
+             ))}
+        </div>
+        <p className='group_title'> My Group List</p>
+        <div className="MyGroupList">
+        
+        
+        {groupList.map((it) =>(
+          <MyGroupList key = {it.id} {...it}/>
+          ))}
+    
+        </div>
       </div>
     );
-  }
+    
+  };
+GroupList.defaultProps = {
+    groupList: [],
 }
 
-export default groupList;
+  
+export default GroupList;

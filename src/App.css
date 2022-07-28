@@ -10,9 +10,9 @@ body {
   margin: 0px;
 }
 /* ??? ?? ?? ?? */
-@media (min-width: 650px){ /*if size> 650 do*/
+@media (min-width: 800px){ /*if size> 650 do*/
   .App{
-    width:640px;
+    width:800px;
   }
 }
 
@@ -110,6 +110,184 @@ header .head_signup{
   justify-content: center;
   color: white;
   
+}
+
+
+
+/* PostList */
+.PostList .menu_wrapper {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.PostList .menu_wrapper .right_col {
+  flex-grow: 0.1;
+}
+
+.PostList .menu_wrapper .right_col button{
+  width: 100%;
+  
+}
+
+.PostList .ControlMenu {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  cursor: pointer;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+}
+
+.Post_Table {
+  border: 2px solid #e2e2e2;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  width: 100%;
+
+}
+
+.Post_Table caption {
+  color: darkcyan;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.Post_Table th {
+  color:black;
+  font-size: 20px;
+  border-bottom: 2px solid #e2e2e2;
+}
+
+
+.Post_Tr {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+  background-color: white;
+  
+}
+.Post_Table_Date{
+  width: 20%;
+
+}
+
+.Post_Table_Title{
+  width: 40%;
+
+}
+.Post_Table_Author{
+  width: 20%;
+
+}
+.Post_Table_GroupName{
+  width: 20%;
+
+}
+.MyGroupList, .RecommendGroupList{
+  display:flex;
+  flex-wrap: wrap;
+  /* overflow:; */
+  white-space: normal;
+  /* justify-content: center; */
+
+  
+}
+
+.MyGroup, .RecommendGroup {
+  width: 250px;
+  border: 4px solid #e2e2e2;
+  border-radius: 5px;
+  /* display:flex; */
+  justify-content: center;
+  background-color: white;
+  margin: 2%;
+
+  cursor: pointer;
+}
+
+.RecommendGroup .RecommendGroup_image, .MyGroup .MyGroup_image{
+  width: 100%;
+  /* height: 40px; */
+  border-bottom: 5px solid #ececec;
+  /* border-radius:5px; */
+  /* display: flex; */
+  justify-content: center;
+  background-color: #64c964;
+}
+
+.group_title{
+  padding: 10px;
+  font-size: 30px;
+}
+.RecommendGroup .RecommendGroupcontent, .MyGroup .MyGroupcontent {
+  font-size: 20px;
+  justify-content: center; 
+
+}
+
+.RecommendGroup .RecommendGroupcontent p, .MyGroup .MyGroupcontent p{
+  word-wrap: break-word;
+}
+
+
+.group_search {
+  padding: 5px;
+  margin: 20px;
+  margin-top: 50px;
+
+}
+.group_searchBar{
+  width: 40%;
+  font-size: 30px;
+  margin-right: 40px;
+}
+
+
+
+.PostEditor section {
+  margin-bottom:40px;
+  
+}
+.PostEditor h4{
+  font-size: 25px;
+  /* font-weight: bold; */
+}
+
+.post_title{
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 20px;
+  font-family: 'Do Hyeon', sans-serif;
+  border: 4px solid #ececec;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.PostEditor textarea{
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 400px;
+  resize: vertical;
+  border: 4px solid #ececec;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.PostEditor .control_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 
