@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const MyGroup = ({group_info, group_post, group_gallery, group_chatting}) => {
     const navigate = useNavigate();
     return <header className="group_header">
-        <div className="group_info" onClick={()=>{ navigate("/group");}}>
+        <div className="group_main" onClick={()=>{ navigate("/group/main");}}>
             {group_info}
         </div>
         <div className="group_post"  onClick={()=>{ navigate("/group/post");}}>

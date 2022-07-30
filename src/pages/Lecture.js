@@ -1,17 +1,25 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import LectureList from "../components/lecture/LectureList";
+import React, {Component, useContext, useEffect, useState} from "react";
+// import GroupList from "../components/group/GroupContentList";
+import { LectureStateContext } from "../App";
 
-const Lecture = ({lecture}) => {
-    const {id} = useParams();
-    return (<div>
-        {/* {Lecture.map((it) =>(
-            <div key = {it.id}>{it.content}</div>
-        ))} */}
-        <h1>Lecture</h1>
-        <p>This is Lecture page</p>
-    </div>
-    );
-};
-Lecture.defaultProps = {
-    lecture:[],
+const Lecture =() =>{
+    const lectureList = useContext(LectureStateContext);
+    const [lecture_data, setLectureData] = useState([]);
+
+    useEffect(()=>{
+        setLectureData(lectureList);
+    },[lectureList]);
+        
+    useEffect(()=>{
+        console.log(lecture_data);
+    },[lecture_data]);
+        
+
+    return(<div className="lecture">
+        <LectureList lectureList = {lecture_data}/>
+    </div>)
+
 }
 export default Lecture;

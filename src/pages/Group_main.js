@@ -1,26 +1,34 @@
-// import { useParams } from "react-router-dom";
-import GroupList from "../components/group/GroupList";
+import GroupMain from "../components/group/GroupMain"
 import React, {Component, useContext, useEffect, useState} from "react";
-// import GroupList from "../components/group/GroupContentList";
 import { GroupStateContext } from "../App";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const Group_main =() =>{
-    const groupList = useContext(GroupStateContext);
-    const [group_data, setGroupData] = useState([]);
-
-    useEffect(()=>{
-        setGroupData(groupList);
-    },[groupList]);
+    const { id } = useParams();
+    const groupData = useContext(GroupStateContext);
+    const [originData, setOriginData] = useState();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(groupData.length >= 1){
+            const targetGroup = groupData.find(
+                (it) => parseInt(it.id) === parseInt(id)
+            );
+            console.log(targetGroup);
+            if(targetGroup){
+                setOriginData(targetGroup);
+            } else {
+                navigate("/group", {replace: true});
+            }
+        }
+    }, [id, groupData]);
         
-    useEffect(()=>{
-        console.log(group_data);
-    },[group_data]);
-        
 
-    return(<div group_main>
-        <GroupList groupList = {group_data}/>
+    return(<div className="group_main">
+        {originData && <GroupMain originData ={originData}/>}
+
+        
     </div>)
-
 }
 export default Group_main;

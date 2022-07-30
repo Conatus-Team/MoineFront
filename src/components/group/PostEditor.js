@@ -1,4 +1,4 @@
-import { useRef, useState, useContext } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
 import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const getStringDate = (date) => {
 };
 
 
-const PostEditor =() => {
+const PostEditor =({isEdit, originData}) => {
     const navigate = useNavigate();
     const contentRef = useRef();
     const [date, setDate] = useState(getStringDate(new Date()));
@@ -19,7 +19,7 @@ const PostEditor =() => {
     const [title, setTitle] = useState("title6");
     const [groupName, setGroupName] = useState("group6");
 
-    const {onCreate} =useContext(PostDispatchContext);
+    const {onCreate, onEdit} =useContext(PostDispatchContext);
 
 
     const handleSubmit = () => {
@@ -27,9 +27,28 @@ const PostEditor =() => {
             contentRef.current.focus();
             return;
         }
-        onCreate(date, author, content, title, groupName);
-        navigate("/", { replace: true});
-    }
+        if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
+            if(!isEdit){
+                onCreate(date, author, content, title, groupName);
+            }
+        
+            else {
+                onEdit(originData.id, date, author, content, title, groupName);
+            }
+        }
+        
+        navigate("/group/post", {replace: true});
+    };
+
+    useEffect(()=>{
+        if(isEdit){
+            setDate(getStringDate(new Date(parseInt(originData.date))));
+            setGroupName(originData.groupName);
+            setAuthor(originData.author);
+            setContent(originData.content);
+            setTitle(originData.title);
+        }
+    })
 
 
     return (<div className="PostEditor">
