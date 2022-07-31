@@ -1,29 +1,24 @@
-import React, {Component} from "react";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+import MyGroup from '../MyGroup';
+// import MyButton from '../MyButton';
+// import { useNavigate } from 'react-router';
+// import RecommendGroupList from "./RecommendGroupList";
+// import MyGroupList from './MyGroupList';
 
-class groups extends Component {
-    static defaultData = {
-        info: {
-            id: 0,
-            groupName: 'Happy cooking',
-            thumbnail: "../../public/assets/emotion1.png"
-        }
-    }
-    render(){
-        const style = {
-            border: '1px solid gray',
-            padding: '8px',
-            margin: '8px'
-        };
-        const {
-            id, groupName, thumbnail
-        } = this.props.info;
+const Groups= ()=> {
+    const { id } = useParams();
+    console.log(id);
+   
+    return (<div>
+        <MyGroup id={id}/>
+        </div>
+    );
+    
+  };
+// GroupMain.defaultProps = {
+//     groupList: [],
+// }
 
-        return (
-            <div style={style}>
-                <div><b>{groupName}</b></div>
-                <div><img alt="thumbnail" src={thumbnail}/></div>
-            </div>
-        )
-    }
-}
-export default groups;
+  
+export default Groups;

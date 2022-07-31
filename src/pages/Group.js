@@ -12,13 +12,8 @@ const Group =() =>{
         setGroupData(groupList);
     },[groupList]);
         
-    useEffect(()=>{
-        console.log(group_data);
-    },[group_data]);
-        
 
     return(<div className="group">
-        <MyGroup group_info={"Main"} group_post={"Posts"} group_gallery={"Gallery"} group_chatting={"Chatting"}/>
         <GroupList groupList = {group_data}/>
     </div>)
 

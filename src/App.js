@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './pages/Home';
 import PostItemNew from './pages/Post/PostItemNew';
 import PostItemEdit from './pages/Post/PostItemEdit';
+import PostItem from './pages/Post/PostItem';
 
 //components
 import MyButton from './components/MyButton';
@@ -17,6 +18,7 @@ import Lecture from './pages/Lecture';
 import Group_main from './pages/Group_main';
 import Gallery from './pages/Post/Gallery';
 import Post from './pages/Post/Post';
+import Groups from './components/group/Groups';
 
 
 const reducer = (state, action) => {
@@ -135,6 +137,7 @@ const group_dummy_data = [
 const post_dummy_data = [
   {
     id: 1,
+    groupId:1,
     groupName: "cooking",
     title: "title1",
     author: "author1",
@@ -143,6 +146,7 @@ const post_dummy_data = [
   },
   {
     id: 2,
+    groupId: 1,
     groupName: "cooking",
     title: "title2",
     author: "author2",
@@ -152,6 +156,7 @@ const post_dummy_data = [
   {
     id: 3,
     groupName: "yummy",
+    groupId:4,
     title: "title3",
     author: "author3",
     content:"content3",
@@ -160,6 +165,7 @@ const post_dummy_data = [
   {
     id: 4,
     groupName: "yummy",
+    groupId:4,
     content:"content4",
     title: "title4",
     author: "author4",
@@ -168,6 +174,7 @@ const post_dummy_data = [
   {
     id: 5,
     groupName: "cooking",
+    groupId: 1,
     content:"content5",
     title: "title5",
     author: "author5",
@@ -246,10 +253,13 @@ function App() {
         <Route path='/signup' element={<SignUp/>} />
         <Route path='/lecture' element={<Lecture/>} />
         <Route path='/group/main/:id' element={<Group_main/>} />
+        <Route path='/group/groups' element={<Groups/>} />
+        <Route path='/group/groups/:id' element={<Groups/>} />
         <Route path='/group/gallery' element={<Gallery/>} />
         <Route path='/group/post/new' element={<PostItemNew/>} />
         <Route path='/group/post/edit/:id' element={<PostItemEdit/>} />
         <Route path='/group/post/:id' element={<Post/>} /> 
+        <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
         <Route path='/group/post' element={<Post/>} />
 
       </Routes>

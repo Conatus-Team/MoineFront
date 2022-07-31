@@ -14,13 +14,13 @@ const PostItemEdit = () => {
     useEffect(() => {
         if(postList.length >= 1){
             const targetPost = postList.find((it)=> parseInt(it.id) === parseInt(id));
-        console.log(targetPost);
-        if(targetPost) {
-            setOriginData(targetPost);
+            console.log(targetPost);
+            if(targetPost) {
+                setOriginData(targetPost);
 
-        } else {
-            navigate("/group/post",{replace: true});
-        }
+            } else {
+                navigate("/group/post",{replace: true});
+            }
         }
     }, [id, postList]);
   

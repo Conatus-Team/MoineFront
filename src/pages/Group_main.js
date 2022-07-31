@@ -3,6 +3,7 @@ import React, {Component, useContext, useEffect, useState} from "react";
 import { GroupStateContext } from "../App";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import MyGroup from "../components/MyGroup";
 
 
 const Group_main =() =>{
@@ -26,6 +27,7 @@ const Group_main =() =>{
         
 
     return(<div className="group_main">
+        <MyGroup id={id}/>
         {originData && <GroupMain originData ={originData}/>}
 
         
