@@ -1,8 +1,11 @@
-const RecommendLectureList = ({id, lectureName, thumbnail, title, content, teacher, count, date, link}) => {
+import { useNavigate } from "react-router-dom";
+
+const RecommendLectureList = ({id, lectureName, thumbnail, title}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
+    const navigate = useNavigate();
 return (
-    <div className="RecommendLecture">
+    <div className="RecommendLecture" onClick={() => navigate(`/lecture/${id}`)}>
       <div className="RecommendLecture_image">
         <img src = {process.env.PUBLIC_URL+ `assets/${thumbnail}`}/>
       </div>

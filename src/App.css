@@ -16,9 +16,9 @@ body {
   }
 }
 
-@media (min-width: 1500px){ /*if size> 650 do*/
+@media (min-width: 1400px){ /*if size> 650 do*/
   .App{
-    width:1480px;
+    width:1350px;
   }
 }
 
@@ -271,6 +271,15 @@ header .head_signup{
   border-radius: 5px;
   padding: 20px;
 }
+.post_editor_info {
+  margin-left: 20px;
+  margin-right: 20px;
+
+  display:flex;
+  justify-content: space-between;
+  font-size: 20px;
+  border-bottom: 2px solid #ececec;
+}
 
 .PostEditor textarea{
   font-family: 'Do Hyeon', sans-serif;
@@ -322,14 +331,14 @@ header .head_signup{
 .group_content{
   display: flex;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 20px;
   margin-bottom: 10px;
   padding:40px;
-  height:250px;
+  height:300px;
 
 }
 .group_content .group_thumbnail{
-  width: 300px;
+  width: 400px;
   background-color: beige;
 }
 .group_content .MyButton{
@@ -341,6 +350,74 @@ height: 50px;
   padding-right:280px;
   justify-content: center;
 }
+
+.post_item_header{
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 50px;
+  border-bottom: 2px solid #ececec;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.post_item_date{
+  color: gray;
+}
+.post_item_detail{
+  text-align: left;
+  margin-left: 50px;
+  word-wrap: break-word;
+  height: 600px;
+}
+.post_item_title{
+  font-size: 30px;
+}
+.post_item_content{
+  font-size: 25px;
+}
+
+.post_item_button button{
+  width: 120px;
+  margin-top:20px
+}
+
+
+/* lecture */
+.lecture_main{
+  justify-content: center;
+  font-size: 20px;
+  
+}
+
+.lecture_header{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding:40px;
+  height:600px;
+
+}
+.lecture_header .lecture_thumbnail{
+  width: 800px;
+  height: 500px;
+  background-color: beige;
+}
+.lecture_header .MyButton{
+margin-left:20px;
+margin-top: 60px;
+height: 50px;
+}
+.lecture_content{
+  padding-right:280px;
+  justify-content: center;
+  font-size: 25px;
+}
+.lecture_content .lecture_title{
+  font-size: 25px;
+}
+
+
 
 
 /* .App-header {

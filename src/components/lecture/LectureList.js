@@ -7,7 +7,7 @@ import LectureSearch from './LectureSearch';
 
 const LectureList= ({lectureList})=> {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     return (
       <div className="LectrueList">

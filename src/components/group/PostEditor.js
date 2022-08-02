@@ -1,7 +1,7 @@
 import { useRef, useState, useContext, useEffect } from "react";
 import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PostDispatchContext } from "../../App";
 
 //return date into string
@@ -10,14 +10,14 @@ const getStringDate = (date) => {
 };
 
 
-const PostEditor =({isEdit, originData}) => {
+const PostEditor =({isEdit, originData, groupId, groupName}) => {
     const navigate = useNavigate();
     const contentRef = useRef();
+  
     const [date, setDate] = useState(getStringDate(new Date()));
     const [content, setContent] = useState("");
     const [author, setAuthor] = useState("author6");
     const [title, setTitle] = useState("title6");
-    const [groupName, setGroupName] = useState("group6");
 
     const {onCreate, onEdit} =useContext(PostDispatchContext);
 
@@ -29,21 +29,20 @@ const PostEditor =({isEdit, originData}) => {
         }
         if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
             if(!isEdit){
-                onCreate(date, author, content, title, groupName);
+                onCreate(date, author, content, title, groupId, groupName);
             }
         
             else {
-                onEdit(originData.id, date, author, content, title, groupName);
+                onEdit(date, author, content, title, groupName);
             }
         }
         
-        navigate("/group/post", {replace: true});
+        navigate(`/group/post/${originData.groupId}`, {replace: true});
     };
 
     useEffect(()=>{
         if(isEdit){
             setDate(getStringDate(new Date(parseInt(originData.date))));
-            setGroupName(originData.groupName);
             setAuthor(originData.author);
             setContent(originData.content);
             setTitle(originData.title);
@@ -52,32 +51,20 @@ const PostEditor =({isEdit, originData}) => {
 
 
     return (<div className="PostEditor">
-        <MyGroup group_info={"Main"} group_post={"Posts"} group_gallery={"Gallery"} group_chatting={"Chatting"}/>
+        <MyGroup id={parseInt(groupId)}/>
         
         <div className="post_new">
-            <section>
-            {/*  */}
+            <section className="post_editor_info">
             {/* group Name */}
-            <h4>Group Name: </h4>
-            <div>
-            <input type="hidden"
-            className="post_title"
-            value={groupName} onChange = {(e) => setGroupName(e.target.value)}/></div>
-
-            
-            
-            <h4>User Name: </h4>
-            <div>
-            <input type="hidden"
-            className="post_title"
-            value={author} onChange = {(e) => setAuthor(e.target.value)}/></div>
-            
-
+            <p>Group Name: {groupName}</p>
+               
+            <p>User Name: {author}</p>
+           
             {/* date */}
-            <h4>date: {date}  </h4>
+            <p>date: {date}  </p>
 
             <div>
-            <input value={date} onChange = {(e) => setDate(e.target.value)} type="date"/>
+            {/*<input value={date} onChange = {(e) => setDate(e.target.value)} type="date"/>*/}
             </div>
             </section>
 

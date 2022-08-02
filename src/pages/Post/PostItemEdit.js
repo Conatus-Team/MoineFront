@@ -4,16 +4,16 @@ import { PostStateContext } from "../../App";
 import PostEditor from "../../components/group/PostEditor";
 const PostItemEdit = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { postId } = useParams();
     const [originData, setOriginData] = useState();
 
     const postList = useContext(PostStateContext);
-    console.log(id);
+    console.log(postId);
 
 
     useEffect(() => {
         if(postList.length >= 1){
-            const targetPost = postList.find((it)=> parseInt(it.id) === parseInt(id));
+            const targetPost = postList.find((it)=> parseInt(it.id) === parseInt(postId));
             console.log(targetPost);
             if(targetPost) {
                 setOriginData(targetPost);
@@ -22,10 +22,10 @@ const PostItemEdit = () => {
                 navigate("/group/post",{replace: true});
             }
         }
-    }, [id, postList]);
+    }, [postId, postList]);
   
     return (<div>
-        {originData && <PostEditor isEdit={true} originData={originData}/>}
+        {originData && <PostEditor isEdit={true} originData={originData} groupId={originData.groupId} groupName={originData.groupName}/>}
 
     </div>
     );

@@ -1,10 +1,10 @@
-// import GroupList from "./GroupList";
-
-const MyLectureList = ({id, lectureName, thumbnail, title, content, teacher, count, date, link}) => {
+import { useNavigate } from "react-router-dom";
+const MyLectureList = ({id, lectureName, thumbnail, title}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
+    const navigate = useNavigate();
 return (
-    <div className="MyLecture">
+    <div className="MyLecture" onClick={() => navigate(`/lecture/${id}`)}>
       <div className="MyLecture_image">
         <img src = {process.env.PUBLIC_URL+ `assets/${thumbnail}`}/>
       </div>

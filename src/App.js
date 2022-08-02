@@ -1,8 +1,21 @@
 import React, { useEffect, useReducer, useRef } from 'react';
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useParams } from "react-router-dom";
 
 import Home from './pages/Home';
+
+//Lecture
+import Lecture from './pages/Lecture';
+import LectureDetail from "./components/lecture/LectureDetail";
+
+//Group
+import Group from './pages/Group';
+import Group_main from './pages/Group_main';
+import Groups from './components/group/Groups';
+import Gallery from './pages/Post/Gallery';
+
+//post
+import Post from './pages/Post/Post';
 import PostItemNew from './pages/Post/PostItemNew';
 import PostItemEdit from './pages/Post/PostItemEdit';
 import PostItem from './pages/Post/PostItem';
@@ -11,14 +24,8 @@ import PostItem from './pages/Post/PostItem';
 import MyButton from './components/MyButton';
 import MyHeader from './components/MyHeader';
 import Mypage from './pages/Mypage';
-import Group from './pages/Group';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
-import Lecture from './pages/Lecture';
-import Group_main from './pages/Group_main';
-import Gallery from './pages/Post/Gallery';
-import Post from './pages/Post/Post';
-import Groups from './components/group/Groups';
 
 
 const reducer = (state, action) => {
@@ -66,6 +73,7 @@ const lecture_dummy_data = [
     content:"this lecture is.....",
     teacher: 7,
     count: 5,
+    price:1000,
     date: 1638969241915,
     link: "http://naver.com",
   },
@@ -77,6 +85,7 @@ const lecture_dummy_data = [
     content:"this lecture is.....",
     teacher: 7,
     count: 5,
+    price:2000,
     date: 1638969241916,
     link: "http://naver.com",
   },
@@ -88,6 +97,7 @@ const lecture_dummy_data = [
     content:"this lecture is.....",
     teacher: 7,
     count: 5,
+    price:50000,
     date: 1638969241917,
     link: "http://naver.com",
   },
@@ -247,6 +257,7 @@ function App() {
       <Routes>
         <Route path = '/' element = {<Home/>} />
         <Route path='/lecture' element={<Lecture/>} />
+        <Route path='/lecture/:id' element={<LectureDetail/>} />
         <Route path='/group' element={<Group/>} />
         <Route path='/mypage' element={<Mypage/>} />
         <Route path='/login' element={<LogIn/>} />
@@ -256,8 +267,8 @@ function App() {
         <Route path='/group/groups' element={<Groups/>} />
         <Route path='/group/groups/:id' element={<Groups/>} />
         <Route path='/group/gallery' element={<Gallery/>} />
-        <Route path='/group/post/new' element={<PostItemNew/>} />
-        <Route path='/group/post/edit/:id' element={<PostItemEdit/>} />
+        <Route path='/group/post/new/:groupId' element={<PostItemNew/>} />
+        <Route path='/group/post/edit/:groupId/:postId' element={<PostItemEdit/>} />
         <Route path='/group/post/:id' element={<Post/>} /> 
         <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
         <Route path='/group/post' element={<Post/>} />
