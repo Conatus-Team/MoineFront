@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
 import RecommendGroupList from "./RecommendGroupList";
 import MyGroupList from './MyGroupList';
 
 const GroupMain= ({originData})=> {
+    const { id } = useParams();
     const [thumbnail, setThumbnail] = useState("");
     const [people, setPeople] = useState("");
     const [title, setTitle] = useState("");
     const [groupName, setGroupName] = useState("");
+    const navigate = useNavigate();
 
     // const navigate = useNavigate();
     useEffect(()=>{
@@ -27,6 +30,8 @@ const GroupMain= ({originData})=> {
         <img src = {process.env.PUBLIC_URL+ `/assets${thumbnail}`}/>        
         </div>
         <MyButton type = {'positive'} text ={'Register'} onClick={() => alert('./new')}></MyButton>
+        <MyButton  text="edit" type="default" onClick={()=> navigate(`/group/edit/${id}`)}></MyButton>  
+    
         </div>
 
 

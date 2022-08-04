@@ -1,9 +1,9 @@
-import GroupMain from "../components/group/GroupMain"
+import GroupMain from "./../../components/group/GroupMain"
 import React, {Component, useContext, useEffect, useState} from "react";
-import { GroupStateContext } from "../App";
+import { GroupStateContext } from "../../App";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import MyGroup from "../components/MyGroup";
+import MyGroup from "../../components/MyGroup";
 
 
 const Group_main =() =>{

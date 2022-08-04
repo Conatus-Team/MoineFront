@@ -8,7 +8,6 @@ import { GroupStateContext } from "../../App";
 const Post = () => {
     const { id } = useParams(); //groupId
     const navigate = useNavigate();
-//
     const [groupOriginData, setGroupOriginData] = useState();
 
     const groupData = useContext(GroupStateContext);
@@ -28,10 +27,6 @@ const Post = () => {
         }
     }, [id, groupData]);
   
-
-
-//
-
     const postList = useContext(PostStateContext);
     const [data, setData] = useState([]);
 
@@ -45,9 +40,7 @@ const Post = () => {
         <div post>
             <MyGroup id={id}/>
             <PostList postList = {data}/>
-            
-            <p></p>
-            
+                        
         </div>
     )
 };

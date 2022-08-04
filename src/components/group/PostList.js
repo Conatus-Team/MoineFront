@@ -28,8 +28,11 @@ const ControlMenu = ({value, onChange, optionList}) =>{
 };
 
 
+
+
+
 const PostList= ({postList})=> {
- 
+
   const navigate = useNavigate();
   const [sortType, setSortType] = useState("latest");
   const [filter, setFilter] = useState("all");

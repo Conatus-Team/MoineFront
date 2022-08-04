@@ -6,12 +6,13 @@ import MyGroupList from './MyGroupList';
 import GroupSearch from './GroupSearch';
 
 const GroupList= ({groupList})=> {
+  const navigate = useNavigate();
 
     // const navigate = useNavigate();
 
     return (
       <div className="GroupList">
-        <GroupSearch/>
+        <GroupSearch/>     
 
 
         <p className='group_title'> Recommend Group List</p>
@@ -28,6 +29,11 @@ const GroupList= ({groupList})=> {
         {groupList.map((it) =>(
           <MyGroupList key = {it.id} {...it}/>
           ))}
+          <div className="group_list_new">
+          <MyButton  text="new" type="default" onClick={()=> navigate("./new")}></MyButton>   
+
+          </div>
+          
     
         </div>
       </div>

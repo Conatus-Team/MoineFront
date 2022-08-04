@@ -15,17 +15,17 @@ const PostItem = () => {
     useEffect (() =>{
         console.log('enter');
         if(postList.length >= 2){
-            console.log(1);
+            // console.log(1);
 
             const targetPost = postList.find(
                 (it)=> parseInt(it.id) === parseInt(postId)
                 );
-                console.log('postId: ',postId);
+                // console.log('postId: ',postId);
 
-            console.log('targetPost: ',targetPost);
+            // console.log('targetPost: ',targetPost);
             if(targetPost){
                 setPostData(targetPost);
-                console.log(postData);           
+                // console.log(postData);           
             } else {
                 navigate(`/group/post${groupId}`);
             }
@@ -36,7 +36,7 @@ const PostItem = () => {
     
 
     useEffect(()=>{
-         console.log(postData);
+        //  console.log(postData);
      }, [postData]);
     // const data = JSON.parse(JSON.stringify(postData));
     

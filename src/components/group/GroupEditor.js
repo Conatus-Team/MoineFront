@@ -2,52 +2,34 @@ import { useRef, useState, useContext, useEffect } from "react";
 import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
 import { useNavigate, useParams } from "react-router-dom";
-import { PostDispatchContext } from "../../App";
 import axios from "axios";
 
-//return date into string
-const getStringDate = (date) => {
-    return date.toISOString().slice(0,10);
-};
-
-
-const PostEditor =({isEdit, originData, groupId, groupName}) => {
-    const navigate = useNavigate();
-    const contentRef = useRef();
-  
-    const [date, setDate] = useState(getStringDate(new Date()));
-    const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("author6");
-    const [title, setTitle] = useState("title6");
+const GroupEditor =({isEdit, originData, groupId}) => {
+    const navigate = useNavigate();  
+    const [thumbnail, setThumbnail] = useState("");
+    const [people, setPeople] = useState("");
+    const [title, setTitle] = useState("title");
+    const [groupName, setGroupName] = useState("group name");
 
     let url="";
 
-
     const handleSubmit = () => {
-        if(content.length <1){
-            contentRef.current.focus();
-            return;
-        }
         if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
             const createData = {
-                date: date, 
-                author: author,
-                content: content, 
+                thumbnail: thumbnail,
+                people:people,
                 title: title, 
-                groupId: groupId, 
                 groupName: groupName,
             }
             const updateData = {
-                id: originData.id,
-                date: date, 
-                author: author,
-                content: content, 
+                id: groupId,
+                thumbnail: thumbnail,
+                people:people,
                 title: title, 
-                groupId: groupId, 
                 groupName: groupName,
             }
             if(!isEdit){
-                url = "http://localhost:3000/group/post/edit";
+                url = "http://localhost:3000/group/edit";
                 axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
@@ -60,7 +42,7 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
             }
         
             else {
-                url = "http://localhost:3000/group/post/new";
+                url = "http://localhost:3000/group/new";
                 axios.post(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
@@ -73,14 +55,15 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
             }
         }
         
-        navigate(`/group/post/${groupId}`, {replace: true});
+        navigate(`/group`, {replace: true});
     };
+    // console.log(originData);
 
     useEffect(()=>{
         if(isEdit){
-            setDate(getStringDate(new Date(parseInt(originData.date))));
-            setAuthor(originData.author);
-            setContent(originData.content);
+            setThumbnail(originData.thumbnail);
+            setPeople(originData.people);
+            setGroupName(originData.groupName);
             setTitle(originData.title);
         }
     })
@@ -91,18 +74,29 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
         
         <div className="post_new">
             <section className="post_editor_info">
-            {/* group Name */}
-            <p>Group Name: {groupName}</p>
-               
-            <p>User Name: {author}</p>
-           
-            {/* date */}
-            <p>date: {date}  </p>
 
             <div>
             {/*<input value={date} onChange = {(e) => setDate(e.target.value)} type="date"/>*/}
             </div>
             </section>
+            {/* group name */}
+            <section>
+                <h4>group name </h4>
+            <div ><input
+            className="post_title"
+            value={groupName} onChange = {(e) => setGroupName(e.target.value)}/>
+            </div>
+            </section>
+
+            {/* thumbnail */}
+            <section>
+                <h4>thumbnail </h4>
+            <div ><input
+            className="post_title"
+            value={thumbnail} onChange = {(e) => setThumbnail(e.target.value)}/>
+            </div>
+            </section>
+
 
             {/* title */}
             <section>
@@ -112,18 +106,16 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
             value={title} onChange = {(e) => setTitle(e.target.value)}/>
             </div>
             </section>
-            
-            {/* content */}
+
+            {/* people */}
             <section>
-            <h4>content </h4>
-            <div className="post_content">
-            <textarea 
-            placeholder="please enter the content"
-            ref={contentRef} 
-            value = {content}
-            onChange = {(e) => setContent(e.target.value)}/> 
+                <h4>people </h4>
+            <div ><input
+            className="post_title"
+            value={people} onChange = {(e) => setPeople(e.target.value)}/>
             </div>
             </section>
+          
 
 
             <section>
@@ -138,4 +130,4 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
     );
 };
 
-export default PostEditor;
+export default GroupEditor;

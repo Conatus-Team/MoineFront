@@ -1,0 +1,39 @@
+[
+    {
+      "id": 1,
+      "lectureName": "cooking",
+      "thumbnail": "/emotion1.png",
+      "title": "title1",
+      "content":"this lecture is.....",
+      "teacher": 7,
+      "count": 5,
+      "price":1000,
+      "date": 1638969241915,
+      "link": "http://naver.com"
+    },
+    {
+      "id": 2,
+      "lectureName": "cooking",
+      "thumbnail": "/emotion2.png",
+      "title": "title2",
+      "content":"this lecture is.....",
+      "teacher": 7,
+      "count": 5,
+      "price":2000,
+      "date": 1638969241916,
+      "link": "http://naver.com"
+    },
+    {
+      "id": 3,
+      "lectureName": "cooking",
+      "thumbnail": "/emotion3.png",
+      "title": "title3",
+      "content":"this lecture is.....",
+      "teacher": 7,
+      "count": 5,
+      "price":50000,
+      "date": 1638969241917,
+      "link": "http://naver.com"
+    }
+    
+  ]

@@ -13,7 +13,7 @@ const Lecture =() =>{
     },[lectureList]);
         
     useEffect(()=>{
-        console.log(lecture_data);
+        // console.log(lecture_data);
     },[lecture_data]);
         
 
