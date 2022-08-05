@@ -427,9 +427,29 @@ height: 50px;
 .lecture_content .lecture_title{
   font-size: 25px;
 }
+@import "~react-image-gallery/styles/css/image-gallery.css";
 
+.gallery_new{
+  margin-top: 40px;
+  margin-bottom: 60px;
+  margin-right:40px;
+  display: flex;
+  justify-content: right;
+}
+.gallery_new button{
+  width: 120px;
 
-
+}
+.gallery_input{
+  margin: 80px;
+}
+.gallery_preview{
+  margin:50px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  width: auto;
+  height:max-content;
+}
 
 /* .App-header {
   background-color: #282c34;

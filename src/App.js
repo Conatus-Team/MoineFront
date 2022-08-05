@@ -15,13 +15,16 @@ import Group_main from './pages/Group/Group_main';
 import Groups from './components/group/Groups';
 import GroupEdit from "./pages/Group/GroupEdit"
 import GroupNew from "./pages/Group/GroupNew"
-import Gallery from './pages/Post/Gallery';
 
 //post
 import Post from './pages/Post/Post';
 import PostItemNew from './pages/Post/PostItemNew';
 import PostItemEdit from './pages/Post/PostItemEdit';
 import PostItem from './pages/Post/PostItem';
+
+//Gallery
+import Gallery from './pages/Gallery/Gallery';
+import GalleryNew from './pages/Gallery/GalleryNew';
 
 //components
 import MyButton from './components/MyButton';
@@ -56,7 +59,7 @@ function App() {
 
   const [postData, setPostData] = useState([]);
   useEffect(()=>{
-    axios.get(" http://localhost:3000/assets/post_data.json")
+    axios.get("http://localhost:3000/assets/post_data.json")
     .then(response => {
       setPostData(response.data);
     });
@@ -86,7 +89,8 @@ function App() {
         <Route path='/group/main/:id' element={<Group_main/>} />
         <Route path='/group/groups' element={<Groups/>} />
         <Route path='/group/groups/:id' element={<Groups/>} />
-        <Route path='/group/gallery' element={<Gallery/>} />
+        <Route path='/group/gallery/:groupId' element={<Gallery/>}/>
+        <Route path='/group/gallery/new/:groupId' element={<GalleryNew/>}/>
         <Route path='/group/post/new/:groupId' element={<PostItemNew/>} />
         <Route path='/group/post/edit/:groupId/:postId' element={<PostItemEdit/>} />
         <Route path='/group/post/:id' element={<Post/>} /> 
