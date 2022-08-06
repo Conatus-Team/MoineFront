@@ -1,16 +1,15 @@
 import { useNavigate } from "react-router-dom";
-const MyLectureList = ({id, lectureName, imagePath, introduction}) => {
+const MyLectureList = ({lectureId, lectureName, imagePath, introduction}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
     const navigate = useNavigate();
 return (
-    <div className="MyLecture" onClick={() => navigate(`/lecture/${id}`)}>
+    <div className="MyLecture" onClick={() => navigate(`/lecture/${lectureId}`)}>
       <div className="MyLecture_image">
-        <img src = {process.env.PUBLIC_URL+ `/${imagePath}`}/>
+        <img src = {process.env.PUBLIC_URL+ `${imagePath}`}/>
       </div>
       <div className="MyLecturecontent">
         <p>{lectureName}</p>
-        <p>introduction: {introduction}</p>
         </div>
 
        

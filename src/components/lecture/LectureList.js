@@ -18,7 +18,7 @@ const LectureList= ({lectureList})=> {
         <div className="RecommendLectureList">
         
              {lectureList.map((it) => (
-                <RecommendLectureList key = {it.id} {...it}/>
+                <RecommendLectureList key = {it.lectureId} {...it}/>
              ))}
         </div>
         <p className='lecture_title'> My Lecture List</p>
@@ -26,7 +26,7 @@ const LectureList= ({lectureList})=> {
         
         
         {lectureList.map((it) =>(
-          <MyLectureList key = {it.id} {...it}/>
+          <MyLectureList key = {it.lectureId} {...it}/>
           ))}
     
         </div>

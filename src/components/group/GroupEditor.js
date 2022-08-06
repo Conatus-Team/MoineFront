@@ -36,7 +36,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                     },
                     })
                     .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     });
                 // onCreate(date, author, content, title, groupId, groupName);
             }
@@ -49,7 +49,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                     },
                     })
                     .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     });
                 // onEdit(date, author, content, title, groupName);
             }

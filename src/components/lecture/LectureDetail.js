@@ -8,24 +8,31 @@ const LectureDetail = ()=>{
     const lectureData = useContext(LectureStateContext);
     const [originData, setOriginData] = useState([]);
     const parse = require('html-react-parser');
-    
+    const [curriculum, setCurriculum] = useState([]);
 
-
-
+    // console.log('id', id);
+  
     const navigate = useNavigate();
     useEffect(() => {
+        // console.log("enter");
         if(lectureData.length >= 1){
             const targetLecture = lectureData.find(
-                (it) => parseInt(it.id) === parseInt(id)
+                (it) => parseInt(it.lectureId) === parseInt(id)
             );
+            // console.log('targetLecture', targetLecture);
             if(targetLecture){
                 setOriginData(targetLecture);
+                
+                setCurriculum(parse(targetLecture.curriculum));
+                // console.log('curriculum', curriculum);
             } else {
                 navigate("/lecture", {replace: true});
             }
         }
-    }, [id, lectureData, setOriginData]);
-    const curriculum = parse(originData.curriculum);
+    }, [id,lectureData, originData, setOriginData, curriculum, setCurriculum]);
+    // console.log("originData", originData);
+    // console.log(originData.curriculum);
+    // const curriculum = parse(originData.curriculum);
     
         
 
@@ -54,7 +61,7 @@ const LectureDetail = ()=>{
             </div>
             <div className='lecture_detail'>
                 <p>[Detail]</p>
-                <p> {originData.curriculum}</p>
+                <p> {curriculum}</p>
             </div>
 
             <div className='lecture_price'>

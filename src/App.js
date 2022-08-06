@@ -42,9 +42,11 @@ function App() {
 
   const [lectureData, setLectureData] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:3000/assets/lecture_data.json")
+    axios.get("http://localhost:8082/lecturelist")
     .then(response => {
       setLectureData(response.data);
+    
+      // console.log(response.data);
     });
   }, [lectureData, setLectureData]);
   // console.log(lectureData);

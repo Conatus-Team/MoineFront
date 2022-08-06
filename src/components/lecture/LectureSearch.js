@@ -11,8 +11,9 @@ function LectureSearch() {
     const submitSearch = () =>{
         let data = {
             keyword: keyword,
+            userId: 1
         }
-        let url = "http://localhost:3000/lecture/search";
+        let url = "http://localhost:8082/lecturelist/search";
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,
@@ -21,7 +22,7 @@ function LectureSearch() {
             .then((res) => {
             console.log(res);
         });
-        // console.log("finish search");
+        console.log('data',data);
             
     }
     return (
