@@ -27,7 +27,7 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
         <div className="MyGroup_image" 
         // onClick={() => navigate(`/group/main/${id}`)}
         >
-          <img src = {process.env.PUBLIC_URL+ `assets/${thumbnail}`}/>
+          <img src = {process.env.PUBLIC_URL+ `/${thumbnail}`}/>
         </div>
         <div className="MyGroupcontent">
             <div className="lecture_like">

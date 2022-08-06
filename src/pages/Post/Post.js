@@ -40,13 +40,12 @@ const Post = () => {
             .then(response => {
             setPostData(response.data);
             });
-        }, [postData, setPostData]);
+        }, []);
 
     return (
         <div post>
             <MyGroup id={id}/>
-            <PostList postList = {postData}/>
-                        
+            <PostList postList = {postData}/>       
         </div>
     )
 };

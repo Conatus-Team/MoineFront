@@ -20,7 +20,7 @@ const PostItem = () => {
         .then(response => {
         setPostData(response.data);
         });
-    }, [postData, setPostData]);
+    }, []);
 
 
     // useEffect (() =>{

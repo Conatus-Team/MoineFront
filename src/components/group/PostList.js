@@ -8,11 +8,11 @@ const sortOptionList = [
   {value: "oldest", name:"oldest"},
 ];
 
-const filterOptionList = [
-  {value: "cooking", name: "cooking"},
-  { value: "all", name: "all"}
+// const filterOptionList = [
+//   {value: "cooking", name: "cooking"},
+//   { value: "all", name: "all"}
 
-];
+// ];
 
 const ControlMenu = ({value, onChange, optionList}) =>{
   return (
@@ -41,12 +41,12 @@ const PostList= ({postList})=> {
   
   const getProcessdPostList = () => {
 
-    const filterCallBack = (item) =>{
-      if(filter === "cooking"){
-        return item.groupName === "cooking";
-      } else return item.groupName !== "cooking";
+    // const filterCallBack = (item) =>{
+    //   if(filter === "cooking"){
+    //     return item.groupName === "cooking";
+    //   } else return item.groupName !== "cooking";
     
-    }
+    // }
 
     const compare = (a,b) =>{
       if(sortType === "latest"){
@@ -58,8 +58,8 @@ const PostList= ({postList})=> {
     }
     const copyList = JSON.parse(JSON.stringify(postList));
 
-    const filteredList = filter !=='cooking' ? copyList :copyList.filter((it) => filterCallBack(it));
-    const sortedList = filteredList.sort(compare);
+    // const filteredList = filter !=='cooking' ? copyList :copyList.filter((it) => filterCallBack(it));
+    const sortedList = copyList.sort(compare);
     return sortedList;
   }
   
@@ -72,10 +72,10 @@ const PostList= ({postList})=> {
         value = {sortType} 
         onChange = {setSortType}
         optionList = {sortOptionList}/>
-        <ControlMenu 
+        {/* <ControlMenu 
         value = {filter} 
         onChange = {setFilter}
-        optionList = {filterOptionList}/>
+        optionList = {filterOptionList}/> */}
 
         </div>
         <div className='right_col'>

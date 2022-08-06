@@ -66,7 +66,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
             setGroupName(originData.name);
             setTitle(originData.explanation);
         }
-    })
+    },[])
 
 
     return (<div className="PostEditor">

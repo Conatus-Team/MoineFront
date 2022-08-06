@@ -21,7 +21,7 @@ const GroupEdit = () => {
                 navigate(`/group/main/${groupId}`,{replace: true});
             }
         }
-    }, [groupId, groupList]);
+    }, []);
   
     return (<div>
         {originData && <GroupEditor isEdit={true} originData={originData} groupId={groupId}/>}

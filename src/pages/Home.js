@@ -16,34 +16,11 @@ const Home =() =>{
     .then(response => {
       setRecommendHobbyData(response.data);
     });
-  }, [recommendHobbyData, setRecommendHobbyData]);
-
+  }, []);
 
     const recommendLectureList = useContext(RecommendLectureStateContext);
-    const [lecture_data, setLectureData] = useState([]);
-
     const groupList = useContext(GroupStateContext);
-    const [group_data, setGroupData] = useState([]);
 
-
-    useEffect(()=>{
-        setLectureData(recommendLectureList);
-    },[recommendLectureList]);
-        
-    useEffect(()=>{
-        console.log(lecture_data);
-    },[lecture_data]);
-
-
-    useEffect(()=>{
-      setGroupData(groupList);
-  },[groupList]);
-      
-  useEffect(()=>{
-      console.log(group_data);
-  },[group_data]);
-  
-        
 
     return(<div className="home">
       <div className="slogen">

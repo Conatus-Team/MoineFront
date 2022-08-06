@@ -12,14 +12,14 @@ const Group =() =>{
 
     useEffect(()=>{
         setGroupData(groupList);
-    },[groupList]);
+    },[]);
 
 
     const recommendGroupList = useContext(RecommendGroupStateContext);
     const [recommendData, setRecommendData] = useState([]);
     useEffect(() => {
         setRecommendData(recommendGroupList);
-    }, [recommendGroupList]);
+    }, []);
         
 
     return(<div className="group">

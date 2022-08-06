@@ -28,7 +28,7 @@ const LectureDetail = ()=>{
                 navigate("/lecture", {replace: true});
             }
         }
-    }, [id,lectureData, originData, setOriginData, curriculum, setCurriculum]);
+    }, []);
      
     return(<div className="lecture_main">
        <div className="lecture_header">

@@ -44,6 +44,7 @@ funtion: like, search, recommend data mapping, register
 */
 
 function App() {
+  
  
   //Lecture
   const [lectureData, setLectureData] = useState([]);
@@ -52,7 +53,7 @@ function App() {
     .then(response => {
       setLectureData(response.data);
     });
-  }, [lectureData, setLectureData]);
+  }, []);
 
   const [recommendLectureData, setRecommendLectureData] = useState([]);
   useEffect(()=>{
@@ -60,18 +61,20 @@ function App() {
     .then(response => {
       setRecommendLectureData(response.data);
     });
-  }, [recommendLectureData, setRecommendLectureData]);
+  }, []);
 
 
   // Group
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:8083/info")
+    // axios.get("http://localhost:8083/info")
+    axios.get("http://localhost:3000/assets/group_data.json")
     .then(response => {
-      setGroupData(response.data._embedded.info)
+      // setGroupData(response.data._embedded.info)
+      setGroupData(response.data)
       .catch(err => console.log(err));
     });
-  }, [groupData, setGroupData]);
+  }, []);
   console.log('groupdata',groupData);
 
   const [recommendGroupData, setRecommendGroupData] = useState([]);
@@ -80,7 +83,7 @@ function App() {
     .then(response => {
       setRecommendGroupData(response.data);
     });
-  }, [recommendGroupData, setRecommendGroupData]);
+  }, []);
 
 
   

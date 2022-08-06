@@ -18,7 +18,7 @@ const PostItemEdit = () => {
         .then(response => {
         setPostData(response.data);
         });
-    }, [postData, setPostData]);
+    }, []);
 
 
 

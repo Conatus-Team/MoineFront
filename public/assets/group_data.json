@@ -1,37 +1,42 @@
 [
     {
       "id": 1,
-      "groupName": "cooking",
+      "name": "cooking",
       "thumbnail": "/emotion1.png",
       "title": "Enjoy cooking!",
-      "people": 7
+      "explanation": "explanation1", 
+      "memberCount": 7
     },
     {
       "id": 2,
-      "groupName": "sports",
+      "name": "sports",
       "thumbnail": "/emotion2.png",
       "title": "Enjoy sports!",
-      "people": 11
+      "explanation": "explanation2",
+      "memberCount": 11
     },
     {
       "id": 3,
-      "groupName": "swimming",
+      "name": "swimming",
       "thumbnail": "/emotion3.png",
       "title": "Enjoy cswimming!",
-      "people": 15
+      "explanation": "explanation3",
+      "memberCount": 15
     },
     {
       "id": 4,
-      "groupName": "yummy",
+      "name": "yummy",
       "thumbnail": "/emotion4.png",
+      "explanation": "explanation4",
       "title": "Enjoy cook",
-      "people": 9
+      "memberCount": 9
     },
     {
       "id": 5,
-      "groupName": "programming",
+      "name": "programming",
       "thumbnail": "/emotion5.png",
       "title": "Enjoy programming!",
-      "people": 4
+      "explanation": "explanation5",
+      "memberCount": 4
     }
   ]

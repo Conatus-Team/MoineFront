@@ -16,14 +16,14 @@ const Group_main =() =>{
             const targetGroup = groupData.find(
                 (it) => parseInt(it.id) === parseInt(id)
             );
-            console.log(targetGroup);
+            // console.log(targetGroup);
             if(targetGroup){
                 setOriginData(targetGroup);
             } else {
                 navigate("/group", {replace: true});
             }
         }
-    }, [id, groupData]);
+    }, []);
         
 
     return(<div className="group_main">
