@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
-import RecommendLectureList from "./RecommendLectureList"
-import MyLectureList from './MyLectureList';
+import LectureListTemp from './LectureListTemp';
 import LectureSearch from './LectureSearch';
 
-const LectureList= ({lectureList})=> {
+const LectureList= ({lectureList, recommendLectureList})=> {
 
     const navigate = useNavigate();
 
@@ -13,20 +12,19 @@ const LectureList= ({lectureList})=> {
       <div className="LectrueList">
         <LectureSearch/>
 
-
         <p className='lecture_title'> Recommend Lecture List</p>
         <div className="RecommendLectureList">
-        
-             {lectureList.map((it) => (
-                <RecommendLectureList key = {it.lectureId} {...it}/>
+             {recommendLectureList.map((it) => (
+                <LectureListTemp key = {it.lectureId} {...it}/>
              ))}
         </div>
+
+
+
         <p className='lecture_title'> My Lecture List</p>
         <div className="MyLectureList">
-        
-        
         {lectureList.map((it) =>(
-          <MyLectureList key = {it.lectureId} {...it}/>
+          <LectureListTemp key = {it.lectureId} {...it}/>
           ))}
     
         </div>

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
-import RecommendGroupList from "./RecommendGroupList";
-import MyGroupList from './MyGroupList';
+import GroupListTemp from './GroupListTemp';
 import GroupSearch from './GroupSearch';
 
-const GroupList= ({groupList})=> {
+const GroupList= ({groupList, recommendGroupList})=> {
   const navigate = useNavigate();
 
     // const navigate = useNavigate();
@@ -14,21 +13,23 @@ const GroupList= ({groupList})=> {
       <div className="GroupList">
         <GroupSearch/>     
 
-
         <p className='group_title'> Recommend Group List</p>
-        <div className="RecommendGroupList">
-        
-             {groupList.map((it) => (
-                <RecommendGroupList key = {it.id} {...it}/>
+        <div className='RecommendGroupList'>
+             {recommendGroupList.map((it) => (
+                <GroupListTemp key = {it.id} {...it}/>
              ))}
+
         </div>
         <p className='group_title'> My Group List</p>
+
+
+
         <div className="MyGroupList">
-        
-        
         {groupList.map((it) =>(
-          <MyGroupList key = {it.id} {...it}/>
+          <GroupListTemp key = {it.id} {...it}/>
           ))}
+
+
           <div className="group_list_new">
           <MyButton  text="new" type="default" onClick={()=> navigate("./new")}></MyButton>   
 

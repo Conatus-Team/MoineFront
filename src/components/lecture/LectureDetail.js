@@ -24,18 +24,12 @@ const LectureDetail = ()=>{
                 setOriginData(targetLecture);
                 
                 setCurriculum(parse(targetLecture.curriculum));
-                // console.log('curriculum', curriculum);
             } else {
                 navigate("/lecture", {replace: true});
             }
         }
     }, [id,lectureData, originData, setOriginData, curriculum, setCurriculum]);
-    // console.log("originData", originData);
-    // console.log(originData.curriculum);
-    // const curriculum = parse(originData.curriculum);
-    
-        
-
+     
     return(<div className="lecture_main">
        <div className="lecture_header">
         <div className="lecture_thumbnail">

@@ -1,17 +1,25 @@
 // import { useParams } from "react-router-dom";
-import LectureList from "../components/lecture/LectureList";
-import GroupList from "../components/lecture/LectureList";
-import MyGroupList from "../components/group/MyGroupList";
-import RecommendLectureList from "../components/lecture/RecommendLectureList";
-
+import GroupListTemp from "../components/group/GroupListTemp";
+import LectureListTemp from "../components/lecture/LectureListTemp";
 import React, {Component, useContext, useEffect, useState} from "react";
 // import GroupList from "../components/group/GroupContentList";
-import { LectureStateContext } from "../App";
+import { RecommendLectureStateContext } from "../App";
 import { GroupStateContext } from "../App";
+import axios from "axios";
 
 
 const Home =() =>{
-    const lectureList = useContext(LectureStateContext);
+  //Recommend Hobby
+  const [recommendHobbyData, setRecommendHobbyData] = useState([]);
+  useEffect(()=>{
+    axios.get("http://localhost:8082/hobby/recommend")
+    .then(response => {
+      setRecommendHobbyData(response.data);
+    });
+  }, [recommendHobbyData, setRecommendHobbyData]);
+
+
+    const recommendLectureList = useContext(RecommendLectureStateContext);
     const [lecture_data, setLectureData] = useState([]);
 
     const groupList = useContext(GroupStateContext);
@@ -19,8 +27,8 @@ const Home =() =>{
 
 
     useEffect(()=>{
-        setLectureData(lectureList);
-    },[lectureList]);
+        setLectureData(recommendLectureList);
+    },[recommendLectureList]);
         
     useEffect(()=>{
         console.log(lecture_data);
@@ -49,7 +57,7 @@ const Home =() =>{
 
         </div>
         <div className="recommended_hobby">
-          <p>I recommend you ....</p>
+          <p>I recommend you {recommendHobbyData}</p>
 
         </div>
 
@@ -57,15 +65,15 @@ const Home =() =>{
 
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="RecommendLectureList">
-        {lectureList.map((it) => (
-            <RecommendLectureList key = {it.id} {...it}/>
+        {recommendLectureList.map((it) => (
+            <LectureListTemp key = {it.id} {...it}/>
         ))}
       </div>
 
       <p className='group_title'> My Group List</p>
         <div className="MyGroupList">
           {groupList.map((it) => (
-            <MyGroupList key = {it.id} {...it}/>
+            <GroupListTemp key = {it.id} {...it}/>
           ))}
         </div>
       

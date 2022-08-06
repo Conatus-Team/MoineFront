@@ -3,10 +3,11 @@
 import MyButton from "../MyButton";
 import {useState} from 'react';
 import axios from "axios";
-
+import LectureSearched from "./LectureSearched";
 
 function LectureSearch() {
     const [keyword, SetKeyword] = useState("");
+    const [result, setResult] = useState([]);
 
     const submitSearch = () =>{
         let data = {
@@ -21,6 +22,7 @@ function LectureSearch() {
             })
             .then((res) => {
             console.log(res);
+            setResult(res);
         });
         console.log('data',data);
             
@@ -29,8 +31,8 @@ function LectureSearch() {
         <div className="lecture_search">
             <input className="lecture_searchBar" type="text" onChange={(e)=>{SetKeyword(e.target.value)}}/>
             <MyButton type = {'default'} text ={'Search'} onClick={() =>submitSearch()}>
-          
-        </MyButton>
+            </MyButton>
+            <LectureSearched searchResult = {result}/>
         </div>
     )
 }

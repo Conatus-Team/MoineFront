@@ -13,8 +13,8 @@ import LectureDetail from "./components/lecture/LectureDetail";
 import Group from './pages/Group';
 import Group_main from './pages/Group/Group_main';
 import Groups from './components/group/Groups';
-import GroupEdit from "./pages/Group/GroupEdit"
-import GroupNew from "./pages/Group/GroupNew"
+import GroupEdit from "./pages/Group/GroupEdit";
+import GroupNew from "./pages/Group/GroupNew";
 
 //post
 import Post from './pages/Post/Post';
@@ -34,31 +34,54 @@ import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
 
 export const LectureStateContext = React.createContext();
+export const RecommendLectureStateContext = React.createContext();
 export const GroupStateContext = React.createContext();
+export const RecommendGroupStateContext = React.createContext();
 export const PostStateContext = React.createContext();
-export const PostDispatchContext = React.createContext();
+/*
+Page: leture, login, signup, MyPage, Hobby
+funtion: like, search, recommend data mapping, register
+*/
 
 function App() {
-
+ 
+  //Lecture
   const [lectureData, setLectureData] = useState([]);
   useEffect(()=>{
     axios.get("http://localhost:8082/lecturelist")
     .then(response => {
       setLectureData(response.data);
-    
-      // console.log(response.data);
     });
   }, [lectureData, setLectureData]);
-  // console.log(lectureData);
 
+  const [recommendLectureData, setRecommendLectureData] = useState([]);
+  useEffect(()=>{
+    axios.get("http://localhost:8082/lecturelist/recommend")
+    .then(response => {
+      setRecommendLectureData(response.data);
+    });
+  }, [recommendLectureData, setRecommendLectureData]);
+
+
+  // Group
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get(" http://localhost:3000/assets/group_data.json")
+    axios.get("http://localhost:3000/assets/group_data.json")
     .then(response => {
       setGroupData(response.data);
     });
   }, [groupData, setGroupData]);
 
+  const [recommendGroupData, setRecommendGroupData] = useState([]);
+  useEffect(()=>{
+    axios.get("http://localhost:3000/assets/group_data.json")
+    .then(response => {
+      setRecommendGroupData(response.data);
+    });
+  }, [recommendGroupData, setRecommendGroupData]);
+
+
+  // Post
   const [postData, setPostData] = useState([]);
   useEffect(()=>{
     axios.get("http://localhost:3000/assets/post_data.json")
@@ -68,7 +91,9 @@ function App() {
   }, [postData, setPostData]);
   
   return (
+    <RecommendLectureStateContext.Provider value={recommendLectureData}>
     <LectureStateContext.Provider value={lectureData}>
+    <RecommendGroupStateContext.Provider value={recommendGroupData}>
     <GroupStateContext.Provider value={groupData}>
     <PostStateContext.Provider value={postData}>
     <BrowserRouter>
@@ -104,7 +129,9 @@ function App() {
     </BrowserRouter>
   </PostStateContext.Provider>
   </GroupStateContext.Provider>
+  </RecommendGroupStateContext.Provider>
   </LectureStateContext.Provider>
+  </RecommendLectureStateContext.Provider>
   );
 }
 

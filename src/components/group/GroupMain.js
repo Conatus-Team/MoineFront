@@ -1,35 +1,48 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
-import RecommendGroupList from "./RecommendGroupList";
-import MyGroupList from './MyGroupList';
+import axios from 'axios';
 
 const GroupMain= ({originData})=> {
     const { id } = useParams();
-    const [thumbnail, setThumbnail] = useState("");
-    const [people, setPeople] = useState("");
-    const [title, setTitle] = useState("");
-    const [groupName, setGroupName] = useState("");
     const navigate = useNavigate();
 
-    // const navigate = useNavigate();
-    useEffect(()=>{
-        setGroupName(originData.groupName);
-        setThumbnail(originData.thumbnail);
-        setPeople(originData.people);
-        setTitle(originData.title);
-    })
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
+
+
+    const GroupRegister = () => {
+        if(window.confirm("Do you want regist this group?")){
+            const registerData = {
+                groupId:originData.id,
+                userId: 1,
+            }
+            alert(registerData.groupId);
+            // let url = "http://localhost:3000/group/register";
+            // axios.post(url,  JSON.stringify(registerData), {
+            //     headers: {
+            //         "Content-Type": `application/json`,
+            //     },
+            //     })
+            //     .then((res) => {
+            //     console.log(res);
+            // });
+            
+        } else {
+            alert("?????.");
+        }
+            
+
+    }
 
     return (
       <div className="group_main">
        <div className='group_content'>
         <div className="group_thumbnail">
-        <img src = {process.env.PUBLIC_URL+ `/assets${thumbnail}`}/>        
+        <img src = {process.env.PUBLIC_URL+ `/assets${originData.thumbnail}`}/>        
         </div>
-        <MyButton type = {'positive'} text ={'Register'} onClick={() => alert('./new')}></MyButton>
+        <MyButton type = {'positive'} text ={'Register'} onClick={() => GroupRegister()}></MyButton>
         <MyButton  text="edit" type="default" onClick={()=> navigate(`/group/edit/${id}`)}></MyButton>  
     
         </div>
@@ -38,15 +51,15 @@ const GroupMain= ({originData})=> {
         <div className='group_detail'>
             <div className='group_name'>
                 <p>[Group Name] </p>
-                <p> {groupName}</p>
+                <p> {originData.groupName}</p>
             </div>
             <div className='group_people'>
                 <p>[Group People]</p>
-                <p> {people}</p>
+                <p> {originData.people}</p>
             </div>
             <div className='group_main_title'>
                 <p>[Group Name]</p>
-                <p>{title}</p>
+                <p>{originData.title}</p>
             </div>
         </div>
         
