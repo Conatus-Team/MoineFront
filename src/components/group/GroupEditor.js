@@ -7,9 +7,9 @@ import axios from "axios";
 const GroupEditor =({isEdit, originData, groupId}) => {
     const navigate = useNavigate();  
     const [thumbnail, setThumbnail] = useState("");
-    const [people, setPeople] = useState("");
-    const [title, setTitle] = useState("title");
-    const [groupName, setGroupName] = useState("group name");
+    const [memberCount, setPeople] = useState("");
+    const [explanation, setTitle] = useState("title");
+    const [name, setGroupName] = useState("group name");
 
     let url="";
 
@@ -17,20 +17,20 @@ const GroupEditor =({isEdit, originData, groupId}) => {
         if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
             const createData = {
                 thumbnail: thumbnail,
-                people:people,
-                title: title, 
-                groupName: groupName,
+                memberCount:memberCount,
+                explanation: explanation, 
+                name: name,
             }
             const updateData = {
                 id: groupId,
                 thumbnail: thumbnail,
-                people:people,
-                title: title, 
-                groupName: groupName,
+                memberCount:memberCount,
+                explanation: explanation, 
+                name: name,
             }
             if(!isEdit){
-                url = "http://localhost:3000/group/edit";
-                axios.post(url,  JSON.stringify(createData), {
+                url = `http://localhost:8083/info/${groupId}`;
+                axios.put(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
                     },
@@ -42,7 +42,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
             }
         
             else {
-                url = "http://localhost:3000/group/new";
+                url = "http://localhost:8083/info";
                 axios.post(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
@@ -62,9 +62,9 @@ const GroupEditor =({isEdit, originData, groupId}) => {
     useEffect(()=>{
         if(isEdit){
             setThumbnail(originData.thumbnail);
-            setPeople(originData.people);
-            setGroupName(originData.groupName);
-            setTitle(originData.title);
+            setPeople(originData.memberCount);
+            setGroupName(originData.name);
+            setTitle(originData.explanation);
         }
     })
 
@@ -84,7 +84,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 <h4>group name </h4>
             <div ><input
             className="post_title"
-            value={groupName} onChange = {(e) => setGroupName(e.target.value)}/>
+            value={name} onChange = {(e) => setGroupName(e.target.value)}/>
             </div>
             </section>
 
@@ -103,7 +103,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 <h4>title </h4>
             <div ><input
             className="post_title"
-            value={title} onChange = {(e) => setTitle(e.target.value)}/>
+            value={explanation} onChange = {(e) => setTitle(e.target.value)}/>
             </div>
             </section>
 
@@ -112,7 +112,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 <h4>people </h4>
             <div ><input
             className="post_title"
-            value={people} onChange = {(e) => setPeople(e.target.value)}/>
+            value={memberCount} onChange = {(e) => setPeople(e.target.value)}/>
             </div>
             </section>
           

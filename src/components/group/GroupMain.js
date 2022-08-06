@@ -10,6 +10,7 @@ const GroupMain= ({originData})=> {
 
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
+    console.log('originData',originData);
 
 
     const GroupRegister = () => {
@@ -18,16 +19,16 @@ const GroupMain= ({originData})=> {
                 groupId:originData.id,
                 userId: 1,
             }
-            alert(registerData.groupId);
-            // let url = "http://localhost:3000/group/register";
-            // axios.post(url,  JSON.stringify(registerData), {
-            //     headers: {
-            //         "Content-Type": `application/json`,
-            //     },
-            //     })
-            //     .then((res) => {
-            //     console.log(res);
-            // });
+            // alert(registerData.groupId);
+            let url = `http://localhost:8083/group/join`;
+            axios.post(url,  JSON.stringify(registerData), {
+                headers: {
+                    "Content-Type": `application/json`,
+                },
+                })
+                .then((res) => {
+                console.log(res);
+            });
             
         } else {
             alert("?????.");
@@ -40,7 +41,7 @@ const GroupMain= ({originData})=> {
       <div className="group_main">
        <div className='group_content'>
         <div className="group_thumbnail">
-        <img src = {process.env.PUBLIC_URL+ `/assets${originData.thumbnail}`}/>        
+        {/* <img src = {process.env.PUBLIC_URL+ `/assets${originData.thumbnail}`}/>         */}
         </div>
         <MyButton type = {'positive'} text ={'Register'} onClick={() => GroupRegister()}></MyButton>
         <MyButton  text="edit" type="default" onClick={()=> navigate(`/group/edit/${id}`)}></MyButton>  
@@ -51,15 +52,15 @@ const GroupMain= ({originData})=> {
         <div className='group_detail'>
             <div className='group_name'>
                 <p>[Group Name] </p>
-                <p> {originData.groupName}</p>
+                {/* <p> {originData.groupName}</p> */}
             </div>
             <div className='group_people'>
                 <p>[Group People]</p>
-                <p> {originData.people}</p>
+                <p> {originData.memberCount}</p>
             </div>
             <div className='group_main_title'>
                 <p>[Group Name]</p>
-                <p>{originData.title}</p>
+                <p>{originData.explanation}</p>
             </div>
         </div>
         

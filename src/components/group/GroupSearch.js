@@ -14,7 +14,7 @@ function GroupSearch() {
         let data = {
             keyword: keyword,
         }
-        let url = "http://localhost:3000/group/search";
+        let url = "http://localhost:8083/group/search";
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,

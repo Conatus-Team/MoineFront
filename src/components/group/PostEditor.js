@@ -1,8 +1,7 @@
 import { useRef, useState, useContext, useEffect } from "react";
 import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
-import { useNavigate, useParams } from "react-router-dom";
-import { PostDispatchContext } from "../../App";
+import { useNavigate} from "react-router-dom";
 import axios from "axios";
 
 //return date into string
@@ -47,7 +46,7 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
                 groupName: groupName,
             }
             if(!isEdit){
-                url = "http://localhost:3000/group/post/edit";
+                url = `http://localhost:8083/group/post/create/${groupId}`;
                 axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
@@ -60,8 +59,8 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
             }
         
             else {
-                url = "http://localhost:3000/group/post/new";
-                axios.post(url,  JSON.stringify(updateData), {
+                url = `http://localhost:8083/group/post/update/${originData.id}`;
+                axios.put(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
                     },

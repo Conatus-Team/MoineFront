@@ -1,44 +1,51 @@
 import React, {useContext, useEffect, useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import MyButton from "../../components/MyButton";
-import { PostStateContext } from "../../App";
+// import { PostStateContext } from "../../App";
 import MyGroup from "../../components/MyGroup";
+import axios from "axios";
 const PostItem = () => {
     console.log("function enter");
 
     const navigate = useNavigate();
     const {postId } = useParams();
     const {groupId} = useParams(postId);
-    const postList = useContext(PostStateContext);
+    // const postList = useContext(PostStateContext);
+
+
+    // Post
     const [postData, setPostData] = useState([]);
+    useEffect(()=>{
+        axios.get(`http://localhost:8083/group/post/${postId}`)
+        .then(response => {
+        setPostData(response.data);
+        });
+    }, [postData, setPostData]);
 
-    useEffect (() =>{
-        console.log('enter');
-        if(postList.length >= 2){
-            // console.log(1);
 
-            const targetPost = postList.find(
-                (it)=> parseInt(it.id) === parseInt(postId)
-                );
-                // console.log('postId: ',postId);
+    // useEffect (() =>{
+    //     console.log('enter');
+    //     if(postList.length >= 2){
+    //         // console.log(1);
 
-            // console.log('targetPost: ',targetPost);
-            if(targetPost){
-                setPostData(targetPost);
-                // console.log(postData);           
-            } else {
-                navigate(`/group/post${groupId}`);
-            }
+    //         const targetPost = postList.find(
+    //             (it)=> parseInt(it.id) === parseInt(postId)
+    //             );
+    //             // console.log('postId: ',postId);
 
-        }
+    //         // console.log('targetPost: ',targetPost);
+    //         if(targetPost){
+    //             setPostData(targetPost);
+    //             // console.log(postData);           
+    //         } else {
+    //             navigate(`/group/post${groupId}`);
+    //         }
 
-    }, [postId,groupId,postData, postList, setPostData]);
+    //     }
+
+    // }, [postId,groupId,postData, postList, setPostData]);
     
 
-    useEffect(()=>{
-        //  console.log(postData);
-     }, [postData]);
-    // const data = JSON.parse(JSON.stringify(postData));
     
     return (<div className="post_item">
         <MyGroup id={parseInt(groupId)}/>

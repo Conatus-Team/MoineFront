@@ -37,7 +37,7 @@ export const LectureStateContext = React.createContext();
 export const RecommendLectureStateContext = React.createContext();
 export const GroupStateContext = React.createContext();
 export const RecommendGroupStateContext = React.createContext();
-export const PostStateContext = React.createContext();
+// export const PostStateContext = React.createContext();
 /*
 Page: leture, login, signup, MyPage, Hobby
 funtion: like, search, recommend data mapping, register
@@ -66,11 +66,13 @@ function App() {
   // Group
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:3000/assets/group_data.json")
+    axios.get("http://localhost:8083/info")
     .then(response => {
-      setGroupData(response.data);
+      setGroupData(response.data._embedded.info)
+      .catch(err => console.log(err));
     });
   }, [groupData, setGroupData]);
+  console.log('groupdata',groupData);
 
   const [recommendGroupData, setRecommendGroupData] = useState([]);
   useEffect(()=>{
@@ -81,21 +83,13 @@ function App() {
   }, [recommendGroupData, setRecommendGroupData]);
 
 
-  // Post
-  const [postData, setPostData] = useState([]);
-  useEffect(()=>{
-    axios.get("http://localhost:3000/assets/post_data.json")
-    .then(response => {
-      setPostData(response.data);
-    });
-  }, [postData, setPostData]);
   
   return (
     <RecommendLectureStateContext.Provider value={recommendLectureData}>
     <LectureStateContext.Provider value={lectureData}>
     <RecommendGroupStateContext.Provider value={recommendGroupData}>
     <GroupStateContext.Provider value={groupData}>
-    <PostStateContext.Provider value={postData}>
+    {/* <PostStateContext.Provider value={postData}> */}
     <BrowserRouter>
     <div className="App">
       {/*     <div key = {userData.id} className="App"> */}
@@ -127,7 +121,7 @@ function App() {
       </Routes>
     </div>
     </BrowserRouter>
-  </PostStateContext.Provider>
+  {/* </PostStateContext.Provider> */}
   </GroupStateContext.Provider>
   </RecommendGroupStateContext.Provider>
   </LectureStateContext.Provider>
