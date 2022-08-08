@@ -2,45 +2,43 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LikeButton from "../LikeButton";
 import axios from "axios";
+import { BASE_URL } from "../../constants/baseUrl";
 
-const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
-    const env = process.env;
-    env.PUBLIC_URL = env.PUBLIC_URL || "";
-    const navigate = useNavigate();
-    const [like, setLike] = useState(false);
+const LectureListTemp = ({ lectureId, lectureName, imagePath }) => {
+  const env = process.env;
+  env.PUBLIC_URL = env.PUBLIC_URL || "";
+  const navigate = useNavigate();
+  const [like, setLike] = useState(false);
 
-    useEffect(() => {
-      let url_like = "http://localhost:3000/assets/like_data.json";
-      axios.get(url_like)
-        .then(response => {
-          if (response.like === 'liked') setLike(true);
-      });
-      }, [like, setLike]);
+  useEffect(() => {
+    let url_like = `${BASE_URL.react}/assets/like_data.json`;
+    // let url_like = `${BASE_URL.lecture}/assets/like_data.json`;
+    axios.get(url_like).then((response) => {
+      if (response.like === "liked") setLike(true);
+    });
+  }, [like, setLike]);
 
-   
-    const toggleLike =(e) => {
-      let url_liked = "http://localhost:8082/lecturelist/liked";
-      axios.post(url_liked, JSON.stringify(e.target.data)
-      ).then((res)=>{
-          setLike(!like);
-      })
-       // [POST] ???? ???? ?? -> DB ??
-      
-    }
+  const toggleLike = (e) => {
+    let url_liked = `${BASE_URL.lecture}/lecturelist/liked`;
+    axios.post(url_liked, JSON.stringify(e.target.data)).then((res) => {
+      setLike(!like);
+    });
+    // [POST] ???? ???? ?? -> DB ??
+  };
 
-return (
-    <div className="RecommendLecture" >
-      <LikeButton like={like} onClick={toggleLike}/>
-    <div onClick={() => navigate(`/lecture/${lectureId}`)}>
-      <div className="RecommendLecture_image">
-        <img src = {process.env.PUBLIC_URL+ `${imagePath}`}/>
+  return (
+    <div className="RecommendLecture">
+      <LikeButton like={like} onClick={toggleLike} />
+      <div onClick={() => navigate(`/lecture/${lectureId}`)}>
+        <div className="RecommendLecture_image">
+          <img src={process.env.PUBLIC_URL + `${imagePath}`} />
+        </div>
+        <div className="RecommendLecturecontent">
+          <p>{lectureName}</p>
+        </div>
       </div>
-      <div className="RecommendLecturecontent">
-        <p>{lectureName}</p>
-        </div>
-        </div>
     </div>
-)
+  );
 };
 
 export default LectureListTemp;
