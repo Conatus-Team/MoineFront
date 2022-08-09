@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div>
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
-      <HeaderBar title="채팅 내역 보기" />
-      <!-- <b-table striped hover :items="items" :fields="fields"
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <HeaderBar title="채팅 내역 보기" />
+
+    <!-- <b-table striped hover :items="items" :fields="fields"
         ><template
           v-for="field in editableFields"
           v-slot:[`cell(${field.key})`]="{ item }"
@@ -16,33 +16,46 @@
           <b-input v-model="item[field.key]" />
         </template>
       </b-table> -->
+    <div class="container-fluid">
       <b-editable-table
         :busy="loading"
         bordered
+        striped
         class="editable-table"
         v-model="items"
         :fields="fields"
+        @head-clicked="headClicked"
       >
-        <template #table-colgroup="scope">
-          <col
-            v-for="field in scope.fields"
-            :key="field.key"
-            @click="handleClick"
-        /></template>
+        <!-- <template #cell(roomUUID)="data">
+          <div class="w-100 text-truncate">{{ data.value }}</div>
+        </template> -->
+
         <template #cell(isChecked)="data">
-          <span v-if="data.value">✅</span>
-          <span v-else>❌</span>
+          <div class="float-center">
+            <span v-if="data.value"><b-checkbox checked="true" /></span>
+            <span v-else><b-checkbox checked="false" /></span>
+          </div>
         </template>
       </b-editable-table>
-    </div>
-    <div>
-      <button class="btn btn-primary" type="button" @click="findBefore">
-        이전
-      </button>
-      {{ page + 1 }} / {{ totalPages }}
-      <button class="btn btn-primary" type="button" @click="findNext">
-        이후
-      </button>
+
+      <div class="absolute-center">
+        <button class="btn btn-primary" type="button" @click="findBefore">
+          이전
+        </button>
+        {{ page + 1 }} / {{ totalPages }}
+        <button class="btn btn-primary" type="button" @click="findNext">
+          이후
+        </button>
+        <div class="float-right">
+          <button class="btn btn-primary" type="button" @click="checkAll">
+            모두 체크
+          </button>
+
+          <button class="btn btn-primary" type="button" @click="findNext">
+            저장
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -115,9 +128,12 @@ export default {
   },
   methods: {
     findAllChatData() {
+      console.log(
+        `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}&sortColumn=${this.sortBy}&sortOrder=${this.sortDirection}`
+      );
       this.$axios
         .get(
-          `http://localhost:8080/chat/data/get/pageable?page=${this.page}&size=${this.size}`
+          `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
         )
         .then((response) => {
           const content = response.data.content;
@@ -130,7 +146,12 @@ export default {
 
           const exceptKeys = ["isDeleted"];
           const editableKeys = { answer: "text", isChecked: "checkbox" };
-
+          const keyWidth = {
+            id: "1rem",
+            isChecked: "1rem",
+            question: "20rem",
+            answer: "20rem",
+          };
           // 필드
           if (this.fields.length === 0) {
             keys.map((key) => {
@@ -141,15 +162,19 @@ export default {
                 key: String(key),
                 label: String(key),
                 sortable: true,
+                thStyle: { width: "13rem" },
+                tdClass: "text-center",
               };
               if (Object.keys(editableKeys).includes(key)) {
                 field.editable = true;
                 field.type = editableKeys[key];
               }
-
+              if (Object.keys(keyWidth).includes(key)) {
+                field.thStyle.width = keyWidth[key];
+              }
               this.fields.push(field);
             });
-            this.fields.push({ key: "actions", class: "text-center" });
+            // this.fields.push({ key: "actions", class: "text-center" });
           }
 
           this.items = [];
@@ -166,12 +191,12 @@ export default {
         return;
       }
       this.page = this.page - 1;
-      this.findAllChatData();
+      this.findByColumnOrderBy();
     },
     findNext() {
       if (this.last !== true) {
         this.page = this.page + 1;
-        this.findAllChatData();
+        this.findByColumnOrderBy();
       }
     },
     doEdit(item) {
