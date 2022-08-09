@@ -29,7 +29,10 @@
           v-for="message in messages"
           v-bind:key="message.messaage"
         >
-          {{ message.sender }} - {{ message.message }}
+          <div v-if="message.sender === '나'" id="align-right">
+            {{ message.sender }} - {{ message.message }}
+          </div>
+          <div v-else>{{ message.sender }} - {{ message.message }}</div>
         </li>
       </ul>
       <div></div>
@@ -164,5 +167,9 @@ export default {
 @import "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css";
 li {
   text-align: left;
+}
+
+#align-right {
+  text-align: right;
 }
 </style>
