@@ -87,13 +87,21 @@ export default {
         // },
       ],
       items: [],
-      size: 100,
+      size: 12,
       page: 0,
       first: true,
       last: false,
       totalElements: 0,
       totalPages: 1,
       loading: false,
+      sortBy: "id",
+      sortDesc: false,
+      sortDirection: "asc",
+      isBusy: false,
+      // eslint-disable-next-line vue/no-reserved-keys
+      _helper: "",
+      dataChanged: false,
+      allChecked: false,
     };
   },
 
@@ -187,9 +195,61 @@ export default {
     handleClick() {
       console.log("clicked");
     },
+    findByColumnOrderBy() {
+      console.log("데이터 로드");
+      console.log(
+        `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}&sortColumn=${this.sortBy}&sortOrder=${this.sortDirection}`
+      );
+      this.$axios
+        .get(
+          `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}&sortColumn=${this.sortBy}&sortOrder=${this.sortDirection}`
+        )
+        .then((response) => {
+          const content = response.data.content;
+          this.last = response.data.last;
+          this.first = response.data.first;
+          console.log(content);
+          this.items = [];
+          content.map((item) => {
+            this.items.push(item);
+          });
+        });
+    },
+    headClicked(column) {
+      // https://github.com/bootstrap-vue/bootstrap-vue/issues/1090
+      console.log("head clicked");
+      if (column == this._helper) {
+        //change sorting order.
+        this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc";
+      } else {
+        this.sortDirection = "asc";
+      }
+      //set sorting column.
+      this.sortBy = column;
+      this._helper = column;
+      console.log(`column, order = ${column}, ${this.sortDirection}`);
+      this.findByColumnOrderBy(column, this.sortDirection);
+    },
+    checkAll() {
+      this.allChecked = !this.allChecked;
+
+      this.items = this.items.map((item) => {
+        item.isChecked = this.allChecked;
+        return item;
+      });
+      console.log(this.items);
+    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.btn-primary {
+  margin: 1rem;
+}
+
+#align-right {
+  float: right;
+}
+</style>
