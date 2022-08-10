@@ -100,7 +100,8 @@ export default {
       }
     },
     enterRoom(roomUUID) {
-      const sender = prompt("대화명을 입력해 주세요.");
+      // const sender = prompt("대화명을 입력해 주세요.");
+      const sender = "관리자";
       if (sender !== "") {
         localStorage.setItem("wschat.sender", sender);
         localStorage.setItem("wschat.roomUUID", roomUUID);
@@ -118,5 +119,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css";
-
 </style>
