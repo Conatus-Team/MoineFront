@@ -1,12 +1,25 @@
 <template>
   <div>
     <div>
-      <HeaderBar title="채팅하기" />
+      <HeaderBar title="채팅방 채팅 기록" />
     </div>
     <div class="container" id="app" v-cloak>
       <div>
         <h2>{{ room.name }}</h2>
       </div>
+
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          v-for="message in messages"
+          v-bind:key="message.messaage"
+        >
+          <div v-if="message.sender === '나'" id="align-right">
+            {{ message.sender }} - {{ message.message }}
+          </div>
+          <div v-else>{{ message.sender }} - {{ message.message }}</div>
+        </li>
+      </ul>
       <div class="input-group">
         <div class="input-group-prepend">
           <label class="input-group-text">내용</label>
@@ -23,18 +36,6 @@
           </button>
         </div>
       </div>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          v-for="message in messages"
-          v-bind:key="message.messaage"
-        >
-          <div v-if="message.sender === '나'" id="align-right">
-            {{ message.sender }} - {{ message.message }}
-          </div>
-          <div v-else>{{ message.sender }} - {{ message.message }}</div>
-        </li>
-      </ul>
       <div></div>
     </div>
   </div>
@@ -48,7 +49,7 @@
 import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import HeaderBar from "@/components/HeaderBar";
-
+// import lodash from "lodash";
 const HOST = "http://localhost:8080";
 
 // let sock = new SockJS(HOST + "/ws/chat");
@@ -72,6 +73,7 @@ export default {
     };
   },
   mounted() {
+    this.findAllChatData();
     console.log(HOST);
     sock = new SockJS(`${HOST}/ws/chat`);
     ws = Stomp.over(sock);
@@ -87,8 +89,27 @@ export default {
   },
 
   methods: {
+    findAllChatData() {
+      this.$axios
+        .get(
+          // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
+          `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}`
+        )
+        .then((response) => {
+          console.log("axios response");
+          console.log(response);
+          const content = response.data.content;
+          // console.log(content);
+          // this.messages = lodash.cloneDeep(content);
+          content.map((item) => {
+            this.messages.push({ sender: "나", message: item.question });
+            this.messages.push({ sender: "BOT", message: item.answer });
+          });
+          console.log(this.messages);
+        });
+    },
     recvMessage(recv) {
-      this.messages.unshift({
+      this.messages.push({
         type: recv.type,
         sender: recv.type === "ENTER" ? "[알림]" : recv.sender,
         message: recv.message,
