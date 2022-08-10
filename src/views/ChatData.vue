@@ -31,9 +31,29 @@
         </template> -->
 
         <template #cell(isChecked)="data">
-          <div class="float-center">
-            <span v-if="data.value"><b-checkbox checked="true" /></span>
-            <span v-else><b-checkbox checked="false" /></span>
+          <div id="align-center">
+            <!-- <span v-if="data.value"><b-form-checkbox checked="true" /></span>
+            <span v-else><b-form-checkbox checked="false" /></span> -->
+
+            <!-- <span v-if="data.value">✅</span>
+            <span v-else>❌</span> -->
+            <div class="float-center">
+              <b-checkbox
+                key="data.id"
+                v-model="data.item.isChecked"
+                @change="clickCheckbox(data, 'isChecked')"
+              />
+            </div>
+          </div>
+        </template>
+
+        <template #cell(isDeleted)="data">
+          <div class="text-center">
+            <b-checkbox
+              key="data.id"
+              v-model="data.item.isDeleted"
+              @change="clickCheckbox(data, 'isDeleted')"
+            />
           </div>
         </template>
       </b-editable-table>
@@ -51,7 +71,7 @@
             모두 체크
           </button>
 
-          <button class="btn btn-primary" type="button" @click="findNext">
+          <button class="btn btn-primary" type="button" @click="save">
             저장
           </button>
         </div>
@@ -63,6 +83,7 @@
 <script>
 import HeaderBar from "@/components/HeaderBar";
 import BEditableTable from "bootstrap-vue-editable-table";
+import lodash from "lodash";
 // import { BButton } from "bootstrap-vue";
 
 export default {
@@ -144,13 +165,15 @@ export default {
           this.totalPages = totalPages;
           const keys = Object.keys(content[0]);
 
-          const exceptKeys = ["isDeleted"];
-          const editableKeys = { answer: "text", isChecked: "checkbox" };
+          const exceptKeys = [];
+          const editableKeys = { answer: "text" };
           const keyWidth = {
             id: "1rem",
             isChecked: "1rem",
+            score: "1rem",
             question: "20rem",
             answer: "20rem",
+            isDeleted: "1rem",
           };
           // 필드
           if (this.fields.length === 0) {
@@ -243,6 +266,7 @@ export default {
     headClicked(column) {
       // https://github.com/bootstrap-vue/bootstrap-vue/issues/1090
       console.log("head clicked");
+      this.page = 0;
       if (column == this._helper) {
         //change sorting order.
         this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc";
@@ -253,7 +277,7 @@ export default {
       this.sortBy = column;
       this._helper = column;
       console.log(`column, order = ${column}, ${this.sortDirection}`);
-      this.findByColumnOrderBy(column, this.sortDirection);
+      this.findByColumnOrderBy();
     },
     checkAll() {
       this.allChecked = !this.allChecked;
@@ -262,7 +286,25 @@ export default {
         item.isChecked = this.allChecked;
         return item;
       });
+    },
+    save() {
       console.log(this.items);
+      try {
+        this.$axios
+          .patch(`http://localhost:8080/chat/data/many`, this.items)
+          .then((response) => {
+            this.items = lodash.cloneDeep(response.data);
+            console.log(this.items);
+            alert("저장되었습니다");
+          });
+      } catch (err) {
+        console.err(err);
+        alert("저장 실패");
+      }
+    },
+    clickCheckbox(data, value) {
+      console.log(value);
+      this.items[data.index][value] = data.item[value];
     },
   },
 };
@@ -276,5 +318,16 @@ export default {
 
 #align-right {
   float: right;
+}
+
+#align-center {
+  float: center !important;
+}
+
+.editable-table {
+}
+
+td {
+  text-align: center;
 }
 </style>
