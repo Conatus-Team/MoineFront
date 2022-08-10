@@ -10,7 +10,11 @@
     </router-link>
     <div><p></p></div>
     <router-link to="/chatdata">
-      <button class="btn btn-primary">학습할 데이터 보기</button>
+      <button class="btn btn-primary">채팅 내역 보기</button>
+    </router-link>
+    <div><p></p></div>
+    <router-link to="/data-table">
+      <button class="btn btn-primary">테이블</button>
     </router-link>
   </div>
 </template>
@@ -25,10 +29,10 @@ export default {
   methods: {
     enterChatBot() {
       this.$axios
-        .post("http://localhost:8080/chat/room")
+        .post("http://localhost:8080/chat/bot/room")
         .then((response) => {
           this.$router.push({
-            name: "RoomDetail",
+            name: "Chatting",
             params: { sender: "나", roomUUID: response.data.roomUUID },
           });
         })
