@@ -83,7 +83,7 @@
 <script>
 import HeaderBar from "@/components/HeaderBar";
 import BEditableTable from "bootstrap-vue-editable-table";
-import lodash from "lodash";
+// import lodash from "lodash";
 // import { BButton } from "bootstrap-vue";
 
 export default {
@@ -256,6 +256,8 @@ export default {
           const content = response.data.content;
           this.last = response.data.last;
           this.first = response.data.first;
+          this.totalElements = response.data.totalElements;
+          this.totalPages = response.data.totalPages;
           console.log(content);
           this.items = [];
           content.map((item) => {
@@ -293,8 +295,10 @@ export default {
         this.$axios
           .patch(`http://localhost:8080/chat/data/many`, this.items)
           .then((response) => {
-            this.items = lodash.cloneDeep(response.data);
-            console.log(this.items);
+            console.log(response);
+            // this.items = lodash.cloneDeep(response.data);
+            // console.log(this.items);
+            this.findByColumnOrderBy();
             alert("저장되었습니다");
           });
       } catch (err) {
