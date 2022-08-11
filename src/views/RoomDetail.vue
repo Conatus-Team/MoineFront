@@ -25,10 +25,10 @@
           <li
             class="list-group-item"
             v-for="message in messages"
-          v-bind:key="message.messaage"
-        >
-          <div v-if="message.sender === '나'" id="align-right">
-            {{ message.sender }} - {{ message.message }}
+            v-bind:key="message.messaage"
+          >
+            <div v-if="message.sender === '나'" id="align-right">
+              {{ message.sender }} - {{ message.message }}
             </div>
             <div v-else>{{ message.sender }} - {{ message.message }}</div>
           </li>
@@ -54,14 +54,14 @@
           <div class="input-group-prepend">
             <label class="input-group-text">내용</label>
           </div>
-        <input
-          type="text"
-          class="form-control"
-          v-model="message"
-          v-on:keypress.enter="sendMessage"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button" @click="sendMessage">
+          <input
+            type="text"
+            class="form-control"
+            v-model="message"
+            v-on:keypress.enter="sendMessage"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" @click="sendMessage">
               보내기
             </button>
           </div>
@@ -140,16 +140,31 @@ export default {
       sender: "나",
       message: "",
       messages: [],
+
+      size: 2,
+      page: 0,
+      first: true,
+      last: false,
+      totalElements: 0,
+      totalPages: 1,
+      loading: false,
+      sortBy: "id",
+      sortDesc: false,
+      sortDirection: "desc",
+
+      useScrollListener: false,
     };
   },
   mounted() {
-    this.findAllChatData();
+    this.scrollDown();
+    this.findChatDataHistory();
+
     console.log(HOST);
     sock = new SockJS(`${HOST}/ws/chat`);
     ws = Stomp.over(sock);
     this.connect(this.roomUUID, this.sender);
   },
-  created() {
+  async created() {
     this.roomUUID = this.$route.params.roomUUID;
 
     if (this.$route.params.sender) {
@@ -159,23 +174,42 @@ export default {
   },
 
   methods: {
-    findAllChatData() {
+    scrollDown() {
+      // 스크롤 아래로
+      setTimeout(() => {
+        const element = document.getElementById("chat__body");
+        element.scrollTop = element.scrollHeight;
+      }, 0);
+    },
+    findChatDataHistory() {
       this.$axios
         .get(
           // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
-          `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}`
+          `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
         )
         .then((response) => {
           console.log("axios response");
           console.log(response);
           const content = response.data.content;
+          this.first = response.data.first;
+          this.last = response.data.last;
           // console.log(content);
           // this.messages = lodash.cloneDeep(content);
           content.map((item) => {
-            this.messages.push({ sender: "나", message: item.question });
-            this.messages.push({ sender: "BOT", message: item.answer });
+            this.messages.unshift({ sender: "BOT", message: item.answer });
+            this.messages.unshift({ sender: "나", message: item.question });
           });
           console.log(this.messages);
+          this.scrollDown();
+          // // 스크롤 아래로
+          // setTimeout(() => {
+          //   const element = document.getElementById("chat__body");
+          //   element.scrollTop = element.scrollHeight;
+          // }, 0);
+
+          setTimeout(() => {
+            this.useScrollListener = true;
+          }, 1000);
         });
     },
     recvMessage(recv) {
@@ -190,6 +224,12 @@ export default {
       //     sender: recv.type == "ENTER" ? "[알림]" : recv.sender,
       //     message: recv.message,
       //   });
+      // 스크롤 아래로
+      // setTimeout(() => {
+      //   const element = document.getElementById("chat__body");
+      //   element.scrollTop = element.scrollHeight;
+      // }, 0);
+      this.scrollDown();
     },
     connect(roomUUID, sender) {
       // pub/sub event
@@ -248,6 +288,44 @@ export default {
         {}
       );
       this.message = "";
+    },
+    handleNotificationListScroll(e) {
+      if (!this.useScrollListener) return;
+      // const { scrollHeight, scrollTop, clientHeight } = e.target;
+      const { scrollTop, scrollHeight } = e.target;
+      // const isAtTheBottom = scrollHeight === scrollTop + clientHeight;
+      // // 일정 한도 밑으로 내려오면 함수 실행
+      // if (isAtTheBottom) this.handleLoadMore();
+
+      console.log(`${scrollTop}, ${scrollHeight}`);
+      const isAtTop = scrollTop === 0;
+
+      if (isAtTop && this.last !== true) {
+        // 페이징
+        this.page = this.page + 1;
+
+        this.$axios
+          .get(
+            // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
+            `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
+          )
+          .then((response) => {
+            console.log("axios response");
+            console.log(response);
+            const content = response.data.content;
+            this.first = response.data.first;
+            this.last = response.data.last;
+            // console.log(content);
+            // this.messages = lodash.cloneDeep(content);
+            content.map((item) => {
+              this.messages.unshift({ sender: "나", message: item.question });
+              this.messages.unshift({ sender: "BOT", message: item.answer });
+            });
+            const element = document.getElementById("chat__body");
+            element.scrollTop = element.scrollHeight - scrollHeight;
+            setTimeout(() => {}, 0);
+          });
+      }
     },
   },
 };
