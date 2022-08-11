@@ -3,27 +3,57 @@
     <div>
       <HeaderBar title="채팅방 채팅 기록" />
     </div>
-    <div class="container" id="app" v-cloak>
-      <div>
-        <h2>{{ room.name }}</h2>
-      </div>
 
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          v-for="message in messages"
+    <div class="container" id="app" v-cloak>
+      <div class="chat">
+        <!-- <div>
+        <b-card-header>{{ roomUUID }}</b-card-header>
+      </div> -->
+        <div class="chat__header">
+          <span class="chat__header__greetings">
+            {{ roomUUID }}
+          </span>
+        </div>
+
+        <!-- 채팅 메시지 -->
+        <div
+          class="chat__body"
+          id="chat__body"
+          @scroll="handleNotificationListScroll"
+        >
+          <!-- <ul class="list-group">
+          <li
+            class="list-group-item"
+            v-for="message in messages"
           v-bind:key="message.messaage"
         >
           <div v-if="message.sender === '나'" id="align-right">
             {{ message.sender }} - {{ message.message }}
+            </div>
+            <div v-else>{{ message.sender }} - {{ message.message }}</div>
+          </li>
+        </ul> -->
+          <!-- 
+          지난 채팅메시지 더 불러오기-->
+          <div v-if="this.last === true" class="form__submit">
+            <p>이전 내역이 없습니다</p>
           </div>
-          <div v-else>{{ message.sender }} - {{ message.message }}</div>
-        </li>
-      </ul>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <label class="input-group-text">내용</label>
+
+          <chat-message
+            v-for="(message, index) in messages"
+            :key="index"
+            :msg="message"
+            :prev="[index == 0 ? null : messages[index - 1]]"
+          >
+          </chat-message>
         </div>
+        <!-- 채팅 메시지 끝 -->
+
+        <!-- 내용 입력 -->
+        <!-- <div class="input-group">
+          <div class="input-group-prepend">
+            <label class="input-group-text">내용</label>
+          </div>
         <input
           type="text"
           class="form-control"
@@ -32,11 +62,49 @@
         />
         <div class="input-group-append">
           <button class="btn btn-primary" type="button" @click="sendMessage">
-            보내기
-          </button>
+              보내기
+            </button>
+          </div>
+        </div> -->
+        <div class="form">
+          <input
+            class="form__input"
+            type="text"
+            placeholder="메세지를 입력하세요."
+            v-model.trim="message"
+            @keyup.enter="sendMessage"
+          />
+          <div @click="sendMessage" class="form__submit">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 68 68"
+              fill="#CCCCCC"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_26_10)">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M48.0833 19.799C48.619 20.3347 48.806 21.127 48.5665 21.8457L35.8385 60.0294C35.5946 60.7614 34.9513 61.2877 34.1855 61.382C33.4198 61.4763 32.6681 61.1217 32.2539 60.4707L22.593 45.2893L7.41158 35.6285C6.76065 35.2142 6.40604 34.4625 6.50031 33.6968C6.59458 32.931 7.12092 32.2878 7.85287 32.0438L46.0366 19.3159C46.7553 19.0763 47.5476 19.2633 48.0833 19.799ZM26.5903 44.1204L33.3726 54.7782L42.0926 28.6181L26.5903 44.1204ZM39.2642 25.7897L23.7619 41.292L13.1041 34.5097L39.2642 25.7897Z"
+                  fill=""
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_26_10">
+                  <rect
+                    width="48"
+                    height="48"
+                    fill="white"
+                    transform="translate(33.9412) rotate(45)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
         </div>
+        <!-- 내용 입력 끝 -->
       </div>
-      <div></div>
     </div>
   </div>
 </template>
@@ -49,6 +117,7 @@
 import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import HeaderBar from "@/components/HeaderBar";
+import ChatMessage from "@/components/ChatMessage";
 // import lodash from "lodash";
 const HOST = "http://localhost:8080";
 
@@ -62,6 +131,7 @@ export default {
   name: "RoomDetail",
   components: {
     HeaderBar,
+    ChatMessage,
   },
   data() {
     return {
@@ -192,5 +262,89 @@ li {
 
 #align-right {
   text-align: right;
+}
+
+.container {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 600px;
+  background-color: #ffffff;
+  margin: 5rem auto 0rem;
+  border-radius: 1.5rem;
+  box-shadow: 0px 1px 20px #9c9cc855; */
+}
+
+/* 채팅 바디 */
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* max-width: 375px; */
+  height: 35rem;
+  background-color: #ffffff;
+  /* margin: 5rem auto 0rem; */
+  border-radius: 1.5rem;
+  box-shadow: 0px 1px 20px #9c9cc855;
+}
+
+.chat__body {
+  padding: 2rem;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
+.chat__body::-webkit-scrollbar {
+  display: none;
+}
+
+.chat__header {
+  background: #ffffff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 24px 24px 0px 0px;
+  padding: 1.8rem;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.chat__header__greetings {
+  color: #292929;
+}
+
+/* 입력폼 */
+.form {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.4rem;
+  background: #ffffff;
+  border-radius: 30px 30px 24px 24px;
+  box-shadow: 0px -5px 30px rgba(0, 0, 0, 0.05);
+}
+
+.form__input {
+  border: none;
+  padding: 0.5rem;
+  font-size: 16px;
+  width: calc(100% - 60px);
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__submit {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+svg {
+  transition: 0.3s;
+}
+
+svg:hover {
+  fill: #999999;
 }
 </style>
