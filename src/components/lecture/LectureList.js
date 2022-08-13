@@ -13,7 +13,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
         <LectureSearch/>
 
         <p className='lecture_title'> Recommend Lecture List</p>
-        <div className="RecommendLectureList">
+        <div className="lectureList">
              {recommendLectureList.map((it) => (
                 <LectureListTemp key = {it.lectureId} {...it}/>
              ))}
@@ -22,7 +22,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
 
 
         <p className='lecture_title'> My Lecture List</p>
-        <div className="MyLectureList">
+        <div className="lectureList">
         {lectureList.map((it) =>(
           <LectureListTemp key = {it.lectureId} {...it}/>
           ))}

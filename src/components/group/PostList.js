@@ -8,11 +8,6 @@ const sortOptionList = [
   {value: "oldest", name:"oldest"},
 ];
 
-// const filterOptionList = [
-//   {value: "cooking", name: "cooking"},
-//   { value: "all", name: "all"}
-
-// ];
 
 const ControlMenu = ({value, onChange, optionList}) =>{
   return (
@@ -28,54 +23,40 @@ const ControlMenu = ({value, onChange, optionList}) =>{
 };
 
 
-
-
-
 const PostList= ({postList})=> {
 
   const navigate = useNavigate();
   const [sortType, setSortType] = useState("latest");
-  const [filter, setFilter] = useState("all");
 
   
   
   const getProcessdPostList = () => {
 
-    // const filterCallBack = (item) =>{
-    //   if(filter === "cooking"){
-    //     return item.groupName === "cooking";
-    //   } else return item.groupName !== "cooking";
-    
-    // }
 
-    const compare = (a,b) =>{
-      if(sortType === "latest"){
-        return parseInt(b.date)-parseInt(a.date);
-      } else {
-        return parseInt(a.date)-parseInt(b.date);
-      }
+  const compare = (a,b) =>{
+       if(sortType === "latest"){
+               return parseInt(b.date)-parseInt(a.date);
+       } else {
+         return parseInt(a.date)-parseInt(b.date);
+       }
 
-    }
-    const copyList = JSON.parse(JSON.stringify(postList));
+     }
+     const copyList = JSON.parse(JSON.stringify(postList));
 
-    // const filteredList = filter !=='cooking' ? copyList :copyList.filter((it) => filterCallBack(it));
-    const sortedList = copyList.sort(compare);
-    return sortedList;
-  }
+     const sortedList = copyList.sort(compare);
+     return sortedList;
+   }
   
   
   return (
     <div className='PostList'>
       <div className="menu_wrapper">
         <div className='left_col'>
-        <ControlMenu 
+         <ControlMenu 
         value = {sortType} 
         onChange = {setSortType}
-        optionList = {sortOptionList}/>
-        {/* <ControlMenu 
-        value = {filter} 
-        onChange = {setFilter}
-        optionList = {filterOptionList}/> */}
+        optionList = {sortOptionList}/> 
+
 
         </div>
         <div className='right_col'>
@@ -93,10 +74,8 @@ const PostList= ({postList})=> {
             </tr>
         </thead>
         <tbody>
-      {getProcessdPostList().map((it)=>(
-           
+      {postList.map((it)=>(
         <PostTable key = {it.id} {...it}/>
-  
       ))}
        </tbody>
     </table>

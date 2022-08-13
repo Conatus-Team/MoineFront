@@ -3,6 +3,7 @@ import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../App";
 
 //return date into string
 const getStringDate = (date) => {
@@ -10,7 +11,7 @@ const getStringDate = (date) => {
 };
 
 
-const PostEditor =({isEdit, originData, groupId, groupName}) => {
+const PostEditor =({isEdit, originData, groupId}) => {
     const navigate = useNavigate();
     const contentRef = useRef();
   
@@ -18,7 +19,12 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
     const [content, setContent] = useState("");
     const [author, setAuthor] = useState("author6");
     const [title, setTitle] = useState("title6");
+    //const [groupName, setGroupName] =useState(originData.groupName);
+    let id=0;
 
+    if(isEdit) id = originData.id;
+
+    
     let url="";
 
 
@@ -28,25 +34,18 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
             return;
         }
         if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
-            const createData = {
-                date: date, 
-                author: author,
-                content: content, 
-                title: title, 
-                groupId: groupId, 
-                groupName: groupName,
-            }
-            const updateData = {
-                id: originData.id,
-                date: date, 
-                author: author,
-                content: content, 
-                title: title, 
-                groupId: groupId, 
-                groupName: groupName,
-            }
+            
             if(!isEdit){
-                url = `http://localhost:8083/group/post/create/${groupId}`;
+                const createData = {
+                    date: date, 
+                    author: author,
+                    content: content, 
+                    title: title, 
+                    groupId: groupId, 
+                    //groupName: groupName,
+                }
+                url = `${BASE_URL.group}/group/post/create`;
+                console.log('createData', createData, url);
                 axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
@@ -54,35 +53,50 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
                     })
                     .then((res) => {
                     console.log(res);
+                    }).catch(error => {
+                        console.log(error.response)
                     });
-                // onCreate(date, author, content, title, groupId, groupName);
             }
         
             else {
-                url = `http://localhost:8083/group/post/update/${originData.id}`;
-                axios.put(url,  JSON.stringify(updateData), {
+                const updateData = {
+                    id: parseInt(originData.id),
+                    date: date, 
+                    author: author,
+                    content: content, 
+                    title: title, 
+                    groupId: groupId, 
+                    //groupName: groupName,
+                }
+                url = `${BASE_URL.group}/post/${originData.id}`;
+                axios.patch(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
                     },
                     })
                     .then((res) => {
                     console.log(res);
+                    }).catch(error => {
+                        console.log(error.response)
                     });
-                // onEdit(date, author, content, title, groupName);
             }
         }
         
         navigate(`/group/post/${groupId}`, {replace: true});
     };
 
+    
     useEffect(()=>{
         if(isEdit){
-            setDate(getStringDate(new Date(parseInt(originData.date))));
+            //setDate(getStringDate(new Date(parseInt(originData.date))));
+            setDate(originData.createdTime);
             setAuthor(originData.author);
             setContent(originData.content);
             setTitle(originData.title);
+            //setGroupName(originData.groupName);
         }
-    })
+    },id);
+    
 
 
     return (<div className="PostEditor">
@@ -91,7 +105,7 @@ const PostEditor =({isEdit, originData, groupId, groupName}) => {
         <div className="post_new">
             <section className="post_editor_info">
             {/* group Name */}
-            <p>Group Name: {groupName}</p>
+            {/*<p>Group Name: {groupName}</p>*/}
                
             <p>User Name: {author}</p>
            

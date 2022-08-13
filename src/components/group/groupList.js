@@ -6,6 +6,7 @@ import GroupSearch from './GroupSearch';
 
 const GroupList= ({groupList, recommendGroupList})=> {
   const navigate = useNavigate();
+  console.log(groupList);
 
     // const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ const GroupList= ({groupList, recommendGroupList})=> {
         <GroupSearch/>     
 
         <p className='group_title'> Recommend Group List</p>
-        <div className='RecommendGroupList'>
+        <div className='groupList'>
              {recommendGroupList.map((it) => (
                 <GroupListTemp key = {it.id} {...it}/>
              ))}
@@ -24,7 +25,7 @@ const GroupList= ({groupList, recommendGroupList})=> {
 
 
 
-        <div className="MyGroupList">
+        <div className="groupList">
         {groupList.map((it) =>(
           <GroupListTemp key = {it.id} {...it}/>
           ))}

@@ -12,10 +12,12 @@ const Home =() =>{
   //Recommend Hobby
   const [recommendHobbyData, setRecommendHobbyData] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:8082/hobby/recommend")
+    axios.get("http://192.168.11.186:8082/hobby/recommend")
     .then(response => {
       setRecommendHobbyData(response.data);
-    });
+    }).catch(error => {
+      console.log(error.response)
+  });
   }, []);
 
     const recommendLectureList = useContext(RecommendLectureStateContext);

@@ -1,5 +1,6 @@
 import GroupListTemp from "./GroupListTemp";
 const GroupSearched = ({searchResult}) =>{
+    console.log('searchPage', searchResult);
     if (searchResult.length>=1){
         return (
             <div className="group_searched">

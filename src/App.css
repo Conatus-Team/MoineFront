@@ -192,7 +192,7 @@ header .head_signup{
   width: 20%;
 
 }
-.MyGroupList, .RecommendGroupList, .MyLectureList, .RecommendLectureList{
+.groupList, .lectureList{
   display:flex;
   flex-wrap: wrap;
   /* overflow:; */
@@ -202,7 +202,7 @@ header .head_signup{
   
 }
 
-.MyGroup, .RecommendGroup, .MyLecture, .RecommendLecture {
+.Group, .Lecture {
   width: 250px;
   border: 4px solid #e2e2e2;
   border-radius: 5px;
@@ -210,31 +210,35 @@ header .head_signup{
   justify-content: center;
   background-color: white;
   margin: 2%;
-
   cursor: pointer;
 }
+.Group .group_image img, .Lecture .Lecture_image img{
+  width:inherit;
+  height: auto;
+}
 
-.RecommendGroup .RecommendGroup_image, .MyGroup .MyGroup_image, .RecommendLecture .RecommendLecture_image, .MyLecture .MyLecture_image{
-  width: 100%;
-  /* height: 40px; */
+.Group .group_image, .Lecture .Lecture_image{
+  width: 250px;
+  /*height: 40px; */
   border-bottom: 5px solid #ececec;
   /* border-radius:5px; */
   /* display: flex; */
   justify-content: center;
-  background-color: #64c964;
+  background-color: black;
+  
 }
 
 .group_title, .lecture_title{
   padding: 10px;
   font-size: 30px;
 }
-.RecommendGroup .RecommendGroupcontent, .MyGroup .MyGroupcontent, .RecommendLecture .RecommendLecturecontent, .MyLecture .MyLecturecontent {
+.Group .Groupcontent, .Lecture .Lecturecontent {
   font-size: 20px;
   justify-content: center; 
 
 }
 
-.RecommendGroup .RecommendGroupcontent p, .MyGroup .MyGroupcontent p, .RecommendLecture .RecommendLecturecontent p, .MyLecture .MyLecturecontent p{
+.Group .Groupcontent p, .Lecture .Lecturecontent p{
   word-wrap: break-word;
 }
 
@@ -334,6 +338,7 @@ header .head_signup{
 
 
 .group_main{
+  
   justify-content: center;
   font-size: 20px;
   
@@ -345,12 +350,16 @@ header .head_signup{
   margin-top: 20px;
   margin-bottom: 10px;
   padding:40px;
-  height:300px;
-
+  
+ 
 }
 .group_content .group_thumbnail{
-  width: 400px;
   background-color: beige;
+}
+.group_content .group_thumbnail img{
+  width:500px;
+  height: 400px;
+  border: 6px solid beige;
 }
 .group_content .MyButton{
 margin-left:20px;
@@ -413,6 +422,7 @@ height: 50px;
   width: 800px;
   height: 500px;
   background-color: beige;
+  width:inherit;
 }
 .lecture_header .MyButton{
 margin-left:20px;
@@ -451,6 +461,45 @@ height: 50px;
   height:max-content;
 }
 
+.LogIn {
+  margin-top: 120px;
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 50%;
+  padding-top: 50px;
+  height: 400px;
+  align-self: center;
+}
+
+.LogIn input {
+ 
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+  align-self: center;
+}
+
+.SignUp {
+  margin-top: 120px;
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 50%;
+  padding-top: 50px;
+  height: 600px;
+  align-self: center;
+
+}
+.SignUp input {
+ 
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+  align-self: center;
+}
 /* .App-header {
   background-color: #282c34;
   min-height: 100vh;

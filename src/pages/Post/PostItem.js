@@ -4,6 +4,7 @@ import MyButton from "../../components/MyButton";
 // import { PostStateContext } from "../../App";
 import MyGroup from "../../components/MyGroup";
 import axios from "axios";
+import { BASE_URL } from "../../App";
 const PostItem = () => {
     console.log("function enter");
 
@@ -16,34 +17,13 @@ const PostItem = () => {
     // Post
     const [postData, setPostData] = useState([]);
     useEffect(()=>{
-        axios.get(`http://localhost:8083/group/post/${postId}`)
+        axios.get(`${BASE_URL.group}/post/${postId}`)
         .then(response => {
         setPostData(response.data);
+        }).catch(error => {
+            console.log(error.response)
         });
     }, []);
-
-
-    // useEffect (() =>{
-    //     console.log('enter');
-    //     if(postList.length >= 2){
-    //         // console.log(1);
-
-    //         const targetPost = postList.find(
-    //             (it)=> parseInt(it.id) === parseInt(postId)
-    //             );
-    //             // console.log('postId: ',postId);
-
-    //         // console.log('targetPost: ',targetPost);
-    //         if(targetPost){
-    //             setPostData(targetPost);
-    //             // console.log(postData);           
-    //         } else {
-    //             navigate(`/group/post${groupId}`);
-    //         }
-
-    //     }
-
-    // }, [postId,groupId,postData, postList, setPostData]);
     
 
     

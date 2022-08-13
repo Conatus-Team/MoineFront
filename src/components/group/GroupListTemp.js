@@ -21,15 +21,15 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
       console.log('group',id,name, memberCount);
 
   return (
-      <div className="MyGroup" >
+      <div className="Group" >
          
         <div onClick={() => navigate(`/group/groups/${id}`)}>
-        <div className="MyGroup_image" 
+        <div className="group_image"
         // onClick={() => navigate(`/group/main/${id}`)}
         >
-          <img src = {process.env.PUBLIC_URL+ `/${thumbnail}`}/>
+          <img src = {process.env.PUBLIC_URL+ `${thumbnail}`}/>
         </div>
-        <div className="MyGroupcontent">
+        <div className="Groupcontent">
             <div className="lecture_like">
            
             </div>

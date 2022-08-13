@@ -3,70 +3,66 @@ import MyGroup from "../MyGroup";
 import MyButton from "../MyButton";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../App";
 
 const GroupEditor =({isEdit, originData, groupId}) => {
     const navigate = useNavigate();  
     const [thumbnail, setThumbnail] = useState("");
-    const [memberCount, setPeople] = useState("");
     const [explanation, setTitle] = useState("title");
     const [name, setGroupName] = useState("group name");
 
     let url="";
 
     const handleSubmit = () => {
-        if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
-            const createData = {
-                thumbnail: thumbnail,
-                memberCount:memberCount,
-                explanation: explanation, 
-                name: name,
-            }
-            const updateData = {
-                id: groupId,
-                thumbnail: thumbnail,
-                memberCount:memberCount,
-                explanation: explanation, 
-                name: name,
-            }
+        if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){            
             if(!isEdit){
-                url = `http://localhost:8083/info/${groupId}`;
-                axios.put(url,  JSON.stringify(createData), {
+                const createData = {
+                    thumbnail: thumbnail,
+                    explanation: explanation, 
+                    name: name,
+                }
+                url = `${BASE_URL.group}/info`;
+                axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
                     },
                     })
                     .then((res) => {
-                    // console.log(res);
+                    }).catch(error => {
+                        console.log(error.response)
                     });
-                // onCreate(date, author, content, title, groupId, groupName);
             }
         
             else {
-                url = "http://localhost:8083/info";
-                axios.post(url,  JSON.stringify(updateData), {
+                const updateData = {
+                    id: groupId,
+                    thumbnail: thumbnail,
+                    explanation: explanation, 
+                    name: name,
+                }
+                url = `${BASE_URL.group}/info/${groupId}`;
+                axios.patch(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
                     },
                     })
                     .then((res) => {
-                    // console.log(res);
+                    }).catch(error => {
+                        console.log(error.response)
                     });
-                // onEdit(date, author, content, title, groupName);
             }
         }
         
         navigate(`/group`, {replace: true});
     };
-    // console.log(originData);
 
     useEffect(()=>{
         if(isEdit){
             setThumbnail(originData.thumbnail);
-            setPeople(originData.memberCount);
             setGroupName(originData.name);
             setTitle(originData.explanation);
         }
-    },[])
+    },groupId)
 
 
     return (<div className="PostEditor">
@@ -106,16 +102,6 @@ const GroupEditor =({isEdit, originData, groupId}) => {
             value={explanation} onChange = {(e) => setTitle(e.target.value)}/>
             </div>
             </section>
-
-            {/* people */}
-            <section>
-                <h4>people </h4>
-            <div ><input
-            className="post_title"
-            value={memberCount} onChange = {(e) => setPeople(e.target.value)}/>
-            </div>
-            </section>
-          
 
 
             <section>

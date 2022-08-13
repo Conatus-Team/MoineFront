@@ -5,18 +5,19 @@ import { useParams } from "react-router-dom";
 import MyButton from "../components/MyButton";
 import axios from "axios";
 import {useState} from 'react';
+import { BASE_URL } from "../App";
 
 
 function LogIn() {
-    const [ID, setID] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPasword] = useState("");
 
     const submit = () =>{
         let data = {
-            ID: ID,
+            email: email,
             Password: password
         }
-        let url = "http://localhost:3000/group/search";
+        let url = `${BASE_URL.auth}/auth/login`;
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,
@@ -24,15 +25,18 @@ function LogIn() {
             })
             .then((res) => {
             console.log(res);
+        }).catch(error => {
+            console.log(error.response)
         });
             
     }
     
     return (
         <div className="LogIn">
-            <input className="LogIn_ID" type="text" onChange={(e)=>{setID(e.target.value)}}/>
-            <input className="LogIn_Password" type="text" onChange={(e)=>{setPasword(e.target.value)}}/>
-            <MyButton type = {'default'} text ={'Search'} onClick={() =>submit()}>
+            <p>LogIn</p>
+            <p>E-mail: <input className="LogIn_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
+            <p>PW: <input className="LogIn_Password" type="text" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
+            <MyButton type = {'default'} text ={'LogIn'} onClick={() =>submit()}>
           
         </MyButton>
         </div>
