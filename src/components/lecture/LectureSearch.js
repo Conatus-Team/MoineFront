@@ -14,13 +14,14 @@ function LectureSearch() {
     const submitSearch = (e) =>{
         let data = {
             keyword: keyword,
-            userId: 1
+            userId:  JSON.parse(sessionStorage.getItem('user')).userId,
         }
         // useEffect(() => {
         let url = `${BASE_URL.lecture}/lecturelist/search`;
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,
+                "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
             },
             })
             .then((res) => {

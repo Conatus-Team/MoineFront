@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import {useState} from 'react';
 import MyButton from "../components/MyButton";
@@ -10,6 +10,7 @@ function SignUp () {
     const [userNickName, setUserNickName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPasword] = useState("");
+    const navigate = useNavigate();
 
     const submit = () =>{
         let data = {
@@ -25,7 +26,8 @@ function SignUp () {
             },
             })
             .then((res) => {
-            console.log(res);
+                navigate('/login', {replace: true});
+                console.log(res);
         }).catch(error => {
             console.log(error.response)
         });

@@ -3,7 +3,11 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import axios from 'axios';
 
+//Home
 import Home from './pages/Home';
+
+//Default
+import Default from './pages/Default';
 
 //Lecture
 import Lecture from './pages/Lecture';
@@ -53,12 +57,29 @@ export const BASE_URL = {
 
 
 function App() {
+
+  //default header setting
+  axios.defaults.headers = {
+    "Authorization": 0,
+  }
+  const defaultUsers = {
+      userId: 1,
+      userName: "Lee Hyunsun",
+      email: "sunnylee7@sookmyung.ac.kr",
+      userNickname: "Sunny"
+  }
+  sessionStorage.setItem('user',JSON.stringify(defaultUsers));
   
  
   //Lecture
   const [lectureData, setLectureData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.lecture}/lecturelist`)
+    axios.get(`${BASE_URL.lecture}/lecturelist`,{
+      headers: {
+        "Content-Type": `application/json`,
+        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+    },
+    })
     .then(response => {
       setLectureData(response.data);
     }).catch(error => {
@@ -68,7 +89,12 @@ function App() {
 
   const [recommendLectureData, setRecommendLectureData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.lecture}/lecturelist`)
+    axios.get(`${BASE_URL.lecture}/lecturelist`,{
+      headers: {
+        "Content-Type": `application/json`,
+        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+      }
+    })
     .then(response => {
       setRecommendLectureData(response.data);
     }).catch(error => {
@@ -82,7 +108,12 @@ function App() {
   // Group
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.group}/info`)
+    axios.get(`${BASE_URL.group}/info`,{
+      headers: {
+        "Content-Type": `application/json`,
+        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+      }
+    })
     .then(response => {
       setGroupData(response.data._embedded.info)
     }).catch(error => {
@@ -93,7 +124,12 @@ function App() {
 
   const [recommendGroupData, setRecommendGroupData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.group}/info`)
+    axios.get(`${BASE_URL.group}/info`,{
+      headers: {
+        "Content-Type": `application/json`,
+        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+      }
+    })
     .then(response => {
       setRecommendGroupData(response.data._embedded.info)
     }).catch(error => {
@@ -111,11 +147,17 @@ function App() {
     <BrowserRouter>
     <div className="App">
       {/*     <div key = {userData.id} className="App"> */}
-      <MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"} head_login={"LogIn"} head_signup = {"SignUp"}/>
+      {
+         JSON.parse(sessionStorage.getItem('user')).userId !== 0
+        ?<MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/>
+        : null
+      }
+      {/* <MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/> */}
       
 
       <Routes>
-        <Route path = '/' element = {<Home/>} />
+        <Route path = '/' element = {<Default/>} />
+        <Route path = '/home' element = {<Home/>} />
         <Route path='/lecture' element={<Lecture/>} />
         <Route path='/lecture/:id' element={<LectureDetail/>} />
         <Route path='/group' element={<Group/>} />

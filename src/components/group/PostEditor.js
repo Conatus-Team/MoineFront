@@ -49,6 +49,7 @@ const PostEditor =({isEdit, originData, groupId}) => {
                 axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,
+                        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
                     },
                     })
                     .then((res) => {
@@ -72,6 +73,7 @@ const PostEditor =({isEdit, originData, groupId}) => {
                 axios.patch(url,  JSON.stringify(updateData), {
                     headers: {
                         "Content-Type": `application/json`,
+                        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
                     },
                     })
                     .then((res) => {

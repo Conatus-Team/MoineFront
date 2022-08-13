@@ -3,7 +3,7 @@ import GroupListTemp from "../components/group/GroupListTemp";
 import LectureListTemp from "../components/lecture/LectureListTemp";
 import React, {Component, useContext, useEffect, useState} from "react";
 // import GroupList from "../components/group/GroupContentList";
-import { RecommendLectureStateContext } from "../App";
+import { BASE_URL, RecommendLectureStateContext } from "../App";
 import { GroupStateContext } from "../App";
 import axios from "axios";
 
@@ -12,7 +12,12 @@ const Home =() =>{
   //Recommend Hobby
   const [recommendHobbyData, setRecommendHobbyData] = useState([]);
   useEffect(()=>{
-    axios.get("http://192.168.11.186:8082/hobby/recommend")
+    axios.get(`${BASE_URL.recommend}/hobby/recommend`,{
+      headers: {
+        "Content-Type": `application/json`,
+        "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+      }
+    })
     .then(response => {
       setRecommendHobbyData(response.data);
     }).catch(error => {

@@ -41,6 +41,42 @@ body {
   text-align: center;
   font-family: 'Do Hyeon', sans-serif;
 }
+.default{
+  width: inherit;
+}
+.default .default_component{
+  width:inherit;
+  display: flex;
+  justify-content: space-between;
+}
+.default img{
+  width:inherit;
+  overflow-wrap:break-word;
+  margin-top: 20px;
+}
+.default p{
+  font-size: 40px;
+}
+.default_login, .default_signup {
+  width: 40%;
+  border: 4px solid #ececec;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  margin: 40px;
+}
+
+
+/* user */
+.mypage{
+  font-size: 25px;
+  align-content: center;
+}
+
+.user_default{
+  width:50%;
+  display: flex;
+  justify-content: space-between;
+
+}
 
 
 /* My Button */

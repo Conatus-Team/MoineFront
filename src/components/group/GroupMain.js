@@ -23,6 +23,7 @@ const GroupMain= ({originData})=> {
             axios.post(url,  JSON.stringify(registerData), {
                 headers: {
                     "Content-Type": `application/json`,
+                    "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
                 },
                 })
                 .then((res) => {

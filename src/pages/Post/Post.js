@@ -12,7 +12,12 @@ const Post = () => {
         // Post
         const [postData, setPostData] = useState([]);
         useEffect(()=>{
-            axios.get(`${BASE_URL.group}/group/${id}/post`)
+            axios.get(`${BASE_URL.group}/group/${id}/post`,{
+                headers: {
+                    "Content-Type": `application/json`,
+                    "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+                  }
+            })
             .then(response => {
                 setPostData(response.data);
             }).catch(error => {

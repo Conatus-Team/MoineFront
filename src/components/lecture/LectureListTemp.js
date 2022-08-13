@@ -10,13 +10,18 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
     const navigate = useNavigate();
     const [like, setLike] = useState(false);
     const likeData = {
-      userId:1,
+      userId: JSON.parse(sessionStorage.getItem('user')).userId,
       lectureId: lectureId,
     }
 
     useEffect(() => {
       let url_like = `${BASE_URL.lecture}/lecturelist/like`;
-      axios.get(url_like)
+      axios.get(url_like,{
+        headers: {
+          "Content-Type": `application/json`,
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        }
+      })
         .then(response => {
           if (response.like === 'liked') setLike(true);
       }).catch(error => {
@@ -27,7 +32,11 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
    
     const toggleLike =(e) => {
       let url_liked = `${BASE_URL.lecture}/lecturelist/like`;
-      axios.post(url_liked, likeData
+      axios.post(url_liked, JSON.stringify(likeData), {
+        headers:{
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        },
+      }
       ).then((res)=>{
           setLike(!like);
       }).catch(error => {
