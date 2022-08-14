@@ -22,7 +22,7 @@
 
           <!-- 
           지난 채팅메시지 더 불러오기-->
-          <div v-if="this.last === true" class="form__submit">
+          <div v-if="this.last === true">
             <p>이전 내역이 없습니다</p>
           </div>
 
@@ -114,8 +114,9 @@ export default {
       nickname: "나",
       message: "",
       messages: [],
+      userId: 0,
 
-      size: 2,
+      size: 100,
       page: 0,
       first: true,
       last: false,
@@ -142,6 +143,7 @@ export default {
     this.roomId = this.$route.params.roomId;
     this.groupName = this.$route.params.groupName;
 
+    this.userId = sessionStorage.getItem("userId");
     if (this.$route.params.nickname) {
       this.nickname = this.$route.params.nickname;
     }
@@ -160,7 +162,7 @@ export default {
       this.$axios
         .get(
           // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
-          `http://localhost:8080/chat/data/room/?roomId=${this.roomId}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
+          `${HOST}/chat/message/pagesort?roomId=${this.roomId}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
         )
         .then((response) => {
           console.log("axios response");
@@ -175,15 +177,8 @@ export default {
           });
           console.log(this.messages);
           this.scrollDown();
-          // // 스크롤 아래로
-          // setTimeout(() => {
-          //   const element = document.getElementById("chat__body");
-          //   element.scrollTop = element.scrollHeight;
-          // }, 0);
 
-          setTimeout(() => {
-            this.useScrollListener = true;
-          }, 1000);
+
         });
     },
     recvMessage(recv) {
@@ -225,6 +220,7 @@ export default {
               type: "ENTER",
               roomId,
               nickname,
+              userId: this.userId,
             }),
             {}
           );
@@ -261,6 +257,7 @@ export default {
           roomId: this.roomId,
           nickname: this.nickname,
           message: this.message,
+          userId: this.userId,
         }),
         {}
       );
