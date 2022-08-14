@@ -1,14 +1,14 @@
 <template>
   <div>
     <div
-      v-if="msg.sender === '나'"
+      v-if="msg.nickname === userNickname"
       class="chat__mymessage"
       :class="[isSame ? '' : 'chat__first']"
     >
       <!-- <p class="chat__yourmessage__time">23:38</p> -->
       <p class="chat__mymessage__paragraph">{{ msg.message }}</p>
     </div>
-    <div v-else-if="msg.sender === '[알림]'">
+    <div v-else-if="msg.nickname === '[알림]'">
       <!-- <p class="chat__yourmessage__time">23:38</p> -->
       <p class="chat__system">{{ msg.message }}</p>
     </div>
@@ -28,7 +28,7 @@
       <div>
         <div>
           <p class="chat__yourmessage__user" v-if="!isSame">
-            {{ msg.sender }}
+            {{ msg.nickname }}
           </p>
         </div>
         <div class="chat__yourmessage__p">
@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       isSame: false,
+      userNickname: ""
       //   avatar: require("../assets/avatar.svg"),
     };
   },
@@ -55,7 +56,7 @@ export default {
     isSamePerson(msg, prev) {
       if (prev === null) {
         return false;
-      } else if (prev[0]?.sender == msg?.sender) {
+      } else if (prev[0]?.nickname == msg?.nickname) {
         return true;
       } else {
         return false;
@@ -63,6 +64,7 @@ export default {
     },
   },
   created() {
+    this.userNickname = sessionStorage.getItem("userNickname");
     this.isSame = this.isSamePerson(this.msg, this.prev);
     // if (this.msg?.from.avatar) {
     //   this.avatar = this.msg?.from.avatar;

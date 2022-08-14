@@ -8,33 +8,20 @@
           <h3>채팅방 리스트</h3>
         </div>
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <label class="input-group-text">방제목</label>
-        </div>
-        <input
-          type="text"
-          class="form-control"
-          v-model="room_name"
-          v-on:keyup.enter="createRoom"
-        />
-        <div class="input-group-append">
-          <button class="btn btn-primary" type="button" @click="createRoom">
-            채팅방 개설
-          </button>
-        </div>
-      </div>
+
       <ul class="list-group">
         <!-- <router-link to="`/room/${item.roomUUID}`"></router-link> -->
         <li
           class="list-group-item list-group-item-action"
           v-for="item in chatrooms"
-          v-bind:key="item.roomUUID"
-          v-on:click="enterRoom(item.roomUUID)"
+          v-bind:key="item.id"
+          v-on:click="enterRoom(item.id, item.groupName)"
           router-link
           to="/"
         >
-          <router-link to="/">{{ item.roomUUID }}</router-link>
+        {{item}}
+        [{{item.category}}] {{ item.groupName }} 
+          <!-- <router-link to="/">이름: {{ item }}</router-link> -->
         </li>
       </ul>
     </div>
@@ -69,7 +56,12 @@ export default {
 
   methods: {
     findAllRoom() {
-      this.$axios.get("http://localhost:8080/chat/rooms").then((response) => {
+      this.$axios.get(`${this.$BASE_URL.chatting}/chat/room`, {
+        headers: {
+        Authorization: sessionStorage.getItem("userId")
+        }
+      }
+      ).then((response) => {
         console.log(response.data);
         const room = response.data;
 
@@ -99,18 +91,15 @@ export default {
           });
       }
     },
-    enterRoom(roomUUID) {
-      // const sender = prompt("대화명을 입력해 주세요.");
-      const sender = "관리자";
-      if (sender !== "") {
-        localStorage.setItem("wschat.sender", sender);
-        localStorage.setItem("wschat.roomUUID", roomUUID);
-        // location.href = "/chat/room/enter/" + roomUUID;
+    enterRoom(roomId, groupName) {
+
+        const nickname = sessionStorage.getItem("userNickname")
+
         this.$router.push({
           name: "RoomDetail",
-          params: { sender, roomUUID },
+          params: { nickname, roomId, groupName},
         });
-      }
+      
     },
   },
 };

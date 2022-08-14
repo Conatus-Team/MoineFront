@@ -49,7 +49,7 @@ import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import HeaderBar from "@/components/HeaderBar";
 
-const HOST = "http://localhost:8080";
+const HOST = "http://localhost:8081";
 
 // let sock = new SockJS(HOST + "/ws/chat");
 // let ws = Stomp.over(sock);

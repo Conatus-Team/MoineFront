@@ -1,17 +1,15 @@
 <template>
   <div>
     <div>
-      <HeaderBar title="채팅방 채팅 기록" />
+      <HeaderBar title="그룹 채팅방" />
     </div>
 
     <div class="container" id="app" v-cloak>
       <div class="chat">
-        <!-- <div>
-        <b-card-header>{{ roomUUID }}</b-card-header>
-      </div> -->
+
         <div class="chat__header">
           <span class="chat__header__greetings">
-            {{ roomUUID }}
+            {{ groupName }}
           </span>
         </div>
 
@@ -21,18 +19,7 @@
           id="chat__body"
           @scroll="handleNotificationListScroll"
         >
-          <!-- <ul class="list-group">
-          <li
-            class="list-group-item"
-            v-for="message in messages"
-            v-bind:key="message.messaage"
-          >
-            <div v-if="message.sender === '나'" id="align-right">
-              {{ message.sender }} - {{ message.message }}
-            </div>
-            <div v-else>{{ message.sender }} - {{ message.message }}</div>
-          </li>
-        </ul> -->
+
           <!-- 
           지난 채팅메시지 더 불러오기-->
           <div v-if="this.last === true" class="form__submit">
@@ -49,23 +36,7 @@
         </div>
         <!-- 채팅 메시지 끝 -->
 
-        <!-- 내용 입력 -->
-        <!-- <div class="input-group">
-          <div class="input-group-prepend">
-            <label class="input-group-text">내용</label>
-          </div>
-          <input
-            type="text"
-            class="form-control"
-            v-model="message"
-            v-on:keypress.enter="sendMessage"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button" @click="sendMessage">
-              보내기
-            </button>
-          </div>
-        </div> -->
+
         <div class="form">
           <input
             class="form__input"
@@ -118,8 +89,10 @@ import Stomp from "webstomp-client";
 import SockJS from "sockjs-client";
 import HeaderBar from "@/components/HeaderBar";
 import ChatMessage from "@/components/ChatMessage";
+import { BASE_URL } from "./../constants/baseUrl";
 // import lodash from "lodash";
-const HOST = "http://localhost:8080";
+// const HOST = "http://localhost:8081";
+const HOST = BASE_URL.chatting;
 
 // let sock = new SockJS(HOST + "/ws/chat");
 // let ws = Stomp.over(sock);
@@ -135,9 +108,10 @@ export default {
   },
   data() {
     return {
-      roomUUID: "",
+      roomId: 0,
+      groupName: "",
       room: {},
-      sender: "나",
+      nickname: "나",
       message: "",
       messages: [],
 
@@ -162,13 +136,14 @@ export default {
     console.log(HOST);
     sock = new SockJS(`${HOST}/ws/chat`);
     ws = Stomp.over(sock);
-    this.connect(this.roomUUID, this.sender);
+    this.connect(this.roomId, this.nickname);
   },
   async created() {
-    this.roomUUID = this.$route.params.roomUUID;
+    this.roomId = this.$route.params.roomId;
+    this.groupName = this.$route.params.groupName;
 
-    if (this.$route.params.sender) {
-      this.sender = this.$route.params.sender;
+    if (this.$route.params.nickname) {
+      this.nickname = this.$route.params.nickname;
     }
     this.findRoom();
   },
@@ -185,7 +160,7 @@ export default {
       this.$axios
         .get(
           // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
-          `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
+          `http://localhost:8080/chat/data/room/?roomId=${this.roomId}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
         )
         .then((response) => {
           console.log("axios response");
@@ -196,8 +171,7 @@ export default {
           // console.log(content);
           // this.messages = lodash.cloneDeep(content);
           content.map((item) => {
-            this.messages.unshift({ sender: "BOT", message: item.answer });
-            this.messages.unshift({ sender: "나", message: item.question });
+            this.messages.unshift({ nickname: item.nickname, message: item.message });
           });
           console.log(this.messages);
           this.scrollDown();
@@ -213,15 +187,18 @@ export default {
         });
     },
     recvMessage(recv) {
+      console.log(`recvMessage:`)
+      console.log(recv)
+
       this.messages.push({
         type: recv.type,
-        sender: recv.type === "ENTER" ? "[알림]" : recv.sender,
+        nickname: recv.type === "ENTER" ? "[알림]" : recv.nickname,
         message: recv.message,
       });
 
       //   this.messages.push({
       //     type: recv.type,
-      //     sender: recv.type == "ENTER" ? "[알림]" : recv.sender,
+      //     nickname: recv.type == "ENTER" ? "[알림]" : recv.nickname,
       //     message: recv.message,
       //   });
       // 스크롤 아래로
@@ -231,14 +208,14 @@ export default {
       // }, 0);
       this.scrollDown();
     },
-    connect(roomUUID, sender) {
+    connect(roomId, nickname) {
       // pub/sub event
       ws.connect(
         {},
         (frame) => {
           console.log("소켓연결성공");
           console.log(frame);
-          ws.subscribe(`/topic/chat/room/${roomUUID}`, (chatMessage) => {
+          ws.subscribe(`/topic/chat/room/${roomId}`, (chatMessage) => {
             const recv = JSON.parse(chatMessage.body);
             this.recvMessage(recv);
           });
@@ -246,8 +223,8 @@ export default {
             "/app/chat/message",
             JSON.stringify({
               type: "ENTER",
-              roomUUID,
-              sender,
+              roomId,
+              nickname,
             }),
             {}
           );
@@ -267,7 +244,7 @@ export default {
       );
     },
     findRoom() {
-      this.$axios.get(`${HOST}/chat/room/${this.roomUUID}`).then((response) => {
+      this.$axios.get(`${HOST}/chattingRooms/${this.roomId}`).then((response) => {
         this.room = response.data;
       });
     },
@@ -281,8 +258,8 @@ export default {
 
         JSON.stringify({
           type: "TALK",
-          roomUUID: this.roomUUID,
-          sender: this.sender,
+          roomId: this.roomId,
+          nickname: this.nickname,
           message: this.message,
         }),
         {}
@@ -307,7 +284,7 @@ export default {
         this.$axios
           .get(
             // `http://localhost:8080/chat/data/get/pagesort?page=${this.page}&size=${this.size}`
-            `http://localhost:8080/chat/data/room/?roomUUID=${this.roomUUID}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
+            `http://localhost:8080/chat/data/room/?roomId=${this.roomId}&page=${this.page}&size=${this.size}&sortOrder=${this.sortDirection}`
           )
           .then((response) => {
             console.log("axios response");
@@ -318,8 +295,7 @@ export default {
             // console.log(content);
             // this.messages = lodash.cloneDeep(content);
             content.map((item) => {
-              this.messages.unshift({ sender: "나", message: item.question });
-              this.messages.unshift({ sender: "BOT", message: item.answer });
+              this.messages.unshift({ nickname: item.nickname, message: item.question });
             });
             const element = document.getElementById("chat__body");
             element.scrollTop = element.scrollHeight - scrollHeight;

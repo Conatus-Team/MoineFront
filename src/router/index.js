@@ -17,25 +17,7 @@ export default new Router({
       component: () => import("@/views/RoomList"),
     },
     {
-      path: "/room/:roomUUID", // 동적 import
-      name: "Chatting",
-      props: true,
-      component: () => import("@/views/Chatting"),
-    },
-    {
-      path: "/chatdata",
-      name: "ChatData",
-      props: true,
-      component: () => import("@/views/ChatData"),
-    },
-    {
-      path: "/data-table",
-      name: "DataTable",
-      props: true,
-      component: () => import("@/views/DataTableTest"),
-    },
-    {
-      path: "log/room/:roomUUID", // 동적 import
+      path: ":roomId", // 동적 import
       name: "RoomDetail",
       props: true,
       component: () => import("@/views/RoomDetail"),
