@@ -114,6 +114,7 @@ export default {
       nickname: "나",
       message: "",
       messages: [],
+      userId: 0,
 
       size: 100,
       page: 0,
@@ -142,6 +143,7 @@ export default {
     this.roomId = this.$route.params.roomId;
     this.groupName = this.$route.params.groupName;
 
+    this.userId = sessionStorage.getItem("userId");
     if (this.$route.params.nickname) {
       this.nickname = this.$route.params.nickname;
     }
@@ -218,6 +220,7 @@ export default {
               type: "ENTER",
               roomId,
               nickname,
+              userId: this.userId,
             }),
             {}
           );
@@ -254,6 +257,7 @@ export default {
           roomId: this.roomId,
           nickname: this.nickname,
           message: this.message,
+          userId: this.userId,
         }),
         {}
       );
