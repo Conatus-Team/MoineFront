@@ -1,0 +1,561 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+
+body {
+  background-color: #f6f6f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0px;
+}
+/* ??? ?? ?? ?? */
+@media (min-width: 800px){ /*if size> 650 do*/
+  .App{
+    width:800px;
+  }
+}
+
+@media (min-width: 1400px){ /*if size> 650 do*/
+  .App{
+    width:1350px;
+  }
+}
+
+@media (max-width:650px){
+  .App{
+    width:90vw;
+  }
+}
+
+#root {
+  background-color: white;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+}
+
+
+.App {
+  min-height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  font-family: 'Do Hyeon', sans-serif;
+}
+.default{
+  width: inherit;
+}
+.default .default_component{
+  width:inherit;
+  display: flex;
+  justify-content: space-between;
+}
+.default img{
+  width:inherit;
+  overflow-wrap:break-word;
+  margin-top: 20px;
+}
+.default p{
+  font-size: 40px;
+}
+.default_login, .default_signup {
+  width: 40%;
+  border: 4px solid #ececec;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  margin: 40px;
+}
+
+
+/* user */
+.mypage{
+  font-size: 25px;
+  align-content: center;
+}
+
+.user_default{
+  width:50%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+
+/* My Button */
+.MyButton{
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  font-size: 25px;
+  white-space: nowrap;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+.MyButton_default{
+  background-color: #ececec;
+  color: black;
+}
+
+.MyButton_positive {
+  background-color: #64c964;
+  color: white;
+}
+.MyButton_negative {
+  background-color: #fd565f;
+  color: white;
+}
+
+/* header */
+header{
+  /* padding-top: 20px; */
+  /* padding-bottom: 20px; */
+
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+  background-color: #64c964;
+}
+header > div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  display: flex;
+  width: 50%;
+  font-size: 25px;
+  cursor: pointer;
+  justify-content: center;
+
+}
+
+header .head_login{
+  justify-content: center;
+  background-color: darkcyan;
+}
+header .head_signup{
+  /* width: 25%; */
+  justify-content: center;
+  background-color: darkcyan;
+}
+.group_header{
+  background-color: darkgray;
+  justify-content: center;
+  color: white;
+  
+}
+
+
+
+/* PostList */
+.PostList .menu_wrapper {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.PostList .menu_wrapper .right_col {
+  flex-grow: 0.1;
+}
+
+.PostList .menu_wrapper .right_col button{
+  width: 100%;
+  
+}
+
+.PostList .ControlMenu {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ececec;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  cursor: pointer;
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+}
+
+.Post_Table {
+  border: 2px solid #e2e2e2;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  width: 100%;
+
+}
+
+.Post_Table caption {
+  color: darkcyan;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.Post_Table th {
+  color:black;
+  font-size: 20px;
+  border-bottom: 2px solid #e2e2e2;
+}
+
+
+.Post_Tr {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+  background-color: white;
+  
+}
+.Post_Table_Date{
+  width: 20%;
+
+}
+
+.Post_Table_Title{
+  width: 40%;
+
+}
+.Post_Table_Author{
+  width: 20%;
+
+}
+.Post_Table_GroupName{
+  width: 20%;
+
+}
+.groupList, .lectureList{
+  display:flex;
+  flex-wrap: wrap;
+  /* overflow:; */
+  white-space: normal;
+  /* justify-content: center; */
+
+  
+}
+
+.Group, .Lecture {
+  width: 250px;
+  border: 4px solid #e2e2e2;
+  border-radius: 5px;
+  /* display:flex; */
+  justify-content: center;
+  background-color: white;
+  margin: 2%;
+  cursor: pointer;
+}
+.Group .group_image img, .Lecture .Lecture_image img{
+  width:inherit;
+  height: auto;
+}
+
+.Group .group_image, .Lecture .Lecture_image{
+  width: 250px;
+  /*height: 40px; */
+  border-bottom: 5px solid #ececec;
+  /* border-radius:5px; */
+  /* display: flex; */
+  justify-content: center;
+  background-color: black;
+  
+}
+
+.group_title, .lecture_title{
+  padding: 10px;
+  font-size: 30px;
+}
+.Group .Groupcontent, .Lecture .Lecturecontent {
+  font-size: 20px;
+  justify-content: center; 
+
+}
+
+.Group .Groupcontent p, .Lecture .Lecturecontent p{
+  word-wrap: break-word;
+}
+
+
+.group_search, .lecture_search {
+  padding: 5px;
+  margin: 20px;
+  margin-top: 50px;
+
+}
+.group_searchBar, .lecture_searchBar{
+  width: 40%;
+  font-size: 30px;
+  margin-right: 40px;
+}
+
+
+
+.PostEditor section {
+  margin-bottom:40px;
+  
+}
+.PostEditor h4{
+  font-size: 25px;
+  /* font-weight: bold; */
+}
+
+.post_title{
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 20px;
+  font-family: 'Do Hyeon', sans-serif;
+  border: 4px solid #ececec;
+  border-radius: 5px;
+  padding: 20px;
+}
+.post_editor_info {
+  margin-left: 20px;
+  margin-right: 20px;
+
+  display:flex;
+  justify-content: space-between;
+  font-size: 20px;
+  border-bottom: 2px solid #ececec;
+}
+
+.PostEditor textarea{
+  font-family: 'Do Hyeon', sans-serif;
+  font-size: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 400px;
+  resize: vertical;
+  border: 4px solid #ececec;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.PostEditor .control_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slogen {
+  padding: 10px;
+  margin:20px;
+  font-size: 40px;
+}
+
+.hobby {
+  font-size: 25px;
+  margin-left: 40px;
+  border: 4px solid #ececec;
+  border-radius: 5px;
+  padding-left: 40px;
+  
+}
+.hobby .hobby_p{
+  display: flex;
+  color: #fd565f;
+  
+}
+.hobby .my_hobby, .hobby .recommended_hobby{
+  font-size: 20px;
+  display: flex;
+}
+
+
+.group_list_new{
+  margin: 30px;
+}
+.group_list_new button {
+  height: 280px;
+  width: 250px;
+}
+
+
+.group_main{
+  
+  justify-content: center;
+  font-size: 20px;
+  
+}
+
+.group_content{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding:40px;
+  
+ 
+}
+.group_content .group_thumbnail{
+  background-color: beige;
+}
+.group_content .group_thumbnail img{
+  width:500px;
+  height: 400px;
+  border: 6px solid beige;
+}
+.group_content .MyButton{
+margin-left:20px;
+margin-top: 60px;
+height: 50px;
+}
+.group_detail{
+  padding-right:280px;
+  justify-content: center;
+}
+
+.post_item_header{
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 50px;
+  border-bottom: 2px solid #ececec;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+}
+.post_item_date{
+  color: gray;
+}
+.post_item_detail{
+  text-align: left;
+  margin-left: 50px;
+  word-wrap: break-word;
+  height: 600px;
+}
+.post_item_title{
+  font-size: 30px;
+}
+.post_item_content{
+  font-size: 25px;
+}
+
+.post_item_button button{
+  width: 120px;
+  margin-top:20px
+}
+
+
+/* lecture */
+.lecture_main{
+  justify-content: center;
+  font-size: 20px;
+  
+}
+
+.lecture_header{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding:40px;
+  height:600px;
+
+}
+.lecture_header .lecture_thumbnail{
+  width: 800px;
+  height: 500px;
+  background-color: beige;
+  width:inherit;
+}
+.lecture_header .MyButton{
+margin-left:20px;
+margin-top: 60px;
+height: 50px;
+}
+.lecture_content{
+  padding-right:280px;
+  justify-content: center;
+  font-size: 25px;
+}
+.lecture_content .lecture_title{
+  font-size: 25px;
+}
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+.gallery_new{
+  margin-top: 40px;
+  margin-bottom: 60px;
+  margin-right:40px;
+  display: flex;
+  justify-content: right;
+}
+.gallery_new button{
+  width: 120px;
+
+}
+.gallery_input{
+  margin: 80px;
+}
+.gallery_preview{
+  margin:50px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  width: auto;
+  height:max-content;
+}
+
+.LogIn {
+  margin-top: 120px;
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 50%;
+  padding-top: 50px;
+  height: 400px;
+  align-self: center;
+}
+
+.LogIn input {
+ 
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+  align-self: center;
+}
+
+.SignUp {
+  margin-top: 120px;
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 50%;
+  padding-top: 50px;
+  height: 600px;
+  align-self: center;
+
+}
+.SignUp input {
+ 
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+  align-self: center;
+}
+/* .App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

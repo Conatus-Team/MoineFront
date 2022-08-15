@@ -1,0 +1,42 @@
+[
+    {
+      "id": 1,
+      "name": "cooking",
+      "thumbnail": "/emotion1.png",
+      "title": "Enjoy cooking!",
+      "explanation": "explanation1", 
+      "memberCount": 7
+    },
+    {
+      "id": 2,
+      "name": "sports",
+      "thumbnail": "/emotion2.png",
+      "title": "Enjoy sports!",
+      "explanation": "explanation2",
+      "memberCount": 11
+    },
+    {
+      "id": 3,
+      "name": "swimming",
+      "thumbnail": "/emotion3.png",
+      "title": "Enjoy cswimming!",
+      "explanation": "explanation3",
+      "memberCount": 15
+    },
+    {
+      "id": 4,
+      "name": "yummy",
+      "thumbnail": "/emotion4.png",
+      "explanation": "explanation4",
+      "title": "Enjoy cook",
+      "memberCount": 9
+    },
+    {
+      "id": 5,
+      "name": "programming",
+      "thumbnail": "/emotion5.png",
+      "title": "Enjoy programming!",
+      "explanation": "explanation5",
+      "memberCount": 4
+    }
+  ]

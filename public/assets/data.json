@@ -1,0 +1,38 @@
+[
+    {
+        "id": 0,
+        "groupName": "Happy cooking",
+        "thumbnail": "./emotion1.png",
+        "author": "author1",
+        "content": "content1"
+    },
+    {
+        "id": 1,
+        "groupName": "Bad cooking",
+        "thumbnail": "./emotion2.png",
+        "author": "author2",
+        "content": "content2"
+    },
+    {
+        "id": 2,
+        "groupName": "Fun cooking",
+        "thumbnail": "./emotion3.png",
+        "author": "author3",
+        "content": "content3"
+    },
+    {
+        "id": 3,
+        "groupName": "Oh cooking",
+        "thumbnail": "./emotion4.png",
+        "author": "author4",
+        "content": "content4"
+    },
+    {
+        "id": 4,
+        "groupName": "Happy cooking",
+        "thumbnail": "./emotion5.png",
+        "author": "author5",
+        "content": "content5"
+    }
+
+]
