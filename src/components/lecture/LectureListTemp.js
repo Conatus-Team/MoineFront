@@ -15,7 +15,7 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
     }
 
     useEffect(() => {
-      let url_like = `${BASE_URL.lecture}/lecturelist/like`;
+      let url_like = `${BASE_URL.lecture}/lecture/like`;
       axios.get(url_like,{
         headers: {
           "Content-Type": `application/json`,
@@ -31,7 +31,7 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
 
    
     const toggleLike =(e) => {
-      let url_liked = `${BASE_URL.lecture}/lecturelist/like`;
+      let url_liked = `${BASE_URL.lecture}/lecture/like`;
       axios.post(url_liked, JSON.stringify(likeData), {
         headers:{
           "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,

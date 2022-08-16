@@ -17,7 +17,7 @@ function LectureSearch() {
             userId:  JSON.parse(sessionStorage.getItem('user')).userId,
         }
         // useEffect(() => {
-        let url = `${BASE_URL.lecture}/lecturelist/search`;
+        let url = `${BASE_URL.lecture}/lecture/search`;
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,

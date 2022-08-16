@@ -46,13 +46,13 @@ export const RecommendGroupStateContext = React.createContext();
 
 //Base_URL
 export const BASE_URL = {
-  react: "http://localhost:3000",
-  chatting: "http://localhost:8081",
-  lecture: "http://localhost:8082",
-  group: "http://112.149.179.238:8083",
-  auth: "http://localhost:8084",
-  mypage: "http://localhost:8085",
-  recommend: "http://localhost:8086",
+  react: "http://3.36.98.81:3000",
+  chatting: "http://localhost:8082",
+  lecture: "http://13.124.213.181:8082",
+  group: "http://112.149.179.238:8082",
+  auth: "http://13.124.251.102:8082",
+  mypage: "http://13.124.251.102:8082",
+  recommend: "http://13.124.251.102:8082",
 };
 
 
@@ -74,7 +74,7 @@ function App() {
   //Lecture
   const [lectureData, setLectureData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.lecture}/lecturelist`,{
+    axios.get(`${BASE_URL.lecture}/lecture`,{
       headers: {
         "Content-Type": `application/json`,
         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
@@ -89,7 +89,7 @@ function App() {
 
   const [recommendLectureData, setRecommendLectureData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.lecture}/lecturelist`,{
+    axios.get(`${BASE_URL.lecture}/lecture`,{
       headers: {
         "Content-Type": `application/json`,
         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
