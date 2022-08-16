@@ -291,6 +291,10 @@ header .head_signup{
   margin-right: 40px;
 }
 
+.group_searched, .lecture_searched {
+  display: flex;
+}
+
 
 
 .PostEditor section {
@@ -466,7 +470,7 @@ margin-top: 60px;
 height: 50px;
 }
 .lecture_content{
-  padding-right:280px;
+  /* padding-right:280px; */
   justify-content: center;
   font-size: 25px;
 }
