@@ -1,1 +1,26 @@
+version: 0.2
 
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+     commands: 
+      - sudo apt-get update
+      - sudo apt-get install -y build-essential
+      - sudo -apt-get install -y nodejs
+      - sudo apt install npm
+  pre_build:
+    commands:
+      - echo Nothing to do in the pre_build phase...
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm install
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - "**/*"
+   base-directory: build
