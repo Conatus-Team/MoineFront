@@ -10,7 +10,7 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
     const navigate = useNavigate();
     const [like, setLike] = useState(false);
     const likeData = {
-      userId: JSON.parse(sessionStorage.getItem('user')).userId,
+      //userId: JSON.parse(sessionStorage.getItem('user')).userId,
       lectureId: lectureId,
     }
 
@@ -31,8 +31,8 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
 
    
     const toggleLike =(e) => {
-      let url_liked = `${BASE_URL.lecture}/lecture/like`;
-      axios.post(url_liked, JSON.stringify(likeData), {
+      let url_liked = `${BASE_URL.lecture}/lecture/like/${lectureId}`;
+      axios.post(url_liked,  null, {
         headers:{
           "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
         },
