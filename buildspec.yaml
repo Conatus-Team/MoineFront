@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 16
+      nodejs: 12
     commands:
       - aws configure set aws_access_key_id $KEY_ID --profile $EKS_PROFILE
       - aws configure set aws_secret_access_key $SECRET_KEY --profile $EKS_PROFILE
