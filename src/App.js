@@ -36,6 +36,7 @@ import MyHeader from './components/MyHeader';
 import Mypage from './pages/Mypage';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
+import Survey from './pages/Survey';
 
 
 //Global Data
@@ -52,7 +53,8 @@ export const BASE_URL = {
   group: "moine-group-backend-service.moine.svc.cluster.local:8080",
   auth: "moine-auth-backend-service.moine.svc.cluster.local:8080",
   mypage: "moine-mypage-backend-service.moine.svc.cluster.local:8080",
-  recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
+  // recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
+  recommend: "http://112.149.179.238:8085",
 };
 
 
@@ -164,6 +166,7 @@ function App() {
         <Route path='/mypage' element={<Mypage/>} />
         <Route path='/login' element={<LogIn/>} />
         <Route path='/signup' element={<SignUp/>} />
+        <Route path='/survey' element={<Survey/>} />
         <Route path='/lecture' element={<Lecture/>} />
         <Route path='/group/new' element={<GroupNew/>} />
         <Route path='/group/edit/:groupId' element={<GroupEdit/>} />

@@ -26,7 +26,7 @@ function SignUp () {
             },
             })
             .then((res) => {
-                navigate('/login', {replace: true});
+                navigate('/survey', {replace: true});
                 console.log(res);
         }).catch(error => {
             console.log(error.response)
