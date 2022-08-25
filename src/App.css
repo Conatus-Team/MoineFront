@@ -543,38 +543,33 @@ height: 50px;
 
 
 .Survey{
-  margin-top: 120px;
+  margin-top: 20px;
+  margin-bottom: 40px;
   font-size: 30px;
   border: 2px solid #ececec;
   border-radius: 5px;
   box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
-<<<<<<< Updated upstream
-  width: 50%;
-  padding-top: 50px;
-  height: 2300px;
-  align-self: center;
-
-}
-
-.Survey input {
- 
-  font-size: 30px;
-=======
   width: 80%;
   padding-top: 50px;
-  height: 2300px;
-  justify-content: center;
+  height: 1000px;
+  align-self: center;
 }
+
+/* .Survey input {
+  font-size: 30px;
+  width: 80%;
+  padding-top: 50px;
+  height: 1200px;
+  justify-content: center;
+} */
 
 .Survey input {
   font-size: 25px;
->>>>>>> Stashed changes
   border: 2px solid #ececec;
   border-radius: 5px; 
   align-self: center;
 }
-<<<<<<< Updated upstream
-=======
+
 .Survey select{
   font-size: 25px;
   border: 2px solid #ececec;
@@ -586,7 +581,9 @@ height: 50px;
   display: flex;
   /* width: inherit; */
   overflow: auto;
-justify-content: center;}
+  justify-content: center;
+  margin: 20px;
+}
 .hobbyList{
   /* display: flex; */
   font-size: 20px;

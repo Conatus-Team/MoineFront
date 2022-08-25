@@ -47,14 +47,7 @@ export const RecommendGroupStateContext = React.createContext();
 
 //Base_URL
 export const BASE_URL = {
-<<<<<<< Updated upstream
-  react: "moine-front-service.moine.svc.cluster.local:8080",
-  chatting: "moine-chatting-backend-service.moine.svc.cluster.local:8080",
-  lecture: "moine-lecture-backend-service.moine.svc.cluster.local:8080",
-  group: "moine-group-backend-service.moine.svc.cluster.local:8080",
-  auth: "moine-auth-backend-service.moine.svc.cluster.local:8080",
-  mypage: "moine-mypage-backend-service.moine.svc.cluster.local:8080",
-=======
+
   react: "http://moine-front-service.moine.svc.cluster.local:8080",
   // chatting: "http://moine-chatting-backend-service.moine.svc.cluster.local:8080",
   chatting: "http://112.149.179.238:8083",
@@ -64,7 +57,6 @@ export const BASE_URL = {
 
   auth: "http://moine-auth-backend-service.moine.svc.cluster.local:8080",
   mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
->>>>>>> Stashed changes
   // recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
   recommend: "http://112.149.179.238:8085",
 };
