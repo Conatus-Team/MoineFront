@@ -52,14 +52,14 @@ const Home =() =>{
       </div>
 
       <p className='lecture_title'> Recommend Lecture List</p>
-      <div className="LectureList">
+      <div className="lectureList">
         {recommendLectureList.map((it) => (
             <LectureListTemp key = {it.id} {...it}/>
         ))}
       </div>
 
       <p className='group_title'> My Group List</p>
-        <div className="GroupList">
+        <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
           ))}

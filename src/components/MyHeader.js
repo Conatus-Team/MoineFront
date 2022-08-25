@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../App";
 
 const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatting}) => {
     const navigate = useNavigate();
@@ -17,8 +18,8 @@ const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatti
         <div className="head_mypage" onClick={()=>{ navigate("/mypage");}}>
             {head_mypage}
         </div>
-        <div className="head_chatting" onClick={()=>{ navigate("/chatting");}}>
-            {head_chatting}
+        <div className="head_chatting" >
+            <a href={`${BASE_URL.chatting}/room`}>{head_chatting}</a>
         </div>
         
          </header>

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate,useParams } from "react-router-dom";
-import { GroupStateContext } from "../App";
+import { BASE_URL, GroupStateContext } from "../App";
 const MyGroup = ({id}) => {
     const navigate = useNavigate();
 
@@ -14,8 +14,9 @@ const MyGroup = ({id}) => {
         <div className="group_gallery"  onClick={()=>{ navigate(`/group/gallery/${id}`);}}>
             group_gallery
         </div>
-        <div className="head_chatting"  onClick={()=>{ navigate(`/chatting/${id}`);}}>
-            group_chatting
+        {/* <div className="head_chatting"  onClick={()=>{ navigate(`${BASE_URL.chatting}/chatting/${id}`);}}> */}
+        <div className="head_chatting">
+        <a href={`${BASE_URL.chatting}/room/${id}`}>group_chatting</a>
         </div>
          </header>
 }
