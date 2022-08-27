@@ -23,6 +23,10 @@
     </router-link>
     </div>
     <div><p></p></div>
+    <div>
+      <router-link tag="a" to="https://www.naver.com">이동</router-link>
+      
+    </div>
 
 <div><p></p></div>
     <div class="mybox">
