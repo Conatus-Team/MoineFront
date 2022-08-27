@@ -23,7 +23,7 @@ const GroupMain= ({originData})=> {
             })
             .then((res) => {
             console.log(res);
-            confrim = res.data.joined;
+            confrim = res.data;
         }).catch(error => {
             console.log(error.response)
         });
