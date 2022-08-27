@@ -14,30 +14,31 @@ const GroupMain= ({originData})=> {
 
 
     const GroupRegister = () => {
-        if(window.confirm("Do you want regist this group?")){
-            const registerData = {
-                groupId:originData.id,
-                userId: 3,
-            }
-            let url = `${BASE_URL.group}/group/join`;
-            axios.post(url,  JSON.stringify(registerData), {
-                headers: {
-                    "Content-Type": `application/json`,
-                    "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-                },
-                })
-                .then((res) => {
-                console.log(res);
-            }).catch(error => {
-                console.log(error.response)
-            });
+        let confrim = false;
+        axios.post(`${BASE_URL.group}/group/join/${id}`,  null, {
+            headers: {
+                "Content-Type": `application/json`,
+                "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+            },
+            })
+            .then((res) => {
+            console.log(res);
+            confrim = res.data.joined;
+        }).catch(error => {
+            console.log(error.response)
+        });
+
+        if (confirm == false){
+         
+            alert("register successed");
             
-        } else {
-            alert("?????.");
+        } else{
+            alert("you have already registered!");
         }
+    }
             
 
-    }
+    
 
     return (
       <div className="group_main">
@@ -45,9 +46,14 @@ const GroupMain= ({originData})=> {
         <div className="group_thumbnail">
         <img src = {process.env.PUBLIC_URL+ `${originData.thumbnail}`}/>        
         </div>
+
         <MyButton type = {'positive'} text ={'Register'} onClick={() => GroupRegister()}></MyButton>
-        <MyButton  text="edit" type="default" onClick={()=> navigate(`/group/edit/${id}`)}></MyButton>  
-    
+
+        {
+            originData.leaderId == JSON.parse(sessionStorage.getItem('user')).userId
+            ? <MyButton  text="edit" type="default" onClick={()=> navigate(`/group/edit/${id}`)}></MyButton>  
+            : null
+        }
         </div>
 
 

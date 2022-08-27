@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import MyButton from "../components/MyButton";
 import { BASE_URL } from "../App";
 
@@ -12,13 +12,17 @@ function SignUp () {
     const [password, setPasword] = useState("");
     const navigate = useNavigate();
 
+
     const submit = () =>{
+
+        alert(email);
         let data = {
             email: email,
-            Password: password,
+            password: password,
             userName: userName,
-            userNickname: userNickName
+            userNickname: userNickName,
         }
+
         let url = `${BASE_URL.auth}/auth/signup`;
         axios.post(url,  JSON.stringify(data), {
             headers: {
@@ -26,22 +30,25 @@ function SignUp () {
             },
             })
             .then((res) => {
-                navigate('/login', {replace: true});
+                navigate('/survey', {replace: true});
                 console.log(res);
+                alert(res)
         }).catch(error => {
+            alert(error)
             console.log(error.response)
         });
+
             
     }
 
     return (<div className="SignUp">
         <p>SignUp</p>
         <form>
-            <p>ID: <input className="SignUp_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
-            <p>PW: <input className="SignUp_Password" type="text" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
+            <p>EMAIL: <input className="SignUp_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
+            <p>PW: <input className="SignUp_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
             <p>userName: <input className="SignUp_Name" type="text" onChange={(e)=>{setUserName(e.target.value)}}/> </p>
             <p>userNickName: <input className="SignUp_NickName" type="text" onChange={(e)=>{setUserNickName(e.target.value)}}/> </p>
-            <MyButton type = {'default'} text ={'SignUp'} onClick={() =>submit()}>
+            <MyButton type = {'default'} text ={'SignUp'} onClick={() => submit()}>
           
         </MyButton>
         </form>

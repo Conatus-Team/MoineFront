@@ -30,9 +30,7 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
           <img src = {process.env.PUBLIC_URL+ `${thumbnail}`}/>
         </div>
         <div className="Groupcontent">
-            <div className="lecture_like">
-           
-            </div>
+            
           <p>{name}</p>
           <p>people: {memberCount}</p>
           </div>

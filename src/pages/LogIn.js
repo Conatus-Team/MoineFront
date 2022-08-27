@@ -18,9 +18,10 @@ function LogIn() {
     const submit = () =>{
         let data = {
             email: email,
-            Password: password
+            password: password
         }
         let url = `${BASE_URL.auth}/auth/login`;
+        let loginSuccess = false;
         axios.post(url,  JSON.stringify(data), {
             headers: {
                 "Content-Type": `application/json`,                
@@ -29,16 +30,21 @@ function LogIn() {
             .then((res) => {
                 setUserData(res.data);
             console.log(res.data);
+            
+            // post 안에 있어야 실행 잘 됨
+            // userData가 페이지 바뀌기 전에 데이터가 안 들어가는 것 같음
+            if (res.data) loginSuccess = true;
+            if(loginSuccess){
+                sessionStorage.setItem('user', JSON.stringify(res.data));
+                navigate('/home', {replace: true});
+            } else {
+                alert("fail to LogIn");
+            }
         }).catch(error => {
             console.log(error.response)
         });
 
-        if(userData.length>=1){
-            sessionStorage.setItem('user', JSON.stringify(userData));
-            navigate('/home', {replace: true});
-        } else {
-            alert("fail to LogIn");
-        }
+        
             
     }
     
@@ -46,7 +52,7 @@ function LogIn() {
         <div className="LogIn">
             <p>LogIn</p>
             <p>E-mail: <input className="LogIn_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
-            <p>PW: <input className="LogIn_Password" type="text" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
+            <p>PW: <input className="LogIn_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
             <MyButton type = {'default'} text ={'LogIn'} onClick={() =>submit()}>
           
         </MyButton>

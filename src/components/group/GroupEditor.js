@@ -21,7 +21,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                     explanation: explanation, 
                     name: name,
                 }
-                url = `${BASE_URL.group}/info`;
+                url = `${BASE_URL.group}/group/create`;
                 axios.post(url,  JSON.stringify(createData), {
                     headers: {
                         "Content-Type": `application/json`,

@@ -12,14 +12,14 @@ const Home =() =>{
   //Recommend Hobby
   const [recommendHobbyData, setRecommendHobbyData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.recommend}/hobby/recommend`,{
+    axios.get(`${BASE_URL.recommend}/recommend/recommended_hobby/search/findByUserId?userId=${JSON.parse(sessionStorage.getItem('user')).userId}`,{
       headers: {
         "Content-Type": `application/json`,
         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
       }
     })
     .then(response => {
-      setRecommendHobbyData(response.data);
+      setRecommendHobbyData(response.data._embedded.recommended_hobby);
     }).catch(error => {
       console.log(error.response)
   });
@@ -41,21 +41,25 @@ const Home =() =>{
 
         </div>
         <div className="recommended_hobby">
-          <p>I recommend you {recommendHobbyData}</p>
+          <p>I recommend you 
+          {recommendHobbyData.map((it) => (
+            <p>{it.category}</p>
+          ))}
+            </p>
 
         </div>
 
       </div>
 
       <p className='lecture_title'> Recommend Lecture List</p>
-      <div className="LectureList">
+      <div className="lectureList">
         {recommendLectureList.map((it) => (
             <LectureListTemp key = {it.id} {...it}/>
         ))}
       </div>
 
       <p className='group_title'> My Group List</p>
-        <div className="GroupList">
+        <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
           ))}

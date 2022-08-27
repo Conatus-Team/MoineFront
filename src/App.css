@@ -540,6 +540,62 @@ height: 50px;
   border-radius: 5px; 
   align-self: center;
 }
+
+
+.Survey{
+  margin-top: 20px;
+  margin-bottom: 40px;
+  font-size: 30px;
+  border: 2px solid #ececec;
+  border-radius: 5px;
+  box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+  width: 80%;
+  padding-top: 50px;
+  height: 1000px;
+  align-self: center;
+}
+
+/* .Survey input {
+  font-size: 30px;
+  width: 80%;
+  padding-top: 50px;
+  height: 1200px;
+  justify-content: center;
+} */
+
+.Survey input {
+  font-size: 25px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+  align-self: center;
+}
+
+.Survey select{
+  font-size: 25px;
+  border: 2px solid #ececec;
+  border-radius: 5px; 
+
+}
+
+.hobby_content1, .hobby_content2{
+  display: flex;
+  /* width: inherit; */
+  overflow: auto;
+  justify-content: center;
+  margin: 20px;
+}
+.hobbyList{
+  /* display: flex; */
+  font-size: 20px;
+  margin: 5px;
+  /* border: 2px solid #ececec; */
+
+
+}
+
+
+
+
 /* .App-header {
   background-color: #282c34;
   min-height: 100vh;
