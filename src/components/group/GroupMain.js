@@ -28,7 +28,7 @@ const GroupMain= ({originData})=> {
             console.log(error.response)
         });
 
-        if (confirm == false){
+        if (confrim == false){
          
             alert("register successed");
             
