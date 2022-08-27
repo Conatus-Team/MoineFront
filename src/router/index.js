@@ -1,3 +1,4 @@
+import { BASE_URL } from "@/constants/baseUrl";
 import Vue from "vue";
 import Router from "vue-router";
 
@@ -31,6 +32,23 @@ export default new Router({
       name: "enter",
       props: true,
       component: () => import("@/views/Enter"),
+    },
+    {
+      path: "/group",
+      name: "group",
+      // component: `${BASE_URL.group}/group`,
+      beforeEnter() {window.location.href =`${BASE_URL.group}/group`}
+    },
+    {
+      path: "/lecture",
+      name: "lecture",
+      // component: `${BASE_URL.lecture}/lecture`,
+      beforeEnter() {window.location.href =`${BASE_URL.lecture}/lecture`}
+    },
+    {
+      path: "/mypage",
+      name: "mypage",
+      beforeEnter() {window.location.href =`${BASE_URL.mypage}/mypage`}
     },
   ],
 });

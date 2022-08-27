@@ -334,7 +334,7 @@ li {
   justify-content: space-between;
 
   /* max-width: 375px; */
-  height: 35rem;
+  height: 45rem;
   background-color: #ffffff;
   /* margin: 5rem auto 0rem; */
   border-radius: 1.5rem;
