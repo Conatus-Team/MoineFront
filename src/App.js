@@ -49,16 +49,18 @@ export const RecommendGroupStateContext = React.createContext();
 export const BASE_URL = {
 
   react: "http://moine-front-service.moine.svc.cluster.local:8080",
-  // chatting: "http://moine-chatting-backend-service.moine.svc.cluster.local:8080",
-  chatting: "http://112.149.179.238:8083",
-  lecture: "http://moine-lecture-backend-service.moine.svc.cluster.local:8080",
-  // group: "moine-group-backend-service.moine.svc.cluster.local:8080",
-  group: "http://112.149.179.238:8083",
+  chatting: "http://moine-chatting-backend-service.moine.svc.cluster.local:8080",
+  // chatting: "http://112.149.179.238:8083",
+  // lecture: "http://moine-lecture-backend-service.moine.svc.cluster.local:8080",
+  lecture: "http://192.168.15.209:8082",
+  group: "moine-group-backend-service.moine.svc.cluster.local:8080",
+  // group: "http://112.149.179.238:8083",
 
   auth: "http://moine-auth-backend-service.moine.svc.cluster.local:8080",
+  // auth: "http://192.168.15.154:8080",
   mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
-  // recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
-  recommend: "http://112.149.179.238:8085",
+  recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
+  // recommend: "http://112.149.179.238:8085",
 };
 
 

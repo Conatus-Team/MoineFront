@@ -16,7 +16,7 @@ const MyGroup = ({id}) => {
         </div>
         {/* <div className="head_chatting"  onClick={()=>{ navigate(`${BASE_URL.chatting}/chatting/${id}`);}}> */}
         <div className="head_chatting">
-        <a href={`${BASE_URL.chatting}/room/${id}`}>group_chatting</a>
+        <a href={`${BASE_URL.chatting}/room/${id}/${JSON.parse(sessionStorage.getItem('user')).userId}`}>group_chatting</a>
         </div>
          </header>
 }

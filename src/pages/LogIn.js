@@ -52,7 +52,7 @@ function LogIn() {
         <div className="LogIn">
             <p>LogIn</p>
             <p>E-mail: <input className="LogIn_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
-            <p>PW: <input className="LogIn_Password" type="text" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
+            <p>PW: <input className="LogIn_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
             <MyButton type = {'default'} text ={'LogIn'} onClick={() =>submit()}>
           
         </MyButton>
