@@ -1,4 +1,4 @@
-# cb-client-4
+# moine-chatting
 
 ## Project setup
 ```
