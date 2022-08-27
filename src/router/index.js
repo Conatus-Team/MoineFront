@@ -7,20 +7,30 @@ export default new Router({
   mode: "history",
   routes: [
     {
-      path: "/",
+      path: "/vue-home",
       name: "home",
       component: () => import("@/views/Home"),
     },
     {
+      // room/userId
       path: "/room",
       name: "RoomList",
       component: () => import("@/views/RoomList"),
     },
     {
-      path: ":roomId", // 동적 import
+      // room/userId/roomId
+      path: "/room/:roomId", // 동적 import
       name: "RoomDetail",
       props: true,
       component: () => import("@/views/RoomDetail"),
+    },
+    {
+      // room/userId/roomId
+      path: "/enter/:id", // 동적 import
+      query: "groupId",
+      name: "enter",
+      props: true,
+      component: () => import("@/views/Enter"),
     },
   ],
 });

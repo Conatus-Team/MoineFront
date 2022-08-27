@@ -94,10 +94,11 @@ export default {
     enterRoom(roomId, groupName) {
 
         const nickname = sessionStorage.getItem("userNickname")
+        const userId = sessionStorage.getItem("userId")
 
         this.$router.push({
           name: "RoomDetail",
-          params: { nickname, roomId, groupName},
+          params: { nickname, roomId, groupName, userId},
         });
       
     },
