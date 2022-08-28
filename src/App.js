@@ -60,6 +60,7 @@ export const BASE_URL = {
   // auth: "http://192.168.15.154:8080",
   mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
   recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
+  chattingFront: "http://localhost:3001",
   // recommend: "http://112.149.179.238:8085",
 };
 
