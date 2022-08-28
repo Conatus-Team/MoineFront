@@ -39,6 +39,10 @@ import SignUp from './pages/SignUp';
 import Survey from './pages/Survey';
 
 
+//page router
+import PageRouter from './components/PageRouter';
+
+
 //Global Data
 export const LectureStateContext = React.createContext();
 export const RecommendLectureStateContext = React.createContext();
@@ -186,6 +190,7 @@ function App() {
         <Route path='/group/post/:id' element={<Post/>} /> 
         <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
         <Route path='/group/post' element={<Post/>} />
+        <Route path='/enter/:page/:userId' element={<PageRouter/>}/>
 
       </Routes>
     </div>
