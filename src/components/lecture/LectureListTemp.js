@@ -14,20 +14,20 @@ const LectureListTemp = ({lectureId, lectureName, imagePath}) => {
       lectureId: lectureId,
     }
 
-    useEffect(() => {
-      let url_like = `${BASE_URL.lecture}/lecture/like`;
-      axios.get(url_like,{
-        headers: {
-          "Content-Type": `application/json`,
-          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-        }
-      })
-        .then(response => {
-          if (response.like === 'liked') setLike(true);
-      }).catch(error => {
-        console.log(error.response)
-    });
-      }, [like, setLike]);
+    // useEffect(() => {
+    //   let url_like = `${BASE_URL.lecture}/lecture/like`;
+    //   axios.get(url_like,{
+    //     headers: {
+    //       "Content-Type": `application/json`,
+    //       "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+    //     }
+    //   })
+    //     .then(response => {
+    //       if (response.like === 'liked') setLike(true);
+    //   }).catch(error => {
+    //     console.log(error.response)
+    // });
+    //   }, [like, setLike]);
 
    
     const toggleLike =(e) => {
