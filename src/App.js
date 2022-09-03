@@ -81,8 +81,10 @@ function App() {
       email: "sunnylee7@sookmyung.ac.kr",
       userNickname: "Sunny"
   }
-  sessionStorage.setItem('user',JSON.stringify(defaultUsers));
-  
+  // user 변경되는 오류 fix
+  if (!sessionStorage.getItem('user')){
+    sessionStorage.setItem('user',JSON.stringify(defaultUsers));
+  }
  
   //Lecture
   const [lectureData, setLectureData] = useState([]);
