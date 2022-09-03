@@ -88,6 +88,7 @@ function App() {
  
   //Lecture
   const [lectureData, setLectureData] = useState([]);
+
   useEffect(()=>{
     axios.get(`${BASE_URL.lecture}/lecture`,{
       headers: {
