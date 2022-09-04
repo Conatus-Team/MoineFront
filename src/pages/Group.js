@@ -10,12 +10,27 @@ import { BASE_URL } from "./../App";
 const Group =() =>{
     const groupList = useContext(GroupStateContext);
     const [group_data, setGroupData] = useState([]);
+    
 
-    useEffect(()=>{
-        setGroupData(groupList);
+    useEffect(() => {
+        axios.get(`${BASE_URL.group}/group/my`,{
+            headers: {
+              "Content-Type": `application/json`,
+              "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+            }
+          })
+          .then(response => {
+            const groupList2 = response.data
+            // setRecommendGroupData(response.data)
+            setGroupData(groupList2);
+          }).catch(error => {
+            console.log(error.response)
+            })
+        
     },[]);
 
 
+    // recommend group list
     const [recommendData, setRecommendData] = useState([]);
     useEffect(() => {
         axios.get(`${BASE_URL.group}/group/recommend`,{
