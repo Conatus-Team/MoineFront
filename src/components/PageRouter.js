@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
 import { BASE_URL } from "../App";
 
 const PageRouter = () =>{
@@ -8,36 +9,42 @@ const PageRouter = () =>{
     const navigate = useNavigate();
     sessionStorage.setItem('user', JSON.stringify(userId));
 
-    useEffect(() => {
+    // console.log(userId)
+    // console.log(page)
+
+    // useEffect(() => {
         let url_like = `${BASE_URL.auth}/auth/mypage`;
+        console.log(url_like)
         axios.get(url_like,{
           headers: {
             "Content-Type": `application/json`,
-            "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+            "Authorization" : userId,
           }
         })
           .then(response => {
             sessionStorage.setItem('user', JSON.stringify(response.data));
+
+            switch (page) {
+              case 'home':
+                  navigate(`/home`);
+                  break;
+              case 'group':
+                  navigate(`/group`);
+                  break;
+              case 'lecture':
+                  navigate(`/lecture`);
+                  break;
+              case 'mypage':
+                  navigate(`/mypage`);
+                  break;
+              default:
+                  break;
+          }
         }).catch(error => {
           console.log(error.response)
       });
-    }, []);
-    switch (page) {
-        case 'home':
-            navigate(`${BASE_URL.react}/home`);
-            break;
-        case 'group':
-            navigate(`${BASE_URL.group}/group`);
-            break;
-        case 'lecture':
-            navigate(`${BASE_URL.lecture}/lecture`);
-            break;
-        case 'mypage':
-            navigate(`${BASE_URL.react}/mypage`);
-            break;
-        default:
-            break;
-    }
+    // }, []);
+    
 };
 
 export default PageRouter;

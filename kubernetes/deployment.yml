@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moine-frontend
+  labels:
+    app: moine-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moine-frontend
+  template:
+    metadata:
+      labels:
+        app: moine-frontend
+    spec:
+      containers:
+        - name: moine-frontend
+          image: 357806352922.dkr.ecr.ap-northeast-2.amazonaws.com/moine_front:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: front-configmap
+                  key: database_url
+            - name: DATABASE_USERID
+              valueFrom:
+                configMapKeyRef:
+                  name: front-configmap
+                  key: database_userid
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: front-configmap
+                  key: database_password
+#            - name: KAFKA_ENDPOINT
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: front-configmap
+#                  key: kafka_endpoint
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: front-configmap
+                  key: server_port
+#            - name: PING_MSG
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: front-configmap
+#                  key: ping_msg
+#          readinessProbe:
+#            httpGet:
+#              path: '/actuator/health'
+#              port: 8080
+#            initialDelaySeconds: 10
+#            timeoutSeconds: 2
+#            periodSeconds: 5
+#            failureThreshold: 10
+#          livenessProbe:
+#            httpGet:
+#              path: '/actuator/health'
+#              port: 8080
+#            initialDelaySeconds: 120
+#            timeoutSeconds: 2
+#            periodSeconds: 5
+#            failureThreshold: 5

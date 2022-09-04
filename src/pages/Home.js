@@ -26,7 +26,25 @@ const Home =() =>{
   }, []);
 
     const recommendLectureList = useContext(RecommendLectureStateContext);
-    const groupList = useContext(GroupStateContext);
+    // const [recommendLectureList, setRecommendLectureList] = useState([]);
+    // my group list 새로고침
+    const [groupList, setGroupList] = useState([]);
+    useEffect(() => {
+        axios.get(`${BASE_URL.group}/group/my`,{
+            headers: {
+              "Content-Type": `application/json`,
+              "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+            }
+          })
+          .then(response => {
+            const groupList2 = response.data
+            // setRecommendGroupData(response.data)
+            setGroupList(groupList2);
+          }).catch(error => {
+            console.log(error.response)
+            })
+        
+    },[]);
 
 
     return(<div className="home">

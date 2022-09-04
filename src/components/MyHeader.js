@@ -19,7 +19,7 @@ const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatti
             {head_mypage}
         </div>
         <div className="head_chatting" >
-            <a href={`${BASE_URL.chatting}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}`}>{head_chatting}</a>
+            <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}`}>{head_chatting}</a>
         </div>
         
          </header>
