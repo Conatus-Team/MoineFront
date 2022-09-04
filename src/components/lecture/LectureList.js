@@ -7,41 +7,42 @@ import axios from 'axios';
 import { BASE_URL } from '../../App';
 
 
-const LikeTest = (lectures, lectureLikeList) =>{
+// const LikeTest = (lectures, lectureLikeList) =>{
 
-  lectures.map((it)=> it.like = false)
+//   lectures.map((it)=> it.like = false)
 
-  lectures.map((it) => (
-    lectureLikeList.map((i)=> {if(it.id === i) it.like = true})
- ))
- return lectures;
-}
+//   lectures.map((it) => (
+//     lectureLikeList.map((i)=> {if(it.id === i) it.like = true})
+//  ))
+//  return lectures;
+// }
 
 const LectureList= ({lectureList, recommendLectureList})=> {
 
     // const navigate = useNavigate();
 
     lectureList.map((it)=> it.like = true)
+    recommendLectureList.map((it)=> it.like = false)
 
-    const [lectureLikeList, setLectureLikeList] = useState([]);
+    // const [lectureLikeList, setLectureLikeList] = useState([]);
   
-    useEffect(()=>{
-      axios.get(`${BASE_URL.lecture}/lecture`,{
-        headers: {
-          "Content-Type": `application/json`,
-          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-      },
-      })
-      .then(response => {
-        if(response.likeId){
-        setLectureLikeList(response.likeId);
-        recommendLectureList = LikeTest(recommendLectureList, lectureLikeList);
-        }
+    // useEffect(()=>{
+    //   axios.get(`${BASE_URL.lecture}/lecture`,{
+    //     headers: {
+    //       "Content-Type": `application/json`,
+    //       "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+    //   },
+    //   })
+    //   .then(response => {
+    //     if(response.likeId){
+    //     setLectureLikeList(response.likeId);
+    //     recommendLectureList = LikeTest(recommendLectureList, lectureLikeList);
+    //     }
 
-      }).catch(error => {
-        console.log(error.response)
-    });
-    }, []);
+    //   }).catch(error => {
+    //     console.log(error.response)
+    // });
+    // }, []);
 
 
     return (

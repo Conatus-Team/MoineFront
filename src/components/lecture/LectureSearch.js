@@ -23,7 +23,7 @@ function LectureSearch() {
             })
             .then((res) => {
             console.log(res.data);
-            setResult(res.data);
+            setResult(res.data.data);
         }).catch(error => {
             console.log(error.response)
         });

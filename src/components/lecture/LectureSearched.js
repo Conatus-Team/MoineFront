@@ -24,8 +24,7 @@ const LectureSearched = ({searchResult}) =>{
           },
           })
           .then(response => {
-            setLectureLikeList(response.likeId);
-    
+            setLectureLikeList(response.data.likeId);
             searchResult = LikeTest(searchResult, lectureLikeList);
     
           }).catch(error => {
