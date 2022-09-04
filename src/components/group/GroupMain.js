@@ -24,17 +24,18 @@ const GroupMain= ({originData})=> {
             .then((res) => {
             console.log(res);
             confrim = res.data;
+            if (confrim === false){
+         
+                alert("register successed");
+                
+            } else{
+                alert("you have already registered!");
+            }
         }).catch(error => {
             console.log(error.response)
         });
 
-        if (confrim == false){
-         
-            alert("register successed");
-            
-        } else{
-            alert("you have already registered!");
-        }
+        
     }
             
 

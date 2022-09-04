@@ -39,6 +39,10 @@ import SignUp from './pages/SignUp';
 import Survey from './pages/Survey';
 
 
+//page router
+import PageRouter from './components/PageRouter';
+
+
 //Global Data
 export const LectureStateContext = React.createContext();
 export const RecommendLectureStateContext = React.createContext();
@@ -77,11 +81,14 @@ function App() {
       email: "sunnylee7@sookmyung.ac.kr",
       userNickname: "Sunny"
   }
-  sessionStorage.setItem('user',JSON.stringify(defaultUsers));
-  
+  // user 변경되는 오류 fix
+  if (!sessionStorage.getItem('user')){
+    sessionStorage.setItem('user',JSON.stringify(defaultUsers));
+  }
  
   //Lecture
   const [lectureData, setLectureData] = useState([]);
+
   useEffect(()=>{
     axios.get(`${BASE_URL.lecture}/lecture`,{
       headers: {
@@ -115,21 +122,22 @@ function App() {
 
 
   // Group
+  // my group list
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.group}/info?size=999`,{
+    axios.get(`${BASE_URL.group}/group/my`,{
       headers: {
         "Content-Type": `application/json`,
         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
       }
     })
     .then(response => {
-      setGroupData(response.data._embedded.info)
+      setGroupData(response.data)
     }).catch(error => {
       console.log(error.response);
   });
   }, []);
-  console.log('groupdata',groupData);
+  // console.log('groupdata',groupData);
 
   const [recommendGroupData, setRecommendGroupData] = useState([]);
   useEffect(()=>{
@@ -140,7 +148,7 @@ function App() {
       }
     })
     .then(response => {
-      setRecommendGroupData(response.data._embedded.info)
+      setRecommendGroupData(response.data)
     }).catch(error => {
       console.log(error.response)
   });
@@ -187,6 +195,7 @@ function App() {
         <Route path='/group/post/:id' element={<Post/>} /> 
         <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
         <Route path='/group/post' element={<Post/>} />
+        <Route path='/enter/:page/:userId' element={<PageRouter/>}/>
 
       </Routes>
     </div>
