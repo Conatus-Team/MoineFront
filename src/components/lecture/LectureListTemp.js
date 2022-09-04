@@ -19,7 +19,7 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     useEffect(()=>{
       if(like===true) setLike(true)
       else setLike(false)
-    }, [like, setLike]);
+    }, []);
     
 
     // useEffect(() => {
@@ -39,21 +39,41 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
 
    
     const toggleLike =() => {
-      console.log("toggle like")
-      setLike(!like_data);
-      console.log(like_data)
+      console.log(`toggle like to: ${!like_data} lectureId: ${lectureId}`)
+
+      
+
       let url_liked = `${BASE_URL.lecture}/lecture/like/${lectureId}`;
+      // true로 바꾸기
+      if (like_data === false) {
+      
       axios.post(url_liked,  null, {
         headers:{
           "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
         },
       }
       ).then((res)=>{
-        
+        console.log(res)
+        console.log("별표시 채워요")
+        setLike(!like_data);
           // setLike(!like_data);
       }).catch(error => {
         console.log(error.response)
+    });}else{ //like를 false로 바꾸기
+      axios.delete(url_liked, {
+        headers:{
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        },
+        data:{}
+      }
+      ).then((res)=>{
+        console.log(res)
+        console.log("별표시 없애기")
+        setLike(!like_data);
+      }).catch(error => {
+        console.log(error.response)
     });
+    }
        // [POST] ???? ???? ?? -> DB ??
       
     }

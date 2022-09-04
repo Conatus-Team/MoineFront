@@ -91,7 +91,7 @@ const Home =() =>{
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="lectureList">
         {recommendLectureList.map((it) => (
-            <LectureListTemp key = {it.id} {...it}/>
+            <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
 

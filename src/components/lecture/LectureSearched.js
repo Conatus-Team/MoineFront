@@ -5,10 +5,10 @@ import { useState } from "react";
 
 const LikeTest = (lectures, lectureLikeList) =>{
 
-    lectures.map((it)=> it.like = false)
+    lectures.map((it)=> it.lectureCrawling.like = false)
   
     lectures.map((it) => (
-      lectureLikeList.map((i)=> {if(it.id ===i) it.like = true})
+      lectureLikeList.map((i)=> {if(it.lectureCrawling.id ===i) it.lectureCrawling.like = true})
    ))
    return lectures;
   }
@@ -17,7 +17,7 @@ const LectureSearched = ({searchResult}) =>{
     const [lectureLikeList, setLectureLikeList] = useState([]);
     if (searchResult.length>=1){
         
-        axios.get(`${BASE_URL.lecture}/lecture`,{
+        axios.post(`${BASE_URL.lecture}/lecture/search`,{
             headers: {
               "Content-Type": `application/json`,
               "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,

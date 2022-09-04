@@ -21,8 +21,8 @@ const LectureList= ({lectureList, recommendLectureList})=> {
 
     // const navigate = useNavigate();
 
-    lectureList.map((it)=> it.like = true)
-    recommendLectureList.map((it)=> it.like = false)
+    lectureList.map((it)=> it.lectureCrawling.like = true)
+    recommendLectureList.map((it)=> it.lectureCrawling.like = false)
 
     const [lectureLikeList, setLectureLikeList] = useState([]);
   
