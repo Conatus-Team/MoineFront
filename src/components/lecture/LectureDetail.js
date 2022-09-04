@@ -31,7 +31,7 @@ const LectureDetail = ()=>{
     return(<div className="lecture_main">
        <div className="lecture_header">
         <div className="lecture_thumbnail">
-        <img src = {process.env.PUBLIC_URL+ `/${originData.imagePath}`}/>        
+        <img src = {process.env.PUBLIC_URL+ `${originData.imagePath}`}/>        
         </div>
         <MyButton type = {'positive'} text ={'More'} onClick={() =>navigate(`/${originData.lectureUrl}`)}></MyButton>
         </div>
@@ -44,16 +44,17 @@ const LectureDetail = ()=>{
             </div>
             
             <div className='lecture_title'>
-                <p>[Lecture Title]</p>
-                <p>{originData.instruction}</p>
+                <p>[Lecture introduction]</p>
+                <p>{parse(originData.introduction)}</p>
             </div>
+
             <div className='lecture_teacher'>
                 <p>[Teacher]</p>
                 <p> {originData.teacherName}</p>
             </div>
             <div className='lecture_detail'>
                 <p>[Detail]</p>
-                <p> {curriculum}</p>
+                <p> {parse(originData.curriculum)}</p>
             </div>
 
             <div className='lecture_price'>
