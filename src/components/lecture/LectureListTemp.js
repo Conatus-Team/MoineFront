@@ -4,12 +4,33 @@ import LikeButton from "../LikeButton";
 import axios from "axios";
 import { BASE_URL } from "../../App";
 
+
+
+
+const LikeTest = (lectures, lectureLikeList) =>{
+  console.log(`like test: lectures - ${lectures}`)
+  console.log(lectures)
+  console.log(lectureLikeList)
+  lectures.map((it)=> it.like = false)
+
+  lectures.map((it) => {
+      console.log(`${it.lectureId} map 들어옴!`)
+      if(lectureLikeList.includes(it.lectureId)){
+          it.like = true;
+          console.log(`${it.lectureId} true로 바뀜!`)
+      }
+
+})
+
+ return lectures;
+}
+
 const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
     const navigate = useNavigate();
     const [like_data, setLike] = useState(false);
-    console.log(`lecture list temp: ${lectureId}`)
+    // console.log(`lecture list temp: ${lectureId}`)
     // const lectureId = id
     const likeData = {
       //userId: JSON.parse(sessionStorage.getItem('user')).userId,

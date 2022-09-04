@@ -21,8 +21,27 @@ const LectureList= ({lectureList, recommendLectureList})=> {
 
     // const navigate = useNavigate();
 
-    lectureList.map((it)=> it.lectureCrawling.like = true)
-    recommendLectureList.map((it)=> it.lectureCrawling.like = false)
+    const likeIdList = lectureList.map((it)=> {
+      // make like key
+      it.lectureCrawling.like = true
+
+      // return like id list
+      return it.lectureCrawling.lectureId
+    })
+
+    // get not liked RrecommendLectureList
+    const tmpRrecommendLectureList = []
+    recommendLectureList.map((it)=> {
+      it.lectureCrawling.like = false
+      if (!likeIdList.includes(it.lectureCrawling.lectureId)){
+        tmpRrecommendLectureList.push(it)
+      }
+
+    });
+
+    recommendLectureList = tmpRrecommendLectureList;
+
+
 
     const [lectureLikeList, setLectureLikeList] = useState([]);
   
@@ -45,15 +64,17 @@ const LectureList= ({lectureList, recommendLectureList})=> {
     // }, []);
 
 
-    console.log(`r lecture list: ${recommendLectureList}`)
+    // console.log(`r lecture list: ${recommendLectureList}`)
     return (
       <div className="LectrueList">
         <LectureSearch/>
 
         <p className='lecture_title'> Recommend Lecture List</p>
         <div className="lectureList">
-             {recommendLectureList.map((it) => (
-                <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling}/>
+             {
+              recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :
+             recommendLectureList.map((it) => (
+                <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling} />
              ))}
         </div>
 

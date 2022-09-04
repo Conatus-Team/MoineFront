@@ -38,11 +38,28 @@ const Home =() =>{
         }
       })
       .then(response => {
-        setRecommendLectureList(response.data.recommendList);
+        const likedLectureList = response.data.likeList;
+        const receivedRrecommendLectureList = response.data.recommendList;
+        const likeIdList = likedLectureList.map((it)=> {
+          // return like id list
+          return it.lectureCrawling.lectureId
+        })
+        // get not liked RrecommendLectureList
+        const tmpRrecommendLectureList = []
+        receivedRrecommendLectureList.map((it)=> {
+          it.lectureCrawling.like = false
+          if (!likeIdList.includes(it.lectureCrawling.lectureId)){
+            tmpRrecommendLectureList.push(it)
+          }
+        });
+        setRecommendLectureList(tmpRrecommendLectureList);
       }).catch(error => {
         console.log(error.response)
     });
-    }, [recommendLectureList]);
+    }, []);
+
+
+
     console.log('lecturedata',recommendLectureList);
   
     // my group list 새로고침
@@ -90,7 +107,7 @@ const Home =() =>{
       
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="lectureList">
-        {recommendLectureList.map((it) => (
+        {recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :recommendLectureList.map((it) => (
             <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
