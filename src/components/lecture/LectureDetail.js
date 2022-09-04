@@ -1,11 +1,11 @@
-import { LectureStateContext } from "../../App";
+import { BASE_URL, LectureStateContext } from "../../App";
 import { useNavigate, useParams} from "react-router-dom";
 import React, { useContext, useEffect,useState } from "react";
 import MyButton from "../MyButton";
+import axios from "axios";
 
 const LectureDetail = ()=>{
     const { id } = useParams();
-    const lectureData = useContext(LectureStateContext);
     const [originData, setOriginData] = useState([]);
     const parse = require('html-react-parser');
     const [curriculum, setCurriculum] = useState([]);
@@ -13,22 +13,20 @@ const LectureDetail = ()=>{
     // console.log('id', id);
   
     const navigate = useNavigate();
-    useEffect(() => {
-        // console.log("enter");
-        if(lectureData.length >= 1){
-            const targetLecture = lectureData.find(
-                (it) => parseInt(it.lectureId) === parseInt(id)
-            );
-            // console.log('targetLecture', targetLecture);
-            if(targetLecture){
-                setOriginData(targetLecture);
-                
-                setCurriculum(parse(targetLecture.curriculum));
-            } else {
-                navigate("/lecture", {replace: true});
-            }
-        }
-    }, []);
+    useEffect(()=>{
+        axios.get(`${BASE_URL.lecture}/lecture/${id}`,{
+          headers: {
+            "Content-Type": `application/json`,
+            "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+          }
+        })
+        .then(response => {
+            setOriginData(response.data)
+        }).catch(error => {
+          console.log(error.response);
+          navigate("/lecture", {replace: true});
+      });
+      }, []);
      
     return(<div className="lecture_main">
        <div className="lecture_header">
