@@ -6,9 +6,20 @@ import axios from "axios";
 import LectureSearched from "./LectureSearched";
 import { BASE_URL } from "../../App";
 
+const LikeTest = (lectures, lectureLikeList) =>{
+
+    lectures.map((it)=> it.lectureCrawling.like = false)
+  
+    lectures.map((it) => (
+      lectureLikeList.map((i)=> {if(it.lectureCrawling.id ===i) it.lectureCrawling.like = true})
+   ))
+   return lectures;
+  }
+
 function LectureSearch() {
     const [keyword, SetKeyword] = useState("");
     const [result, setResult] = useState([]);
+    const [lectureLikeList, setLectureLikeList] = useState([]);
         
 
     const submitSearch = (e) =>{
@@ -24,6 +35,8 @@ function LectureSearch() {
             .then((res) => {
             console.log(res.data);
             setResult(res.data.data);
+            setLectureLikeList(res.data.likeId);
+            result = LikeTest(result, lectureLikeList);
         }).catch(error => {
             console.log(error.response)
         });
