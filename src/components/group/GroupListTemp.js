@@ -18,7 +18,7 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
       const env = process.env;
       env.PUBLIC_URL = env.PUBLIC_URL || "";
       const navigate = useNavigate();
-      console.log('group',id,name, memberCount);
+      // console.log('group',id,name, memberCount);
 
   return (
       <div className="Group" >
