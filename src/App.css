@@ -293,6 +293,8 @@ header .head_signup{
 
 .group_searched, .lecture_searched {
   display: flex;
+  width: inherit;
+  flex-wrap: wrap;
 }
 
 
