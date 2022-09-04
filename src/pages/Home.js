@@ -25,8 +25,26 @@ const Home =() =>{
   });
   }, []);
 
-    const recommendLectureList = useContext(RecommendLectureStateContext);
+    // const recommendLectureListContext = useContext(RecommendLectureStateContext);
     // const [recommendLectureList, setRecommendLectureList] = useState([]);
+    // useEffect(() => {setRecommendLectureList(recommendLectureListContext)}, []);
+
+    const [recommendLectureList, setRecommendLectureList] = useState([]);
+    useEffect(()=>{
+      axios.get(`${BASE_URL.lecture}/lecture`,{
+        headers: {
+          "Content-Type": `application/json`,
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        }
+      })
+      .then(response => {
+        setRecommendLectureList(response.data.recommendList);
+      }).catch(error => {
+        console.log(error.response)
+    });
+    }, [recommendLectureList]);
+    console.log('lecturedata',recommendLectureList);
+  
     // my group list 새로고침
     const [groupList, setGroupList] = useState([]);
     useEffect(() => {
@@ -69,6 +87,7 @@ const Home =() =>{
 
       </div>
 
+      
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="lectureList">
         {recommendLectureList.map((it) => (

@@ -9,12 +9,18 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     env.PUBLIC_URL = env.PUBLIC_URL || "";
     const navigate = useNavigate();
     const [like_data, setLike] = useState(false);
+    console.log(`lecture list temp: ${lectureId}`)
+    // const lectureId = id
     const likeData = {
       //userId: JSON.parse(sessionStorage.getItem('user')).userId,
       lectureId: lectureId,
     }
-    if(like===true) setLike(true)
-    else setLike(false)
+
+    useEffect(()=>{
+      if(like===true) setLike(true)
+      else setLike(false)
+    }, [like, setLike]);
+    
 
     // useEffect(() => {
     //   let url_like = `${BASE_URL.lecture}/lecture/like`;
@@ -32,7 +38,10 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     //   }, [like, setLike]);
 
    
-    const toggleLike =(e) => {
+    const toggleLike =() => {
+      console.log("toggle like")
+      setLike(!like_data);
+      console.log(like_data)
       let url_liked = `${BASE_URL.lecture}/lecture/like/${lectureId}`;
       axios.post(url_liked,  null, {
         headers:{
@@ -40,7 +49,8 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
         },
       }
       ).then((res)=>{
-          setLike(!like_data);
+        
+          // setLike(!like_data);
       }).catch(error => {
         console.log(error.response)
     });

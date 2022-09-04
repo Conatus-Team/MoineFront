@@ -24,7 +24,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
     lectureList.map((it)=> it.like = true)
     recommendLectureList.map((it)=> it.like = false)
 
-    // const [lectureLikeList, setLectureLikeList] = useState([]);
+    const [lectureLikeList, setLectureLikeList] = useState([]);
   
     // useEffect(()=>{
     //   axios.get(`${BASE_URL.lecture}/lecture`,{
@@ -34,9 +34,9 @@ const LectureList= ({lectureList, recommendLectureList})=> {
     //   },
     //   })
     //   .then(response => {
-    //     if(response.likeId){
-    //     setLectureLikeList(response.likeId);
-    //     recommendLectureList = LikeTest(recommendLectureList, lectureLikeList);
+
+    //     setLectureLikeList(response);
+    //     recommendLectureList = 
     //     }
 
     //   }).catch(error => {
@@ -45,6 +45,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
     // }, []);
 
 
+    console.log(`r lecture list: ${recommendLectureList}`)
     return (
       <div className="LectrueList">
         <LectureSearch/>
@@ -52,7 +53,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
         <p className='lecture_title'> Recommend Lecture List</p>
         <div className="lectureList">
              {recommendLectureList.map((it) => (
-                <LectureListTemp key = {it.lectureId} {...it}/>
+                <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling}/>
              ))}
         </div>
 
@@ -61,7 +62,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
         <p className='lecture_title'> My Lecture List</p>
         <div className="lectureList">
         {lectureList.map((it) =>(
-          <LectureListTemp key = {it.lectureId} {...it}/>
+          <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling}/>
           ))}
     
         </div>
