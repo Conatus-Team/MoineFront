@@ -122,21 +122,22 @@ function App() {
 
 
   // Group
+  // my group list
   const [groupData, setGroupData] = useState([]);
   useEffect(()=>{
-    axios.get(`${BASE_URL.group}/info?size=999`,{
+    axios.get(`${BASE_URL.group}/group/my`,{
       headers: {
         "Content-Type": `application/json`,
         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
       }
     })
     .then(response => {
-      setGroupData(response.data._embedded.info)
+      setGroupData(response.data)
     }).catch(error => {
       console.log(error.response);
   });
   }, []);
-  console.log('groupdata',groupData);
+  // console.log('groupdata',groupData);
 
   const [recommendGroupData, setRecommendGroupData] = useState([]);
   useEffect(()=>{
@@ -147,7 +148,7 @@ function App() {
       }
     })
     .then(response => {
-      setRecommendGroupData(response.data._embedded.info)
+      setRecommendGroupData(response.data)
     }).catch(error => {
       console.log(error.response)
   });
