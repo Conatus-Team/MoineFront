@@ -33,7 +33,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
       },
       })
       .then(response => {
-        if(response.likeId !== null){
+        if(response.likeId){
         setLectureLikeList(response.likeId);
         recommendLectureList = LikeTest(recommendLectureList, lectureLikeList);
         }
