@@ -23,7 +23,7 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
   return (
       <div className="Group" >
          
-        <div onClick={() => navigate(`/group/groups/${id}`)}>
+        <div onClick={() => navigate(`/group/main/${id}`)}>
         <div className="group_image"
         // onClick={() => navigate(`/group/main/${id}`)}
         >
