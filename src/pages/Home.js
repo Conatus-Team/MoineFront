@@ -26,7 +26,7 @@ const Home =() =>{
   }, []);
 
     const recommendLectureList = useContext(RecommendLectureStateContext);
-    const groupList = useContext(GroupStateContext);
+    // const [recommendLectureList, setRecommendLectureList] = useState([]);
     // my group list 새로고침
     const [groupList, setGroupList] = useState([]);
     useEffect(() => {
