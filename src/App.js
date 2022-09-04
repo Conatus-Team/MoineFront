@@ -98,6 +98,7 @@ function App() {
     })
     .then(response => {
       setLectureData(response.data);
+      setLectureData(response.data.likeList);
     }).catch(error => {
       console.log(error.response)
   });
@@ -112,7 +113,7 @@ function App() {
       }
     })
     .then(response => {
-      setRecommendLectureData(response.data);
+      setRecommendLectureData(response.data.recommendList);
     }).catch(error => {
       console.log(error.response)
   });
