@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams} from "react-router-dom";
 import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
@@ -25,11 +25,17 @@ const ControlMenu = ({value, onChange, optionList}) =>{
 
 const PostList= ({postList})=> {
 
+  
   const navigate = useNavigate();
   const [sortType, setSortType] = useState("latest");
 
+
+
+  const groupId = useParams();
+
   
-  
+
+
   const getProcessdPostList = () => {
 
 
@@ -68,7 +74,7 @@ const PostList= ({postList})=> {
 
         </div>
         <div className='right_col'>
-        <MyButton type = {'positive'} text ={'new'} onClick={() => navigate(`/group/post/new/${postList[0].groupId}`,postList[0].groupName)}>
+        <MyButton type = {'positive'} text ={'new'} onClick={() => navigate(`/group/post/new/${groupId.id}`,"")}>
           
         </MyButton>
 
