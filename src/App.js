@@ -76,7 +76,7 @@ function App() {
     "Authorization": 0,
   }
   const defaultUsers = {
-      userId: 1,
+      userId: 0,
       userName: "Lee Hyunsun",
       email: "sunnylee7@sookmyung.ac.kr",
       userNickname: "Sunny"
