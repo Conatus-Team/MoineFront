@@ -243,11 +243,15 @@ header .head_signup{
 
 }
 .groupList, .lectureList{
-  display:flex;
-  flex-wrap: wrap;
-  /* overflow:; */
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  /* grid-auto-flow:column; */
+  /* overflow: auto; */
   white-space: normal;
-  /* justify-content: center; */
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+  
 
   
 }
@@ -265,6 +269,7 @@ header .head_signup{
 .Group .group_image img, .Lecture .Lecture_image img{
   width:inherit;
   height: auto;
+  
 }
 
 .Group .group_image, .Lecture .Lecture_image{
@@ -290,6 +295,7 @@ header .head_signup{
 
 .Group .Groupcontent p, .Lecture .Lecturecontent p{
   word-wrap: break-word;
+  
 }
 
 
@@ -306,9 +312,19 @@ header .head_signup{
 }
 
 .group_searched, .lecture_searched {
-  display: flex;
+  /* display: flex;
   width: inherit;
-  flex-wrap: wrap;
+  flex-wrap: wrap; */
+
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  /* grid-auto-flow:column; */
+  /* overflow: auto; */
+  white-space: normal;
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+  margin-top: 3rem;
 }
 
 
