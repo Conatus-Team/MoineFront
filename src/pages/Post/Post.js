@@ -19,7 +19,7 @@ const Post = () => {
                   }
             })
             .then(response => {
-                setPostData(response.data);
+                setPostData(response.data.reverse());
             }).catch(error => {
                 console.log(error.response)
             });
