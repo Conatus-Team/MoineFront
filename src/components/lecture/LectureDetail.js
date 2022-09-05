@@ -3,12 +3,14 @@ import { useNavigate, useParams} from "react-router-dom";
 import React, { useContext, useEffect,useState } from "react";
 import MyButton from "../MyButton";
 import axios from "axios";
+const parse = require('html-react-parser');
+
 
 const LectureDetail = ()=>{
     const { id } = useParams();
     const [originData, setOriginData] = useState([]);
     const parse = require('html-react-parser');
-    const [curriculum, setCurriculum] = useState([]);
+    // const [curriculum, setCurriculum] = useState([]);
 
     // console.log('id', id);
   
@@ -21,7 +23,10 @@ const LectureDetail = ()=>{
           }
         })
         .then(response => {
-            setOriginData(response.data)
+            let responseData = response.data;
+            responseData.introduction = parse(responseData.introduction)
+            responseData.curriculum = parse(responseData.curriculum)
+            setOriginData(responseData)
         }).catch(error => {
           console.log(error.response);
           navigate("/lecture", {replace: true});
@@ -33,7 +38,9 @@ const LectureDetail = ()=>{
         <div className="lecture_thumbnail">
         <img src = {process.env.PUBLIC_URL+ `${originData.imagePath}`}/>        
         </div>
-        <MyButton type = {'positive'} text ={'More'} onClick={() =>navigate(`/${originData.lectureUrl}`)}></MyButton>
+        <MyButton type = {'positive'} text ={'More'} onClick={() =>window.location.href = `${originData.lectureUrl}`}>
+
+        </MyButton>
         </div>
 
 
@@ -45,7 +52,7 @@ const LectureDetail = ()=>{
             
             <div className='lecture_title'>
                 <p>[Lecture introduction]</p>
-                <p>{parse(originData.introduction)}</p>
+                <p>{originData.introduction}</p>
             </div>
 
             <div className='lecture_teacher'>
@@ -54,7 +61,7 @@ const LectureDetail = ()=>{
             </div>
             <div className='lecture_detail'>
                 <p>[Detail]</p>
-                <p> {parse(originData.curriculum)}</p>
+                <p> {originData.curriculum}</p>
             </div>
 
             <div className='lecture_price'>
