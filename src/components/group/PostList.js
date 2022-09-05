@@ -78,7 +78,7 @@ const PostList= ({postList})=> {
         <caption> Posts </caption>
         <thead> 
             <tr>
-                <th> Date </th><th> title </th> <th> author </th> <th> group name </th>
+                <th> Date </th><th> title </th> <th> author </th>
             </tr>
         </thead>
         <tbody>
