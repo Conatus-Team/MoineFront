@@ -12,7 +12,6 @@ const Mypage = () => {
             <p>{userData.userName}</p>
             <p>- {userData.userNickname} -</p>
             <p>{userData.email}</p>
-            <p>{userData.userId}</p>
             </div>
 
         </div>
