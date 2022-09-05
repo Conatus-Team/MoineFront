@@ -17,8 +17,9 @@ const PostEditor =({isEdit, originData, groupId}) => {
   
     const [date, setDate] = useState(getStringDate(new Date()));
     const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("author6");
-    const [title, setTitle] = useState("title6");
+    const author = JSON.parse(sessionStorage.getItem('user')).userNickname;
+    // const [author, setAuthor] = useState(`${sessionStorage.getItem("user").userNickname}`);
+    const [title, setTitle] = useState("title");
     //const [groupName, setGroupName] =useState(originData.groupName);
     let id=0;
 
@@ -42,11 +43,12 @@ const PostEditor =({isEdit, originData, groupId}) => {
                     content: content, 
                     title: title, 
                     groupId: groupId, 
-                    //groupName: groupName,
+                    groupName: "", // do not delete
+                    userId: 0 // do not delete
                 }
                 url = `${BASE_URL.group}/group/post/create`;
                 console.log('createData', createData, url);
-                axios.post(url,  JSON.stringify(createData), {
+                axios.post(url,  (createData), {
                     headers: {
                         "Content-Type": `application/json`,
                         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
@@ -92,7 +94,7 @@ const PostEditor =({isEdit, originData, groupId}) => {
         if(isEdit){
             //setDate(getStringDate(new Date(parseInt(originData.date))));
             setDate(originData.createdTime);
-            setAuthor(originData.author);
+            // setAuthor(originData.author);
             setContent(originData.content);
             setTitle(originData.title);
             //setGroupName(originData.groupName);

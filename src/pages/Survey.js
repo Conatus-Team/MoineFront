@@ -6,6 +6,7 @@ import { BASE_URL } from "../App";
 
 
 function Survey () {
+    alert("survey")
     //DB hobby
     const [hobbyList, setHobbyList] = useState([]);
     const [hobbyTypeList, setHobbyTypeList] = useState([]);
@@ -16,10 +17,11 @@ function Survey () {
     const [hobbyType, setHobbyType] = useState([]);
     const [hobby, setHobby] = useState([]);
     const navigate = useNavigate();
-
+    const signupUserId = sessionStorage.getItem('signupUserId');
     const submit = () =>{
+        
         let dummy_data = {
-            userId: JSON.parse(sessionStorage.getItem('user')).userId,
+            userId: signupUserId,
             birth: birth,
             location: location,
             hobbyType: hobbyType,
@@ -29,7 +31,7 @@ function Survey () {
         axios.post(url,  JSON.stringify(dummy_data), {
             headers: {
                 "Content-Type": `application/json`,
-                "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+                "Authorization" : signupUserId
             },
             })
             .then((res) => {
@@ -44,7 +46,7 @@ function Survey () {
         axios.get(`${BASE_URL.recommend}/recommend/hobby?size=999`, {
             headers: {
                 "Content-Type": `application/json`,
-                "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+                "Authorization" : signupUserId
             },
             })
             .then((res) => {
@@ -59,7 +61,7 @@ function Survey () {
         axios.get( `${BASE_URL.recommend}/recommend/hobby_type?size=999`, {
             headers: {
                 "Content-Type": `application/json`,
-                "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+                "Authorization" : signupUserId
             },
             })
             .then((res) => {
