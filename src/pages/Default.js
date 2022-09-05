@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Moine from "../components/Image/Moine.png";
+import Logo from "../components/Image/Logo396x196.png"
 
 const Default = () =>{
     const navigate = useNavigate();
@@ -17,6 +18,9 @@ const Default = () =>{
         </div>
         </div>
         <img src = {Moine}/>
+        <div className="moine_logo">
+         <img src = {Logo}/>
+        </div>
     </div>)
 }
 

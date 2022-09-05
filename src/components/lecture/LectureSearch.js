@@ -6,9 +6,28 @@ import axios from "axios";
 import LectureSearched from "./LectureSearched";
 import { BASE_URL } from "../../App";
 
+const LikeTest = (lectures, lectureLikeList) =>{
+    console.log(`like test: lectures - ${lectures}`)
+    console.log(lectures)
+    console.log(lectureLikeList)
+    lectures.map((it)=> it.like = false)
+  
+    lectures.map((it) => {
+        console.log(`${it.lectureId} map 들어옴!`)
+        if(lectureLikeList.includes(it.lectureId)){
+            it.like = true;
+            console.log(`${it.lectureId} true로 바뀜!`)
+        }
+
+})
+
+   return lectures;
+  }
+
 function LectureSearch() {
     const [keyword, SetKeyword] = useState("");
-    const [result, setResult] = useState([]);
+    let [result, setResult] = useState([]);
+    const [lectureLikeList, setLectureLikeList] = useState([]);
         
 
     const submitSearch = (e) =>{
@@ -20,12 +39,19 @@ function LectureSearch() {
                 "Content-Type": `application/json`,
                 "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
             },
-            })
-            .then((res) => {
+        }).then((res) => {
             console.log(res.data);
-            setResult(res.data);
+            const resultTmp = res.data.data;
+            const lectureLikeListTmp = res.data.likeId;
+            // setResult(resultTmp);
+            setLectureLikeList(lectureLikeListTmp);
+            console.log("resultTmp")
+            console.log(resultTmp)
+            setResult(LikeTest(resultTmp, lectureLikeListTmp));
+            console.log(result)
         }).catch(error => {
-            console.log(error.response)
+            console.log("에러")
+            console.log(error)
         });
     // }, []);
         console.log('result',result);

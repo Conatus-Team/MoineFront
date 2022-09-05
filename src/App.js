@@ -64,7 +64,7 @@ export const BASE_URL = {
   // auth: "http://192.168.15.154:8080",
   mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
   recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
-  chattingFront: "http://localhost:3001",
+  chattingFront: "moine-recommend-backend-service.moine.svc.cluster.local:8080"
   // recommend: "http://112.149.179.238:8085",
 };
 
@@ -76,7 +76,7 @@ function App() {
     "Authorization": 0,
   }
   const defaultUsers = {
-      userId: 1,
+      userId: 0,
       userName: "Lee Hyunsun",
       email: "sunnylee7@sookmyung.ac.kr",
       userNickname: "Sunny"
@@ -98,6 +98,7 @@ function App() {
     })
     .then(response => {
       setLectureData(response.data);
+      setLectureData(response.data.likeList);
     }).catch(error => {
       console.log(error.response)
   });
@@ -112,7 +113,7 @@ function App() {
       }
     })
     .then(response => {
-      setRecommendLectureData(response.data);
+      setRecommendLectureData(response.data.recommendList);
     }).catch(error => {
       console.log(error.response)
   });

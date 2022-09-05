@@ -25,8 +25,43 @@ const Home =() =>{
   });
   }, []);
 
-    const recommendLectureList = useContext(RecommendLectureStateContext);
+    // const recommendLectureListContext = useContext(RecommendLectureStateContext);
     // const [recommendLectureList, setRecommendLectureList] = useState([]);
+    // useEffect(() => {setRecommendLectureList(recommendLectureListContext)}, []);
+
+    const [recommendLectureList, setRecommendLectureList] = useState([]);
+    useEffect(()=>{
+      axios.get(`${BASE_URL.lecture}/lecture`,{
+        headers: {
+          "Content-Type": `application/json`,
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        }
+      })
+      .then(response => {
+        const likedLectureList = response.data.likeList;
+        const receivedRrecommendLectureList = response.data.recommendList;
+        const likeIdList = likedLectureList.map((it)=> {
+          // return like id list
+          return it.lectureCrawling.lectureId
+        })
+        // get not liked RrecommendLectureList
+        const tmpRrecommendLectureList = []
+        receivedRrecommendLectureList.map((it)=> {
+          it.lectureCrawling.like = false
+          if (!likeIdList.includes(it.lectureCrawling.lectureId)){
+            tmpRrecommendLectureList.push(it)
+          }
+        });
+        setRecommendLectureList(tmpRrecommendLectureList);
+      }).catch(error => {
+        console.log(error.response)
+    });
+    }, []);
+
+
+
+    console.log('lecturedata',recommendLectureList);
+  
     // my group list 새로고침
     const [groupList, setGroupList] = useState([]);
     useEffect(() => {
@@ -69,10 +104,11 @@ const Home =() =>{
 
       </div>
 
+      
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="lectureList">
-        {recommendLectureList.map((it) => (
-            <LectureListTemp key = {it.id} {...it}/>
+        {recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :recommendLectureList.map((it) => (
+            <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
 

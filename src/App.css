@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
 
+a:link { color: black; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: black; text-decoration:  none;}
 
 body {
   background-color: #f6f6f6;
@@ -72,9 +75,20 @@ body {
 }
 
 .user_default{
-  width:50%;
+  width:100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  flex-wrap: wrap;
+  gap: 3rem;
+
+  /* display:grid; */
+  /* grid-template-columns: repeat(auto-fit, minmax(50%, auto)); */
+  /* grid-auto-flow:column; */
+  /* overflow: auto; */
+  /* white-space: normal; */
+  justify-content: center;
+  /* align-items: center; */
+  /* justify-items: center; */
 
 }
 
@@ -229,11 +243,15 @@ header .head_signup{
 
 }
 .groupList, .lectureList{
-  display:flex;
-  flex-wrap: wrap;
-  /* overflow:; */
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  /* grid-auto-flow:column; */
+  /* overflow: auto; */
   white-space: normal;
-  /* justify-content: center; */
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+  
 
   
 }
@@ -251,6 +269,7 @@ header .head_signup{
 .Group .group_image img, .Lecture .Lecture_image img{
   width:inherit;
   height: auto;
+  
 }
 
 .Group .group_image, .Lecture .Lecture_image{
@@ -260,7 +279,7 @@ header .head_signup{
   /* border-radius:5px; */
   /* display: flex; */
   justify-content: center;
-  background-color: black;
+  background-color: white;
   
 }
 
@@ -276,6 +295,7 @@ header .head_signup{
 
 .Group .Groupcontent p, .Lecture .Lecturecontent p{
   word-wrap: break-word;
+  
 }
 
 
@@ -292,7 +312,19 @@ header .head_signup{
 }
 
 .group_searched, .lecture_searched {
-  display: flex;
+  /* display: flex;
+  width: inherit;
+  flex-wrap: wrap; */
+
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+  /* grid-auto-flow:column; */
+  /* overflow: auto; */
+  white-space: normal;
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+  margin-top: 3rem;
 }
 
 
@@ -455,13 +487,13 @@ height: 50px;
   margin-top: 20px;
   margin-bottom: 10px;
   padding:40px;
-  height:600px;
+  /* height:600px; */
 
 }
 .lecture_header .lecture_thumbnail{
   width: 800px;
-  height: 500px;
-  background-color: beige;
+  /* height: 500px; */
+  /* background-color: beige; */
   width:inherit;
 }
 .lecture_header .MyButton{
@@ -617,5 +649,47 @@ height: 50px;
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.group_head_chatting a:link{
+  color: white; text-decoration: none
+}
+.group_head_chatting a:visited{
+ color: white; text-decoration: none
+}
+.group_head_chatting a:hover{
+  color: white; text-decoration: none
+}
+
+.moine_logo img{
+  height: 10%;
+  /* width: 10%; */
+  margin-top: 70px;
+  margin-right: 40px;
+  float: right;
+}
+
+
+
+/* mobile view - header font size */
+@media (min-width: 800px){ /*if size> 650 do*/
+  header > div{
+    font-size: 25px;
+    
+  }
+
+}
+
+@media (min-width: 1400px){ /*if size> 650 do*/
+  header > div{
+    font-size: 25px;
+  }
+
+}
+
+@media (max-width:650px){
+  header > div{
+    font-size: 19px;
   }
 }

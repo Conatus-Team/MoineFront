@@ -18,12 +18,12 @@ const GroupListTemp = ({id, name, thumbnail, memberCount}) => {
       const env = process.env;
       env.PUBLIC_URL = env.PUBLIC_URL || "";
       const navigate = useNavigate();
-      console.log('group',id,name, memberCount);
+      // console.log('group',id,name, memberCount);
 
   return (
       <div className="Group" >
          
-        <div onClick={() => navigate(`/group/groups/${id}`)}>
+        <div onClick={() => navigate(`/group/main/${id}`)}>
         <div className="group_image"
         // onClick={() => navigate(`/group/main/${id}`)}
         >

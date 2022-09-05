@@ -37,6 +37,7 @@ function LogIn() {
             if(loginSuccess){
                 sessionStorage.setItem('user', JSON.stringify(res.data));
                 navigate('/home', {replace: true});
+                window.location.reload();
             } else {
                 alert("fail to LogIn");
             }
