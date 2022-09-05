@@ -48,6 +48,14 @@ const PostList= ({postList})=> {
    }
   
   
+
+
+
+  useEffect(()=>{
+    postList.reverse()
+  },[sortType, setSortType])
+
+
   return (
     <div className='PostList'>
       <div className="menu_wrapper">
