@@ -91,7 +91,8 @@ function App() {
     },
     })
     .then(response => {
-      setLectureData(response.data);
+      // console.log(response)
+      // setLectureData(response.data);
       setLectureData(response.data.likeList);
     }).catch(error => {
       console.log(error.response)
@@ -161,7 +162,7 @@ function App() {
       {/*     <div key = {userData.id} className="App"> */}
       {
          JSON.parse(sessionStorage.getItem('user')).userId !== 0
-        ?<MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/>
+        ?<MyHeader head_Home={"홈"} head_lecture={"강의"} head_group ={"모임"} head_chatting={"채팅"} head_mypage ={"내 정보"}/>
         : null
       }
       {/* <MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/> */}
