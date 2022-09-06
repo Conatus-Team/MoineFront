@@ -54,12 +54,12 @@ export const BASE_URL = {
 
   react: "http://moine-frontend-svc.moine.svc.cluster.local",
   chatting: "http://chatting-backend-svc.moine.svc.cluster.local",
-  lecture: "http://lecture-backend-svc.moine.svc.cluster.local",
+  lecture: "http://a21e150499bee4cdbba329ed8a93610c-1594431961.ap-northeast-2.elb.amazonaws.com:8080",
   group: "http://group-backend-svc.moine.svc.cluster.local",
   auth: "http://auth-backend-service.moine.svc.cluster.local",
   // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
   recommend: "http://recommend-backend-svc.moine.svc.cluster.local",
-  chattingFront: "http://chatting-frontend-svc.moine.svc.cluster.local"
+  chattingFront: "chatting-frontend-svc.moine.svc.cluster.local"
 };
 
 
