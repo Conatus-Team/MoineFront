@@ -3,7 +3,7 @@ import userThumb from "../components/Image/user_thumb.png"
 const Mypage = () => {
     const userData = JSON.parse(sessionStorage.getItem('user'));
     return (<div className="mypage">
-        <h1>MyPage</h1>
+        <h1>내 정보</h1>
         <div className="user_default">
             <div className="user_image">
             <img src={userThumb}/>
@@ -18,7 +18,7 @@ const Mypage = () => {
         <div className="user_content">
             {/* user survey data */}
         </div>
-        
+
     </div>
     );
 };

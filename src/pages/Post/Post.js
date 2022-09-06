@@ -28,7 +28,7 @@ const Post = () => {
     return (
         <div post>
             <MyGroup id={id}/>
-            <PostList postList = {postData}/>       
+            <PostList postList = {postData}/>
         </div>
     )
 };

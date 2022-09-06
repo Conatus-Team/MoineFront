@@ -7,21 +7,21 @@ const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatti
 
     return <header>
         <div className="head_Home" onClick={()=>{  navigate("/home");}}>
-            {head_Home}
+            {홈 화면}
         </div>
         <div className="head_lecture" onClick={()=>{ navigate("/lecture");}}>
-            {head_lecture}
+            {강의}
         </div>
         <div className="head_group" onClick={()=>{ navigate("/group");}}>
-            {head_group}
+            {모임}
         </div>
         <div className="head_mypage" onClick={()=>{ navigate("/mypage");}}>
-            {head_mypage}
+            {내 정보}
         </div>
         <div className="head_chatting" >
-            <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}`}>{head_chatting}</a>
+            <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}`}>{채팅}</a>
         </div>
-        
+
          </header>
 }
 

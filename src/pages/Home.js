@@ -61,7 +61,7 @@ const Home =() =>{
 
 
     console.log('lecturedata',recommendLectureList);
-  
+
     // my group list 새로고침
     const [groupList, setGroupList] = useState([]);
     useEffect(() => {
@@ -78,7 +78,7 @@ const Home =() =>{
           }).catch(error => {
             console.log(error.response)
             })
-        
+
     },[]);
 
 
@@ -88,23 +88,23 @@ const Home =() =>{
       </div>
 
       <div className="hobby">
-        <p  className="hobby_p"> Result and Recommend</p>
+        <p  className="hobby_p"> 취미 정보</p>
         <div className="my_hobby">
-          <p>your hobby is ... </p>
+          // <p>당신의 취미는 </p>
 
         </div>
         <div className="recommended_hobby">
-          <p>I recommend you 
+          <p>당신에게 맞는 취미는
           {recommendHobbyData.map((it) => (
             <p>{it.category}</p>
-          ))}
+          ))} 입니다!
             </p>
 
         </div>
 
       </div>
 
-      
+
       <p className='lecture_title'> Recommend Lecture List</p>
       <div className="lectureList">
         {recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :recommendLectureList.map((it) => (
@@ -118,7 +118,7 @@ const Home =() =>{
             <GroupListTemp key = {it.id} {...it}/>
           ))}
         </div>
-      
+
     </div>)
 
 }

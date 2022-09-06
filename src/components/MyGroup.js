@@ -6,20 +6,19 @@ const MyGroup = ({id}) => {
 
     return <header className="group_header">
         <div className="group_main" onClick={()=>{ navigate(`/group/main/${id}`);}}>
-            group_info
+            모임 소개
         </div>
         <div className="group_post"  onClick={()=>{ navigate(`/group/post/${id}`);}}>
-            group_post
+            게시판
         </div>
         <div className="group_gallery"  onClick={()=>{ navigate(`/group/gallery/${id}`);}}>
-            group_gallery
+            사진첩
         </div>
         {/* <div className="head_chatting"  onClick={()=>{ navigate(`${BASE_URL.chatting}/chatting/${id}`);}}> */}
         <div className="group_head_chatting">
-        <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}?groupId=${id}`}>group_chatting</a>
+        <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}?groupId=${id}`}>모임 채팅방</a>
         </div>
          </header>
 }
 
 export default MyGroup;
-

@@ -4,13 +4,10 @@ import LikeButton from "../LikeButton";
 import axios from "axios";
 import { BASE_URL } from "../../App";
 
-
-
-
 const LikeTest = (lectures, lectureLikeList) =>{
-  console.log(`like test: lectures - ${lectures}`)
-  console.log(lectures)
-  console.log(lectureLikeList)
+  // console.log(`like test: lectures - ${lectures}`)
+  // console.log(lectures)
+  // console.log(lectureLikeList)
   lectures.map((it)=> it.like = false)
 
   lectures.map((it) => {
@@ -41,33 +38,17 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
       if(like===true) setLike(true)
       else setLike(false)
     }, []);
-    
 
-    // useEffect(() => {
-    //   let url_like = `${BASE_URL.lecture}/lecture/like`;
-    //   axios.get(url_like,{
-    //     headers: {
-    //       "Content-Type": `application/json`,
-    //       "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-    //     }
-    //   })
-    //     .then(response => {
-    //       if (response.like === 'liked') setLike(true);
-    //   }).catch(error => {
-    //     console.log(error.response)
-    // });
-    //   }, [like, setLike]);
 
-   
     const toggleLike =() => {
       console.log(`toggle like to: ${!like_data} lectureId: ${lectureId}`)
 
-      
+
 
       let url_liked = `${BASE_URL.lecture}/lecture/like/${lectureId}`;
       // true로 바꾸기
       if (like_data === false) {
-      
+
       axios.post(url_liked,  null, {
         headers:{
           "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
@@ -96,7 +77,7 @@ const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     });
     }
        // [POST] ???? ???? ?? -> DB ??
-      
+
     }
 
 return (
