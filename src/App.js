@@ -56,7 +56,7 @@ export const BASE_URL = {
   chatting: "http://chatting-backend-svc.moine.svc.cluster.local",
   lecture: "http://lecture-backend-svc.moine.svc.cluster.local",
   group: "http://group-backend-svc.moine.svc.cluster.local",
-  auth: "http://auth-backend-service.moine.svc.cluster.local:8080",
+  auth: "http://auth-backend-service.moine.svc.cluster.local",
   // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
   recommend: "http://recommend-backend-svc.moine.svc.cluster.local",
   chattingFront: "http://chatting-frontend-svc.moine.svc.cluster.local"
