@@ -52,14 +52,14 @@ export const RecommendGroupStateContext = React.createContext();
 //Base_URL
 export const BASE_URL = {
 
-  react: "http://moine-frontend-svc.moine.svc.cluster.local",
-  chatting: "http://chatting-backend-svc.moine.svc.cluster.local",
-  lecture: "http://a21e150499bee4cdbba329ed8a93610c-1594431961.ap-northeast-2.elb.amazonaws.com:8080",
-  group: "http://group-backend-svc.moine.svc.cluster.local",
-  auth: "http://auth-backend-service.moine.svc.cluster.local",
+  react: "http://13.125.32.16:3000",
+  chatting: "http://3.34.172.89:8080",
+  lecture: "http://13.209.29.237:8080",
+  group: "http://43.200.197.190:8080",
+  auth: "http://43.200.156.51:8080",
   // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
-  recommend: "http://recommend-backend-svc.moine.svc.cluster.local",
-  chattingFront: "chatting-frontend-svc.moine.svc.cluster.local"
+  recommend: "http://3.38.49.196:8080",
+  chattingFront: "http://3.36.106.21:3001"
 };
 
 
