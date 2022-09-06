@@ -26,14 +26,14 @@ function GroupSearch() {
         }).catch(error => {
             console.log(error.response)
         });
-            
+
     }
-    
+
     return (
         <div className="group_search">
             <input className="group_searchBar" type="text" onChange={(e)=>{SetKeyword(e.target.value)}}/>
-            <MyButton type = {'default'} text ={'Search'} onClick={() =>submitSearch()}>
-                
+            <MyButton type = {'default'} text ={'검색'} onClick={() =>submitSearch()}>
+
         </MyButton>
         <GroupSearched searchResult = {result}/>
         </div>

@@ -52,20 +52,14 @@ export const RecommendGroupStateContext = React.createContext();
 //Base_URL
 export const BASE_URL = {
 
-  react: "http://moine-front-service.moine.svc.cluster.local:8080",
-  chatting: "http://moine-chatting-backend-service.moine.svc.cluster.local:8080",
-  // chatting: "http://112.149.179.238:8083",
-  // lecture: "http://moine-lecture-backend-service.moine.svc.cluster.local:8080",
-  lecture: "http://192.168.15.209:8082",
-  group: "moine-group-backend-service.moine.svc.cluster.local:8080",
-  // group: "http://112.149.179.238:8083",
-
-  auth: "http://moine-auth-backend-service.moine.svc.cluster.local:8080",
-  // auth: "http://192.168.15.154:8080",
-  mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
-  recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
-  chattingFront: "moine-recommend-backend-service.moine.svc.cluster.local:8080"
-  // recommend: "http://112.149.179.238:8085",
+  react: "http://moine-frontend-svc.moine.svc.cluster.local",
+  chatting: "http://chatting-backend-svc.moine.svc.cluster.local",
+  lecture: "http://lecture-backend-svc.moine.svc.cluster.local",
+  group: "http://group-backend-svc.moine.svc.cluster.local",
+  auth: "http://auth-backend-service.moine.svc.cluster.local:8080",
+  // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
+  recommend: "http://recommend-backend-svc.moine.svc.cluster.local",
+  chattingFront: "http://chatting-frontend-svc.moine.svc.cluster.local"
 };
 
 
@@ -85,7 +79,7 @@ function App() {
   if (!sessionStorage.getItem('user')){
     sessionStorage.setItem('user',JSON.stringify(defaultUsers));
   }
- 
+
   //Lecture
   const [lectureData, setLectureData] = useState([]);
 
@@ -156,7 +150,7 @@ function App() {
   }, []);
 
 
-  
+
   return (
     <RecommendLectureStateContext.Provider value={recommendLectureData}>
     <LectureStateContext.Provider value={lectureData}>
@@ -171,7 +165,7 @@ function App() {
         : null
       }
       {/* <MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/> */}
-      
+
 
       <Routes>
         <Route path = '/' element = {<Default/>} />
@@ -193,8 +187,8 @@ function App() {
         <Route path='/group/gallery/new/:groupId' element={<GalleryNew/>}/>
         <Route path='/group/post/new/:groupId' element={<PostItemNew/>} />
         <Route path='/group/post/edit/:groupId/:postId' element={<PostItemEdit/>} />
-        <Route path='/group/post/:id' element={<Post/>} /> 
-        <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
+        <Route path='/group/post/:id' element={<Post/>} />
+        <Route path='/group/post/:groupId/:postId' element={<PostItem/>} />
         <Route path='/group/post' element={<Post/>} />
         <Route path='/enter/:page/:userId' element={<PageRouter/>}/>
 

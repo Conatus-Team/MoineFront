@@ -24,13 +24,13 @@ function LogIn() {
         let loginSuccess = false;
         axios.post(url,  JSON.stringify(data), {
             headers: {
-                "Content-Type": `application/json`,                
+                "Content-Type": `application/json`,
             },
             })
             .then((res) => {
                 setUserData(res.data);
             console.log(res.data);
-            
+
             // post 안에 있어야 실행 잘 됨
             // userData가 페이지 바뀌기 전에 데이터가 안 들어가는 것 같음
             if (res.data) loginSuccess = true;
@@ -45,17 +45,17 @@ function LogIn() {
             console.log(error.response)
         });
 
-        
-            
+
+
     }
-    
+
     return (
         <div className="LogIn">
-            <p>LogIn</p>
+            <p>로그인</p>
             <p>E-mail: <input className="LogIn_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
-            <p>PW: <input className="LogIn_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
-            <MyButton type = {'default'} text ={'LogIn'} onClick={() =>submit()}>
-          
+            <p>비밀번호: <input className="LogIn_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
+            <MyButton type = {'default'} text ={'로그인'} onClick={() =>submit()}>
+
         </MyButton>
         </div>
     )
