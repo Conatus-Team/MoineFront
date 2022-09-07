@@ -59,7 +59,7 @@ export const BASE_URL = {
   auth: "http://43.200.156.51:8080",
   // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
   recommend: "http://3.38.49.196:8080",
-  chattingFront: "http://3.36.106.21:3001"
+  chattingFront: "http://3.38.165.113:3001"
 };
 
 

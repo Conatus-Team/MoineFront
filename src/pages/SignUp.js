@@ -56,7 +56,7 @@ function SignUp () {
             <p>비밀번호: <input className="SignUp_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
             <p>이름: <input className="SignUp_Name" type="text" onChange={(e)=>{setUserName(e.target.value)}}/> </p>
             <p>닉네임: <input className="SignUp_NickName" type="text" onChange={(e)=>{setUserNickName(e.target.value)}}/> </p>
-            <MyButton type = {'submit'} text ={'SignUp'} >
+            <MyButton type = {'submit'} text ={'회원가입'} onClick={() =>submit()}>
 
         </MyButton>
     </div>
