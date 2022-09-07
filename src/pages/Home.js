@@ -81,6 +81,25 @@ const Home =() =>{
 
     },[]);
 
+  // my hobby 
+  const [userHobbyList, setHobbyList] = useState([]);
+  useEffect(() => {
+      axios.get(`${BASE_URL.group}/recommend/user_hobby/search/findByUserId?userId=${JSON.parse(sessionStorage.getItem('user')).userId}`,{
+          headers: {
+            "Content-Type": `application/json`,
+            "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+          }
+        })
+        .then(response => {
+          const hobbyList2 = response.data._embedded.user_hobby
+          // setRecommendGroupData(response.data)
+          setHobbyList(hobbyList2);
+        }).catch(error => {
+          console.log(error.response)
+          })
+
+  },[]);
+
 
     return(<div className="home">
       <div className="slogen">
@@ -90,7 +109,11 @@ const Home =() =>{
       <div className="hobby">
         <p  className="hobby_p"> 취미 정보</p>
         <div className="my_hobby">
-          // <p>당신의 취미는 </p>
+           <p>당신의 취미는 
+          {userHobbyList.map((it) => (
+            <p>{it.hobbyName}</p>
+            ))} 
+          </p>
 
         </div>
         <div className="recommended_hobby">
