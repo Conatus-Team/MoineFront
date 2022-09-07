@@ -6,7 +6,7 @@ import { BASE_URL } from "../App";
 
 
 function Survey () {
-    alert("survey")
+    // alert("survey")
     //DB hobby
     const [hobbyList, setHobbyList] = useState([]);
     const [hobbyTypeList, setHobbyTypeList] = useState([]);

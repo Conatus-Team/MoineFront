@@ -35,18 +35,18 @@ function SignUp () {
             },
             })
             .then((res) => {
-                alert("signup success");
+                // alert("signup success");
 
                 console.log(res.data);
                 sessionStorage.setItem("signupUserId", res.data.userId);
-                alert(res)
+                // alert(res)
                 navigate('/survey', {replace: true});
         }).catch(error => {
-            alert(error)
+            // alert(error)
             console.log(error.response)
         });
 
-        alert("axios 끝");
+        // alert("axios 끝");
 
     }
 

@@ -96,7 +96,7 @@ const Home =() =>{
         <div className="recommended_hobby">
           <p>당신에게 맞는 취미는
           {recommendHobbyData.map((it) => (
-            <p>{it.category}</p>
+            <p>{it.hobby_name}</p>
           ))} 입니다!
             </p>
 
