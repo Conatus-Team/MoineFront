@@ -521,6 +521,12 @@ height: 50px;
 .lecture_content .lecture_title{
   font-size: 25px;
 }
+.boardType1{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 .gallery_new{
