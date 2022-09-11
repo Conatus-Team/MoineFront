@@ -9,9 +9,10 @@ const Mypage = () => {
             <img src={userThumb}/>
             </div>
             <div className="user_data">
-            <p>{userData.userName}</p>
-            <p>- {userData.userNickname} -</p>
-            <p>{userData.email}</p>
+            <p>이름: {userData.userName}</p>
+            <p>닉네임: {userData.userNickname}</p>
+            <p>이메일: {userData.email}</p>
+
             </div>
 
         </div>
