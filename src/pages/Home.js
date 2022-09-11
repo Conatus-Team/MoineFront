@@ -128,14 +128,14 @@ const Home =() =>{
       </div>
 
 
-      <p className='lecture_title'> Recommend Lecture List</p>
+      <p className='lecture_title'>추천 강의 목록</p>
       <div className="lectureList">
         {recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :recommendLectureList.map((it) => (
             <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
 
-      <p className='group_title'> My Group List</p>
+      <p className='group_title'>가입한 그룹 목록</p>
         <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
