@@ -52,7 +52,7 @@ function SignUp () {
 
     return (<div className="SignUp">
         <p>회원가입</p>
-            <p>EMAIL: <input className="SignUp_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
+            <p>이메일: <input className="SignUp_ID" type="text" onChange={(e)=>{setEmail(e.target.value)}}/> </p>
             <p>비밀번호: <input className="SignUp_Password" type="password" onChange={(e)=>{setPasword(e.target.value)}}/> </p>
             <p>이름: <input className="SignUp_Name" type="text" onChange={(e)=>{setUserName(e.target.value)}}/> </p>
             <p>닉네임: <input className="SignUp_NickName" type="text" onChange={(e)=>{setUserNickName(e.target.value)}}/> </p>
