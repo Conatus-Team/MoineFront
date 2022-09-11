@@ -79,7 +79,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
             </section>
             {/* group name */}
             <section>
-                <h4>group name </h4>
+                <h4>모임 이름 </h4>
             <div ><input
             className="post_title"
             value={name} onChange = {(e) => setGroupName(e.target.value)}/>
@@ -88,7 +88,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
 
             {/* thumbnail */}
             <section>
-                <h4>thumbnail </h4>
+                <h4>썸네일 </h4>
             <div ><input
             className="post_title"
             value={thumbnail} onChange = {(e) => setThumbnail(e.target.value)}/>
@@ -98,7 +98,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
 
             {/* title */}
             <section>
-                <h4>title </h4>
+                <h4>모임 설명</h4>
             <div ><input
             className="post_title"
             value={explanation} onChange = {(e) => setTitle(e.target.value)}/>
