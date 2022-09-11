@@ -101,7 +101,21 @@ function Survey () {
             <p>취미 카테고리: </p>
             <div className="hobby_content2">
             {hobbyTypeList.map((it) =>(
-                <div className="hobbyList"><input className="Survey_hobby_type" type="checkbox" name="hobbyType" value={it.id} onChange={(e)=>{setHobbyType(hobbyType => [...hobbyType, parseInt(e.target.value)])}}/><p>{it.name} </p></div>
+                
+                <div className="hobbyList">
+                    <input className="Survey_hobby_type" type="checkbox" name="hobbyType" value={it.id} 
+                    onChange={(e)=>{
+                        const idx = hobbyType.indexOf(parseInt(e.target.value));
+                        // already exist
+                        if (idx !== -1){
+                            // delete item witch matches idx
+                            hobbyType.splice(idx, 1)
+                            setHobbyType([...hobbyType])
+                            return;
+                        }
+                        setHobbyType(hobbyType => [...hobbyType, parseInt(e.target.value)])}}/>
+                        <p>{it.name} </p>
+                </div>
             ))}
             </div>
 
