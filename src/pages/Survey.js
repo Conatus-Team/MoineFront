@@ -50,7 +50,12 @@ function Survey () {
             },
             })
             .then((res) => {
-                setHobbyList(res.data._embedded.hobby);
+                const data = res.data._embedded.hobby;
+                data.sort(function (a, b) {
+                    return a["name"].localeCompare(b["name"]);
+                });
+                setHobbyList(data);
+                
 
         }).catch(error => {
             console.log(error.response)
@@ -65,7 +70,11 @@ function Survey () {
             },
             })
             .then((res) => {
-                setHobbyTypeList(res.data._embedded.hobby_type);
+                const data = res.data._embedded.hobby_type;
+                data.sort(function (a, b) {
+                    return a["name"].localeCompare(b["name"]);
+                });
+                setHobbyTypeList(data);
 
         }).catch(error => {
             console.log(error.response)
