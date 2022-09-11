@@ -595,6 +595,13 @@ height: 50px;
 
 
 .Survey{
+  /* display: grid;  
+  overflow: auto;
+  white-space: normal;
+  justify-content: center; */
+  /* align-items: center; */
+  /* justify-items: center; */
+  margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 40px;
   font-size: 30px;
