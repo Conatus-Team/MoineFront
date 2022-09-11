@@ -644,6 +644,23 @@ height: 50px;
   justify-content: center;
   margin: 20px;
 }
+
+.hobby_content2{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(16%, auto));
+}
+
+.hobby_content1{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(16%, auto));
+  /* grid-auto-flow:column; */
+  overflow: auto;
+  white-space: normal;
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+}
+
 .hobbyList{
   /* display: flex; */
   font-size: 20px;
