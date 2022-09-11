@@ -75,9 +75,9 @@ function Survey () {
 
     return (<div className="Survey">
 
-        <p>Survery</p>
-            <p>Birth: <input className="Survey_Birth" type="date" onChange={(e)=>{setBirth(e.target.value)}}/> </p>
-            <p>Location: </p>
+        <p>설문조사</p>
+            <p>생일: <input className="Survey_Birth" type="date" onChange={(e)=>{setBirth(e.target.value)}}/> </p>
+            <p>지역: </p>
                 <select name="location" onChange={(e)=>{setLocation(e.target.value)}}>
                 <option value="강남구" selected>강남구</option>
                 <option value="강동구">강동구</option>
