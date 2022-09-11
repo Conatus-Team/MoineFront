@@ -109,7 +109,11 @@ function Survey () {
             <p>취미: </p>
             <div className="hobby_content1">
             {hobbyList.map((it) =>(
-                <div className="hobbyList"><input className="Survey_hobby" type="checkbox" name="hobby" value={it.id} onChange={(e)=>{setHobby(hobby => [...hobby, parseInt(e.target.value)])}}/><p>{it.name} </p></div>
+                hobbyType.includes(it.type) ? 
+                <div className="hobbyList"><input className="Survey_hobby" type="checkbox" name="hobby" value={it.id} 
+                onChange={(e)=>{setHobby(hobby => [...hobby, parseInt(e.target.value)])}}/>
+                <p>{it.name} </p>
+                </div> : null
             ))}
             </div>
 
