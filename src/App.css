@@ -93,6 +93,13 @@ body {
 
 }
 
+.user_image{
+  display:grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
 
 /* My Button */
 .MyButton{
