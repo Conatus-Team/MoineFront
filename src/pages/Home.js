@@ -82,9 +82,9 @@ const Home =() =>{
     },[]);
 
   // my hobby 
-  const [userHobbyList, setHobbyList] = useState([]);
+  const [userHobbyList, setUserHobbyList] = useState([]);
   useEffect(() => {
-      axios.get(`${BASE_URL.group}/recommend/user_hobby/search/findByUserId?userId=${JSON.parse(sessionStorage.getItem('user')).userId}`,{
+      axios.get(`${BASE_URL.recommend}/recommend/user_hobby/search/findByUserId?userId=${JSON.parse(sessionStorage.getItem('user')).userId}`,{
           headers: {
             "Content-Type": `application/json`,
             "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
@@ -93,7 +93,7 @@ const Home =() =>{
         .then(response => {
           const hobbyList2 = response.data._embedded.user_hobby
           // setRecommendGroupData(response.data)
-          setHobbyList(hobbyList2);
+          setUserHobbyList(hobbyList2);
         }).catch(error => {
           console.log(error.response)
           })
@@ -111,16 +111,16 @@ const Home =() =>{
         <div className="my_hobby">
            <p>당신의 취미는 
           {userHobbyList.map((it) => (
-            <p>{it.hobbyName}</p>
-            ))} 
+              " '"+it.hobbyName+"'"
+            ))} 입니다.
           </p>
 
         </div>
         <div className="recommended_hobby">
-          <p>당신에게 맞는 취미는
+          <p>당신에게 맞는 취미는 
           {recommendHobbyData.map((it) => (
-            <p>{it.hobby_name}</p>
-          ))} 입니다!
+             " '"+it.hobby_name+"'"
+          ))} 입니다.
             </p>
 
         </div>
@@ -130,12 +130,12 @@ const Home =() =>{
 
       <p className='lecture_title'>추천 강의 목록</p>
       <div className="lectureList">
-        {recommendLectureList.length < 1 ? <p>please expect other recommendation</p> :recommendLectureList.map((it) => (
+        {recommendLectureList.length < 1 ? <p>내일의 추천을 기대해주세요</p> :recommendLectureList.map((it) => (
             <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
 
-      <p className='group_title'>가입한 그룹 목록</p>
+      <p className='group_title'>내 그룹 목록</p>
         <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
