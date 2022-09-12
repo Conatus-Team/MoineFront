@@ -34,6 +34,7 @@ const Home =() =>{
     // useEffect(() => {setRecommendLectureList(recommendLectureListContext)}, []);
 
     const [recommendLectureList, setRecommendLectureList] = useState([]);
+    const [likedLectureList, setLikedLectureList] = useState([]);
     useEffect(()=>{
       axios.get(`${BASE_URL.lecture}/lecture`,{
         headers: {
@@ -42,9 +43,9 @@ const Home =() =>{
         }
       })
       .then(response => {
-        const likedLectureList = response.data.likeList;
+        const likedLectureListTmp = response.data.likeList;
         const receivedRrecommendLectureList = response.data.recommendList;
-        const likeIdList = likedLectureList.map((it)=> {
+        const likeIdList = likedLectureListTmp.map((it)=> {
           // return like id list
           return it.lectureCrawling.lectureId
         })
@@ -61,6 +62,13 @@ const Home =() =>{
             return a.lectureCrawling["lectureName"].localeCompare(b.lectureCrawling["lectureName"]);
         });
 
+        likedLectureListTmp.map((it) =>{
+          it.lectureCrawling.like = true
+        })
+        likedLectureListTmp.sort(function (a, b) {
+          return a.lectureCrawling["lectureName"].localeCompare(b.lectureCrawling["lectureName"]);
+      });
+        setLikedLectureList(likedLectureListTmp);
         setRecommendLectureList(tmpRrecommendLectureList);
       }).catch(error => {
         console.log(error.response)
@@ -145,9 +153,9 @@ const Home =() =>{
       </div>
 
 
-      <p className='lecture_title'>추천 강의 목록</p>
+      <p className='lecture_title'>내가 찜한 강의 목록</p>
       <div className="lectureList">
-        {recommendLectureList.length < 1 ? <p>내일의 추천을 기대해주세요</p> :recommendLectureList.map((it) => (
+        {likedLectureList.length < 1 ? <p>강의를 찜해주세요</p> :likedLectureList.map((it) => (
             <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
