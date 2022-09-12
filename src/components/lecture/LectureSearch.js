@@ -47,6 +47,9 @@ function LectureSearch() {
             setLectureLikeList(lectureLikeListTmp);
             console.log("resultTmp")
             console.log(resultTmp)
+            resultTmp.sort(function (a, b) {
+                return a["lectureName"].localeCompare(b["lectureName"]);
+            });
             setResult(LikeTest(resultTmp, lectureLikeListTmp));
             console.log(result)
         }).catch(error => {

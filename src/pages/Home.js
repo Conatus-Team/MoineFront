@@ -52,6 +52,11 @@ const Home =() =>{
             tmpRrecommendLectureList.push(it)
           }
         });
+
+        tmpRrecommendLectureList.sort(function (a, b) {
+            return a.lectureCrawling["lectureName"].localeCompare(b.lectureCrawling["lectureName"]);
+        });
+
         setRecommendLectureList(tmpRrecommendLectureList);
       }).catch(error => {
         console.log(error.response)

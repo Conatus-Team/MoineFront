@@ -21,7 +21,11 @@ const Group =() =>{
           })
           .then(response => {
             const groupList2 = response.data
-            // setRecommendGroupData(response.data)
+            
+            groupList2.sort(function (a, b) {
+              return a["name"].localeCompare(b["name"]);
+              });
+
             setGroupData(groupList2);
           }).catch(error => {
             console.log(error.response)
@@ -42,6 +46,11 @@ const Group =() =>{
           .then(response => {
             const recommendGroupList2 = response.data
             // setRecommendGroupData(response.data)
+
+            recommendGroupList2.sort(function (a, b) {
+              return a["name"].localeCompare(b["name"]);
+              });
+
             setRecommendData(recommendGroupList2);
           }).catch(error => {
             console.log(error.response)
