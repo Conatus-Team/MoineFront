@@ -7,16 +7,14 @@ import LectureSearched from "./LectureSearched";
 import { BASE_URL } from "../../App";
 
 const LikeTest = (lectures, lectureLikeList) =>{
-    console.log(`like test: lectures - ${lectures}`)
-    console.log(lectures)
-    console.log(lectureLikeList)
+
     lectures.map((it)=> it.like = false)
 
     lectures.map((it) => {
-        console.log(`${it.lectureId} map 들어옴!`)
+        
         if(lectureLikeList.includes(it.lectureId)){
             it.like = true;
-            console.log(`${it.lectureId} true로 바뀜!`)
+            
         }
 
 })
