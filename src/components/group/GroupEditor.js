@@ -58,6 +58,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
         }
 
         navigate(`/group`, {replace: true});
+        window.location.reload();
     };
 
     useEffect(()=>{
