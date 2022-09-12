@@ -19,7 +19,11 @@ const Home =() =>{
       }
     })
     .then(response => {
-      setRecommendHobbyData(response.data._embedded.recommended_hobby);
+      const data = response.data._embedded.recommended_hobby
+      data.sort(function (a, b) {
+        return a["hobby_name"].localeCompare(b["hobby_name"]);
+      });
+      setRecommendHobbyData(data);
     }).catch(error => {
       console.log(error.response)
   });
@@ -78,7 +82,12 @@ const Home =() =>{
           })
           .then(response => {
             const groupList2 = response.data
-            // setRecommendGroupData(response.data)
+
+            
+            groupList2.sort(function (a, b) {
+              return a["name"].localeCompare(b["name"]);
+              });
+
             setGroupList(groupList2);
           }).catch(error => {
             console.log(error.response)
@@ -97,6 +106,9 @@ const Home =() =>{
         })
         .then(response => {
           const hobbyList2 = response.data._embedded.user_hobby
+          hobbyList2.sort(function (a, b) {
+            return a["hobbyName"].localeCompare(b["hobbyName"]);
+          });
           // setRecommendGroupData(response.data)
           setUserHobbyList(hobbyList2);
         }).catch(error => {
