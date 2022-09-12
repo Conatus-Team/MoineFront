@@ -6,70 +6,58 @@ import LectureSearch from './LectureSearch';
 import axios from 'axios';
 import { BASE_URL } from '../../App';
 
-
-const LikeTest = (lectures, lectureLikeList) =>{
-
-  lectures.map((it)=> it.like = false)
-
-  lectures.map((it) => (
-    lectureLikeList.map((i)=> {if(it.id === i) it.like = true})
- ))
- return lectures;
-}
-
 const LectureList= ({lectureList, recommendLectureList})=> {
 
-    // const navigate = useNavigate();
+    const likeIdList = lectureList.map((it)=> {
+      // make like key
+      it.lectureCrawling.like = true
 
-    lectureList.map((it)=> it.like = true)
+      // return like id list
+      return it.lectureCrawling.lectureId
+    })
 
-    const [lectureLikeList, setLectureLikeList] = useState([]);
-  
-    useEffect(()=>{
-      axios.get(`${BASE_URL.lecture}/lecture`,{
-        headers: {
-          "Content-Type": `application/json`,
-          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-      },
-      })
-      .then(response => {
-        setLectureLikeList(response.likeId);
+    // get not liked RrecommendLectureList
+    const tmpRrecommendLectureList = []
+    recommendLectureList.map((it)=> {
+      it.lectureCrawling.like = false
+      if (!likeIdList.includes(it.lectureCrawling.lectureId)){
+        tmpRrecommendLectureList.push(it)
+      }
 
-        recommendLectureList = LikeTest(recommendLectureList, lectureLikeList);
-
-      }).catch(error => {
-        console.log(error.response)
     });
-    }, [recommendLectureList]);
 
+    recommendLectureList = tmpRrecommendLectureList;
+    const [lectureLikeList, setLectureLikeList] = useState([]);
 
     return (
       <div className="LectrueList">
         <LectureSearch/>
 
-        <p className='lecture_title'> Recommend Lecture List</p>
+        <p className='lecture_title'> 추천 강의 목록</p>
         <div className="lectureList">
-             {recommendLectureList.map((it) => (
-                <LectureListTemp key = {it.lectureId} {...it}/>
+             {
+              recommendLectureList.length < 1 ? <p>내일의 추천을 기대해주세요</p> :
+             recommendLectureList.map((it) => (
+                <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling} />
              ))}
         </div>
 
 
 
-        <p className='lecture_title'> My Lecture List</p>
+        <p className='lecture_title'>찜한 강의 목록</p>
         <div className="lectureList">
         {lectureList.map((it) =>(
-          <LectureListTemp key = {it.lectureId} {...it}/>
+          <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling}/>
           ))}
-    
+
         </div>
       </div>
     );
-    
+
   };
 LectureList.defaultProps = {
     lectureList: [],
 }
 
-  
+
 export default LectureList;

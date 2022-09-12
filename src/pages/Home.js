@@ -25,8 +25,48 @@ const Home =() =>{
   });
   }, []);
 
-    const recommendLectureList = useContext(RecommendLectureStateContext);
+    // const recommendLectureListContext = useContext(RecommendLectureStateContext);
     // const [recommendLectureList, setRecommendLectureList] = useState([]);
+    // useEffect(() => {setRecommendLectureList(recommendLectureListContext)}, []);
+
+    const [recommendLectureList, setRecommendLectureList] = useState([]);
+    useEffect(()=>{
+      axios.get(`${BASE_URL.lecture}/lecture`,{
+        headers: {
+          "Content-Type": `application/json`,
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        }
+      })
+      .then(response => {
+        const likedLectureList = response.data.likeList;
+        const receivedRrecommendLectureList = response.data.recommendList;
+        const likeIdList = likedLectureList.map((it)=> {
+          // return like id list
+          return it.lectureCrawling.lectureId
+        })
+        // get not liked RrecommendLectureList
+        const tmpRrecommendLectureList = []
+        receivedRrecommendLectureList.map((it)=> {
+          it.lectureCrawling.like = false
+          if (!likeIdList.includes(it.lectureCrawling.lectureId)){
+            tmpRrecommendLectureList.push(it)
+          }
+        });
+
+        tmpRrecommendLectureList.sort(function (a, b) {
+            return a.lectureCrawling["lectureName"].localeCompare(b.lectureCrawling["lectureName"]);
+        });
+
+        setRecommendLectureList(tmpRrecommendLectureList);
+      }).catch(error => {
+        console.log(error.response)
+    });
+    }, []);
+
+
+
+    console.log('lecturedata',recommendLectureList);
+
     // my group list 새로고침
     const [groupList, setGroupList] = useState([]);
     useEffect(() => {
@@ -43,8 +83,27 @@ const Home =() =>{
           }).catch(error => {
             console.log(error.response)
             })
-        
+
     },[]);
+
+  // my hobby 
+  const [userHobbyList, setUserHobbyList] = useState([]);
+  useEffect(() => {
+      axios.get(`${BASE_URL.recommend}/recommend/user_hobby/search/findByUserId?userId=${JSON.parse(sessionStorage.getItem('user')).userId}`,{
+          headers: {
+            "Content-Type": `application/json`,
+            "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+          }
+        })
+        .then(response => {
+          const hobbyList2 = response.data._embedded.user_hobby
+          // setRecommendGroupData(response.data)
+          setUserHobbyList(hobbyList2);
+        }).catch(error => {
+          console.log(error.response)
+          })
+
+  },[]);
 
 
     return(<div className="home">
@@ -53,36 +112,41 @@ const Home =() =>{
       </div>
 
       <div className="hobby">
-        <p  className="hobby_p"> Result and Recommend</p>
+        <p  className="hobby_p"> 취미 정보</p>
         <div className="my_hobby">
-          <p>your hobby is ... </p>
+           <p>당신의 취미는 
+          {userHobbyList.map((it) => (
+              " '"+it.hobbyName+"'"
+            ))} 입니다.
+          </p>
 
         </div>
         <div className="recommended_hobby">
-          <p>I recommend you 
+          <p>당신에게 맞는 취미는 
           {recommendHobbyData.map((it) => (
-            <p>{it.category}</p>
-          ))}
+             " '"+it.hobby_name+"'"
+          ))} 입니다.
             </p>
 
         </div>
 
       </div>
 
-      <p className='lecture_title'> Recommend Lecture List</p>
+
+      <p className='lecture_title'>추천 강의 목록</p>
       <div className="lectureList">
-        {recommendLectureList.map((it) => (
-            <LectureListTemp key = {it.id} {...it}/>
+        {recommendLectureList.length < 1 ? <p>내일의 추천을 기대해주세요</p> :recommendLectureList.map((it) => (
+            <LectureListTemp key = {it.lectureCrawling.id} {...it.lectureCrawling}/>
         ))}
       </div>
 
-      <p className='group_title'> My Group List</p>
+      <p className='group_title'>내 모임 목록</p>
         <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
           ))}
         </div>
-      
+
     </div>)
 
 }

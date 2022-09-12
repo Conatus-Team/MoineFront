@@ -29,9 +29,9 @@ const PostItem = () => {
             console.log(error.response)
         });
     }, []);
-    
 
-    
+
+
     return (<div className="post_item">
         <MyGroup id={parseInt(groupId)}/>
             <div className="post_item_header">
@@ -40,16 +40,16 @@ const PostItem = () => {
                 <p className="post_item_date">{postData.date}</p>
                 </div>
                 <div className="post_item_button">
-            <MyButton type="defalut" text="edit" onClick={()=>navigate(`/group/post/edit/${groupId}/${postId}`)}/>
+            <MyButton type="defalut" text="수정" onClick={()=>navigate(`/group/post/edit/${groupId}/${postId}`)}/>
             </div>
             </div>
             <div className="post_item_detail">
             <p className="post_item_title">{postData.title}</p>
             <p className="post_item_content">{postData.content}</p>
             </div>
-           
+
         </div>
-    
+
     );
 };
 

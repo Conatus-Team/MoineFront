@@ -14,17 +14,18 @@ const getStringDate = (date) => {
 const PostEditor =({isEdit, originData, groupId}) => {
     const navigate = useNavigate();
     const contentRef = useRef();
-  
+
     const [date, setDate] = useState(getStringDate(new Date()));
     const [content, setContent] = useState("");
-    const [author, setAuthor] = useState("author6");
-    const [title, setTitle] = useState("title6");
+    const author = JSON.parse(sessionStorage.getItem('user')).userNickname;
+    // const [author, setAuthor] = useState(`${sessionStorage.getItem("user").userNickname}`);
+    const [title, setTitle] = useState("title");
     //const [groupName, setGroupName] =useState(originData.groupName);
     let id=0;
 
     if(isEdit) id = originData.id;
 
-    
+
     let url="";
 
 
@@ -33,20 +34,21 @@ const PostEditor =({isEdit, originData, groupId}) => {
             contentRef.current.focus();
             return;
         }
-        if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
-            
+        if(window.confirm(isEdit? "게시글을 수정할까요?":"게시글을 생성할까요?")){
+
             if(!isEdit){
                 const createData = {
-                    date: date, 
+                    date: date,
                     author: author,
-                    content: content, 
-                    title: title, 
-                    groupId: groupId, 
-                    //groupName: groupName,
+                    content: content,
+                    title: title,
+                    groupId: groupId,
+                    groupName: "", // do not delete
+                    userId: 0 // do not delete
                 }
                 url = `${BASE_URL.group}/group/post/create`;
-                console.log('createData', createData, url);
-                axios.post(url,  JSON.stringify(createData), {
+                // console.log('createData', createData, url);
+                axios.post(url,  (createData), {
                     headers: {
                         "Content-Type": `application/json`,
                         "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
@@ -58,15 +60,15 @@ const PostEditor =({isEdit, originData, groupId}) => {
                         console.log(error.response)
                     });
             }
-        
+
             else {
                 const updateData = {
                     id: parseInt(originData.id),
-                    date: date, 
+                    date: date,
                     author: author,
-                    content: content, 
-                    title: title, 
-                    groupId: groupId, 
+                    content: content,
+                    title: title,
+                    groupId: groupId,
                     //groupName: groupName,
                 }
                 url = `${BASE_URL.group}/post/${originData.id}`;
@@ -83,36 +85,31 @@ const PostEditor =({isEdit, originData, groupId}) => {
                     });
             }
         }
-        
+
         navigate(`/group/post/${groupId}`, {replace: true});
     };
 
-    
+
     useEffect(()=>{
         if(isEdit){
-            //setDate(getStringDate(new Date(parseInt(originData.date))));
             setDate(originData.createdTime);
-            setAuthor(originData.author);
             setContent(originData.content);
             setTitle(originData.title);
-            //setGroupName(originData.groupName);
         }
     },id);
-    
+
 
 
     return (<div className="PostEditor">
         <MyGroup id={parseInt(groupId)}/>
-        
+
         <div className="post_new">
             <section className="post_editor_info">
-            {/* group Name */}
-            {/*<p>Group Name: {groupName}</p>*/}
-               
-            <p>User Name: {author}</p>
-           
+
+            <p>작성자: {author}</p>
+
             {/* date */}
-            <p>date: {date}  </p>
+            <p>날짜: {date}  </p>
 
             <div>
             {/*<input value={date} onChange = {(e) => setDate(e.target.value)} type="date"/>*/}
@@ -121,34 +118,34 @@ const PostEditor =({isEdit, originData, groupId}) => {
 
             {/* title */}
             <section>
-                <h4>title </h4>
+                <h4>제목 </h4>
             <div ><input
             className="post_title"
             value={title} onChange = {(e) => setTitle(e.target.value)}/>
             </div>
             </section>
-            
+
             {/* content */}
             <section>
-            <h4>content </h4>
+            <h4>내용 </h4>
             <div className="post_content">
-            <textarea 
+            <textarea
             placeholder="please enter the content"
-            ref={contentRef} 
+            ref={contentRef}
             value = {content}
-            onChange = {(e) => setContent(e.target.value)}/> 
+            onChange = {(e) => setContent(e.target.value)}/>
             </div>
             </section>
 
 
             <section>
                 <div className="control_box">
-                    <MyButton text ={"cancel"} type={"negative"}onClick={()=> navigate(-1)}/>
-                    <MyButton text ={"submit"} type={"positive"} onClick={handleSubmit}/>
+                    <MyButton text ={"취소"} type={"negative"}onClick={()=> navigate(-1)}/>
+                    <MyButton text ={"제출"} type={"positive"} onClick={handleSubmit}/>
                 </div>
             </section>
         </div>
-        
+
     </div>
     );
 };

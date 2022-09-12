@@ -4,48 +4,80 @@ import LikeButton from "../LikeButton";
 import axios from "axios";
 import { BASE_URL } from "../../App";
 
+const LikeTest = (lectures, lectureLikeList) =>{
+  // console.log(`like test: lectures - ${lectures}`)
+  // console.log(lectures)
+  // console.log(lectureLikeList)
+  lectures.map((it)=> it.like = false)
+
+  lectures.map((it) => {
+      console.log(`${it.lectureId} map 들어옴!`)
+      if(lectureLikeList.includes(it.lectureId)){
+          it.like = true;
+          console.log(`${it.lectureId} true로 바뀜!`)
+      }
+
+})
+
+ return lectures;
+}
+
 const LectureListTemp = ({lectureId, lectureName, imagePath, like}) => {
     const env = process.env;
     env.PUBLIC_URL = env.PUBLIC_URL || "";
     const navigate = useNavigate();
     const [like_data, setLike] = useState(false);
+    // console.log(`lecture list temp: ${lectureId}`)
+    // const lectureId = id
     const likeData = {
       //userId: JSON.parse(sessionStorage.getItem('user')).userId,
       lectureId: lectureId,
     }
-    if(like===true) setLike(true)
-    else setLike(false)
 
-    // useEffect(() => {
-    //   let url_like = `${BASE_URL.lecture}/lecture/like`;
-    //   axios.get(url_like,{
-    //     headers: {
-    //       "Content-Type": `application/json`,
-    //       "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
-    //     }
-    //   })
-    //     .then(response => {
-    //       if (response.like === 'liked') setLike(true);
-    //   }).catch(error => {
-    //     console.log(error.response)
-    // });
-    //   }, [like, setLike]);
+    useEffect(()=>{
+      if(like===true) setLike(true)
+      else setLike(false)
+    }, []);
 
-   
-    const toggleLike =(e) => {
+
+    const toggleLike =() => {
+      console.log(`toggle like to: ${!like_data} lectureId: ${lectureId}`)
+
+
+
       let url_liked = `${BASE_URL.lecture}/lecture/like/${lectureId}`;
+      // true로 바꾸기
+      if (like_data === false) {
+
       axios.post(url_liked,  null, {
         headers:{
           "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
         },
       }
       ).then((res)=>{
-          setLike(!like_data);
+        console.log(res)
+        console.log("별표시 채워요")
+        setLike(!like_data);
+          // setLike(!like_data);
+      }).catch(error => {
+        console.log(error.response)
+    });}else{ //like를 false로 바꾸기
+      axios.delete(url_liked, {
+        headers:{
+          "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
+        },
+        data:{}
+      }
+      ).then((res)=>{
+        console.log(res)
+        console.log("별표시 없애기")
+        setLike(!like_data);
       }).catch(error => {
         console.log(error.response)
     });
+    }
        // [POST] ???? ???? ?? -> DB ??
-      
+
     }
 
 return (

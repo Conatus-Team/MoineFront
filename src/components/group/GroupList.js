@@ -12,16 +12,16 @@ const GroupList= ({groupList, recommendGroupList})=> {
 
     return (
       <div className="GroupList">
-        <GroupSearch/>     
+        <GroupSearch/>
 
-        <p className='group_title'> Recommend Group List</p>
+        <p className='group_title'> 추천 모임 목록</p>
         <div className='groupList'>
              {recommendGroupList.map((it) => (
                 <GroupListTemp key = {it.id} {...it}/>
              ))}
 
         </div>
-        <p className='group_title'> My Group List</p>
+        <p className='group_title'> 내 모임 목록</p>
 
 
 
@@ -32,19 +32,19 @@ const GroupList= ({groupList, recommendGroupList})=> {
 
 
           <div className="group_list_new">
-          <MyButton  text="new" type="default" onClick={()=> navigate("./new")}></MyButton>   
+          <MyButton  text="새 모임" type="default" onClick={()=> navigate("./new")}></MyButton>
 
           </div>
-          
-    
+
+
         </div>
       </div>
     );
-    
+
   };
 GroupList.defaultProps = {
     groupList: [],
 }
 
-  
+
 export default GroupList;

@@ -21,7 +21,7 @@ const MyHeader = ({head_Home, head_lecture, head_group, head_mypage, head_chatti
         <div className="head_chatting" >
             <a href={`${BASE_URL.chattingFront}/enter/${JSON.parse(sessionStorage.getItem('user')).userId}`}>{head_chatting}</a>
         </div>
-        
+
          </header>
 }
 

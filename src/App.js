@@ -52,20 +52,14 @@ export const RecommendGroupStateContext = React.createContext();
 //Base_URL
 export const BASE_URL = {
 
-  react: "http://moine-front-service.moine.svc.cluster.local:8080",
-  chatting: "http://moine-chatting-backend-service.moine.svc.cluster.local:8080",
-  // chatting: "http://112.149.179.238:8083",
-  // lecture: "http://moine-lecture-backend-service.moine.svc.cluster.local:8080",
-  lecture: "http://192.168.15.209:8082",
-  group: "moine-group-backend-service.moine.svc.cluster.local:8080",
-  // group: "http://112.149.179.238:8083",
-
-  auth: "http://moine-auth-backend-service.moine.svc.cluster.local:8080",
-  // auth: "http://192.168.15.154:8080",
-  mypage: "http://moine-mypage-backend-service.moine.svc.cluster.local:8080",
-  recommend: "moine-recommend-backend-service.moine.svc.cluster.local:8080",
-  chattingFront: "http://localhost:3001",
-  // recommend: "http://112.149.179.238:8085",
+  react: "http://13.125.32.16:3000",
+  chatting: "http://3.34.172.89:8080",
+  lecture: "http://13.209.29.237:8080",
+  group: "http://43.200.197.190:8080",
+  auth: "http://43.200.156.51:8080",
+  // mypage: "http://lecture-backend-svc.moine.svc.cluster.local",
+  recommend: "http://3.38.49.196:8080",
+  chattingFront: "http://3.38.165.113:3001"
 };
 
 
@@ -76,7 +70,7 @@ function App() {
     "Authorization": 0,
   }
   const defaultUsers = {
-      userId: 1,
+      userId: 0,
       userName: "Lee Hyunsun",
       email: "sunnylee7@sookmyung.ac.kr",
       userNickname: "Sunny"
@@ -85,7 +79,7 @@ function App() {
   if (!sessionStorage.getItem('user')){
     sessionStorage.setItem('user',JSON.stringify(defaultUsers));
   }
- 
+
   //Lecture
   const [lectureData, setLectureData] = useState([]);
 
@@ -97,7 +91,9 @@ function App() {
     },
     })
     .then(response => {
-      setLectureData(response.data);
+      // console.log(response)
+      // setLectureData(response.data);
+      setLectureData(response.data.likeList);
     }).catch(error => {
       console.log(error.response)
   });
@@ -112,7 +108,7 @@ function App() {
       }
     })
     .then(response => {
-      setRecommendLectureData(response.data);
+      setRecommendLectureData(response.data.recommendList);
     }).catch(error => {
       console.log(error.response)
   });
@@ -155,7 +151,7 @@ function App() {
   }, []);
 
 
-  
+
   return (
     <RecommendLectureStateContext.Provider value={recommendLectureData}>
     <LectureStateContext.Provider value={lectureData}>
@@ -166,11 +162,11 @@ function App() {
       {/*     <div key = {userData.id} className="App"> */}
       {
          JSON.parse(sessionStorage.getItem('user')).userId !== 0
-        ?<MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/>
+        ?<MyHeader head_Home={"홈"} head_lecture={"강의"} head_group ={"모임"} head_chatting={"채팅"} head_mypage ={"내 정보"}/>
         : null
       }
       {/* <MyHeader head_Home={"Home"} head_lecture={"lecture"} head_group ={"Group"} head_chatting={"Chatting"} head_mypage ={"MyPage"}/> */}
-      
+
 
       <Routes>
         <Route path = '/' element = {<Default/>} />
@@ -192,8 +188,8 @@ function App() {
         <Route path='/group/gallery/new/:groupId' element={<GalleryNew/>}/>
         <Route path='/group/post/new/:groupId' element={<PostItemNew/>} />
         <Route path='/group/post/edit/:groupId/:postId' element={<PostItemEdit/>} />
-        <Route path='/group/post/:id' element={<Post/>} /> 
-        <Route path='/group/post/:groupId/:postId' element={<PostItem/>} /> 
+        <Route path='/group/post/:id' element={<Post/>} />
+        <Route path='/group/post/:groupId/:postId' element={<PostItem/>} />
         <Route path='/group/post' element={<Post/>} />
         <Route path='/enter/:page/:userId' element={<PageRouter/>}/>
 

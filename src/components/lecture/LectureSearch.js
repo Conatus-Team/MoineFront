@@ -6,13 +6,30 @@ import axios from "axios";
 import LectureSearched from "./LectureSearched";
 import { BASE_URL } from "../../App";
 
+const LikeTest = (lectures, lectureLikeList) =>{
+
+    lectures.map((it)=> it.like = false)
+
+    lectures.map((it) => {
+        
+        if(lectureLikeList.includes(it.lectureId)){
+            it.like = true;
+            
+        }
+
+})
+
+   return lectures;
+  }
+
 function LectureSearch() {
     const [keyword, SetKeyword] = useState("");
-    const [result, setResult] = useState([]);
-        
+    let [result, setResult] = useState([]);
+    const [lectureLikeList, setLectureLikeList] = useState([]);
+
 
     const submitSearch = (e) =>{
-      
+
         // useEffect(() => {
         let url = `${BASE_URL.lecture}/lecture/search?keyword=${keyword}`;
         axios.post(url, null, {
@@ -20,21 +37,31 @@ function LectureSearch() {
                 "Content-Type": `application/json`,
                 "Authorization" : JSON.parse(sessionStorage.getItem('user')).userId,
             },
-            })
-            .then((res) => {
+        }).then((res) => {
             console.log(res.data);
-            setResult(res.data);
+            const resultTmp = res.data.data;
+            const lectureLikeListTmp = res.data.likeId;
+            // setResult(resultTmp);
+            setLectureLikeList(lectureLikeListTmp);
+            console.log("resultTmp")
+            console.log(resultTmp)
+            resultTmp.sort(function (a, b) {
+                return a["lectureName"].localeCompare(b["lectureName"]);
+            });
+            setResult(LikeTest(resultTmp, lectureLikeListTmp));
+            console.log(result)
         }).catch(error => {
-            console.log(error.response)
+            console.log("에러")
+            console.log(error)
         });
     // }, []);
         console.log('result',result);
-            
+
     }
     return (
         <div className="lecture_search">
             <input className="lecture_searchBar" type="text" onChange={(e)=>{SetKeyword(e.target.value)}}/>
-            <MyButton type = {'default'} text ={'Search'} onClick={(e) =>submitSearch()}>
+            <MyButton type = {'default'} text ={'검색'} onClick={(e) =>submitSearch()}>
             </MyButton>
             <LectureSearched searchResult = {result}/>
         </div>

@@ -19,7 +19,7 @@ const Post = () => {
                   }
             })
             .then(response => {
-                setPostData(response.data);
+                setPostData(response.data.reverse());
             }).catch(error => {
                 console.log(error.response)
             });
@@ -28,7 +28,7 @@ const Post = () => {
     return (
         <div post>
             <MyGroup id={id}/>
-            <PostList postList = {postData}/>       
+            <PostList postList = {postData}/>
         </div>
     )
 };
