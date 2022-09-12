@@ -135,7 +135,7 @@ const Home =() =>{
         ))}
       </div>
 
-      <p className='group_title'>내 그룹 목록</p>
+      <p className='group_title'>내 모임 목록</p>
         <div className="groupList">
           {groupList.map((it) => (
             <GroupListTemp key = {it.id} {...it}/>
