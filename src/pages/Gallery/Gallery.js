@@ -32,7 +32,7 @@ function Gallery(){
         <div>
             <MyGroup id={parseInt(groupId)}/>
             <div className='gallery_new'>
-                <MyButton type= "positive" text="New" onClick={()=> navigate(`/group/gallery/new/${groupId}`)}/>
+                <MyButton type= "positive" text="올리기" onClick={()=> navigate(`/group/gallery/new/${groupId}`)}/>
             </div>
              <ImageGallery items={images} />
 
