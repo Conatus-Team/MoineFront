@@ -134,7 +134,19 @@ function Survey () {
             {hobbyList.map((it) =>(
                 hobbyType.includes(it.type) ? 
                 <div className="hobbyList"><input className="Survey_hobby" type="checkbox" name="hobby" value={it.id} 
-                onChange={(e)=>{setHobby(hobby => [...hobby, parseInt(e.target.value)])}}/>
+                onChange={(e)=>{
+
+                    const idx = hobby.indexOf(parseInt(e.target.value));
+                    // already exist
+                    if (idx !== -1){
+                        // delete item witch matches idx
+                        hobby.splice(idx, 1)
+                        setHobby([...hobby])
+
+                        return;
+                    }
+                    
+                    setHobby(hobby => [...hobby, parseInt(e.target.value)])}}/>
                 <p>{it.name} </p>
                 </div> : null
             ))}
