@@ -14,7 +14,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
     let url="";
 
     const handleSubmit = () => {
-        if(window.confirm(isEdit? "Do you want update Post?":"Do you want write new Post")){
+        if(window.confirm(isEdit? "모임 설정을 적용하시겠습니까?":"새로운 모임을 만드시겠습니까?")){
             if(!isEdit){
                 const createData = {
                     thumbnail: thumbnail,

@@ -4,8 +4,8 @@ import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
 import PostTable from './PostTable';
 const sortOptionList = [
-  {value: "latest", name:"latest"},
-  {value: "oldest", name:"oldest"},
+  {value: "latest", name:"최신순"},
+  {value: "oldest", name:"오래된순"},
 ];
 
 
