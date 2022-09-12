@@ -7,16 +7,14 @@ import LectureSearched from "./LectureSearched";
 import { BASE_URL } from "../../App";
 
 const LikeTest = (lectures, lectureLikeList) =>{
-    console.log(`like test: lectures - ${lectures}`)
-    console.log(lectures)
-    console.log(lectureLikeList)
+
     lectures.map((it)=> it.like = false)
 
     lectures.map((it) => {
-        console.log(`${it.lectureId} map 들어옴!`)
+        
         if(lectureLikeList.includes(it.lectureId)){
             it.like = true;
-            console.log(`${it.lectureId} true로 바뀜!`)
+            
         }
 
 })
@@ -47,6 +45,9 @@ function LectureSearch() {
             setLectureLikeList(lectureLikeListTmp);
             console.log("resultTmp")
             console.log(resultTmp)
+            resultTmp.sort(function (a, b) {
+                return a["lectureName"].localeCompare(b["lectureName"]);
+            });
             setResult(LikeTest(resultTmp, lectureLikeListTmp));
             console.log(result)
         }).catch(error => {

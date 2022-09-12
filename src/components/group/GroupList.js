@@ -21,7 +21,7 @@ const GroupList= ({groupList, recommendGroupList})=> {
              ))}
 
         </div>
-        <p className='group_title'> 내 그룹 목록</p>
+        <p className='group_title'> 내 모임 목록</p>
 
 
 
