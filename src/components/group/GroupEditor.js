@@ -10,6 +10,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
     const [thumbnail, setThumbnail] = useState("");
     const [explanation, setTitle] = useState("모임 설명");
     const [name, setGroupName] = useState("모임 이름");
+    const [category, setCategory] = useState("ex) 요리");
 
     let url="";
 
@@ -39,6 +40,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                     id: groupId,
                     thumbnail: thumbnail,
                     explanation: explanation,
+                    category,
                     name: name,
                 }
                 url = `${BASE_URL.group}/info/${groupId}`;
@@ -82,7 +84,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 <h4>모임 이름 </h4>
             <div ><input
             className="post_title"
-            value={name} onChange = {(e) => setGroupName(e.target.value)}/>
+            placeholder ={name} onChange = {(e) => setGroupName(e.target.value)}/>
             </div>
             </section>
 
@@ -101,7 +103,16 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 <h4>모임 설명</h4>
             <div ><input
             className="post_title"
-            value={explanation} onChange = {(e) => setTitle(e.target.value)}/>
+            placeholder ={explanation} onChange = {(e) => setTitle(e.target.value)}/>
+            </div>
+            </section>
+
+            {/* category */}
+            <section>
+                <h4>취미 분야</h4>
+            <div ><input
+            className="post_title"
+            placeholder = {category} onChange = {(e) => setCategory(e.target.value)}/>
             </div>
             </section>
 
