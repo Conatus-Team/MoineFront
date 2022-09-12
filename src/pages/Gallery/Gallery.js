@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react';
 import MyGroup from '../../components/MyGroup';
 import { useNavigate, useParams } from 'react-router-dom';
 import MyButton from '../../components/MyButton';
-
+import { BASE_URL } from "./../../App";
 
 
 function Gallery(){
@@ -13,15 +13,15 @@ function Gallery(){
     const {groupId} = useParams();
 
     useEffect(()=>{
-    axios.get("http://localhost:3000/assets/gallery_data.json")
+    axios.get(`${BASE_URL.react}/assets/gallery_data.json`)
     .then(response => {
         setGalleryData(response.data);
     });
     }, []);
 
     const images = galleryData.map((it)=>{ return({
-        original: `http://localhost:3000/assets${it.image}`,
-        thumbnail: `http://localhost:3000/assets${it.image}`
+        original: `${BASE_URL.react}/assets${it.image}`,
+        thumbnail: `${BASE_URL.react}/assets${it.image}`
     })
         
     }, []);
