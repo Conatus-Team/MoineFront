@@ -38,7 +38,7 @@ const LectureDetail = ()=>{
         <div className="lecture_thumbnail">
         <img src = {process.env.PUBLIC_URL+ `${originData.imagePath}`}/>
         </div>
-        <MyButton type = {'positive'} text ={'More'} onClick={() =>window.location.href = `${originData.lectureUrl}`}>
+        <MyButton type = {'positive'} text ={'더보기'} onClick={() =>window.location.href = `${originData.lectureUrl}`}>
 
         </MyButton>
         </div>

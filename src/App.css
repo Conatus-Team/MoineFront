@@ -93,6 +93,17 @@ body {
 
 }
 
+.user_image{
+  display:grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.user_data{
+  text-align: left;
+}
+
 
 /* My Button */
 .MyButton{
@@ -440,7 +451,9 @@ margin-top: 60px;
 height: 50px;
 }
 .group_detail{
-  padding-right:280px;
+  display: flex;
+  flex-direction: column;
+  /* padding-right:280px; */
   justify-content: center;
 }
 
@@ -510,6 +523,12 @@ height: 50px;
 .lecture_content .lecture_title{
   font-size: 25px;
 }
+.boardType1{
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
 .gallery_new{
@@ -578,6 +597,13 @@ height: 50px;
 
 
 .Survey{
+  /* display: grid;  
+  overflow: auto;
+  white-space: normal;
+  justify-content: center; */
+  /* align-items: center; */
+  /* justify-items: center; */
+  margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 40px;
   font-size: 30px;
@@ -586,7 +612,8 @@ height: 50px;
   box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
   width: 80%;
   padding-top: 50px;
-  height: 1000px;
+  padding-bottom: 50px;
+  height: 300vh;
   align-self: center;
 }
 
@@ -619,6 +646,23 @@ height: 50px;
   justify-content: center;
   margin: 20px;
 }
+
+.hobby_content2{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(16%, auto));
+}
+
+.hobby_content1{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(16%, auto));
+  /* grid-auto-flow:column; */
+  overflow: auto;
+  white-space: normal;
+  justify-content: center;
+  /* align-items: center; */
+  justify-items: center;
+}
+
 .hobbyList{
   /* display: flex; */
   font-size: 20px;

@@ -44,7 +44,7 @@ const LectureList= ({lectureList, recommendLectureList})=> {
 
 
 
-        <p className='lecture_title'>내 강의 목록</p>
+        <p className='lecture_title'>찜한 강의 목록</p>
         <div className="lectureList">
         {lectureList.map((it) =>(
           <LectureListTemp key = {it.lectureCrawling.lectureId} {...it.lectureCrawling}/>

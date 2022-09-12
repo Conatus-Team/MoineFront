@@ -17,14 +17,14 @@ function Gallery(){
     .then(response => {
         setGalleryData(response.data);
     });
-    }, [galleryData, setGalleryData]);
+    }, []);
 
     const images = galleryData.map((it)=>{ return({
         original: `http://localhost:3000/assets${it.image}`,
         thumbnail: `http://localhost:3000/assets${it.image}`
     })
         
-    });
+    }, []);
     console.log(images);
 
 
