@@ -21,7 +21,12 @@ function GroupSearch() {
             },
             })
             .then((res) => {
-            console.log('result',res);
+            // console.log('result',res);
+            const data = res.data
+
+            data.sort(function (a, b) {
+                return a["name"].localeCompare(b["name"]);
+            });
             setResult(res.data);
         }).catch(error => {
             console.log(error.response)
