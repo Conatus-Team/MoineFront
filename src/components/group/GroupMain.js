@@ -4,6 +4,8 @@ import MyButton from '../MyButton';
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import { BASE_URL } from '../../App';
+import defaultThumbnail from "./../Image/noimage_darkgreen.png";
+
 
 const GroupMain= ({originData})=> {
     const { id } = useParams();
@@ -45,7 +47,8 @@ const GroupMain= ({originData})=> {
       <div className="group_main">
        <div className='group_content'>
         <div className="group_thumbnail">
-        <img src = {process.env.PUBLIC_URL+ `${originData.thumbnail}`}/>
+        {originData.thumbnail === "" ? <img src = {defaultThumbnail}/>: <img src = {process.env.PUBLIC_URL+ `${originData.thumbnail}`}/>}
+        
         </div>
 
         <MyButton type = {'positive'} text ={'가입하기'} onClick={() => GroupRegister()}></MyButton>
