@@ -20,6 +20,7 @@ const GroupEditor =({isEdit, originData, groupId}) => {
                 const createData = {
                     thumbnail: thumbnail,
                     explanation: explanation,
+                    category: category,
                     name: name,
                 }
                 url = `${BASE_URL.group}/group/create`;
