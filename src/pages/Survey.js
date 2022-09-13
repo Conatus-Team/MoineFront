@@ -13,7 +13,7 @@ function Survey () {
 
 
     const [birth, setBirth] = useState(0);
-    const [location, setLocation] = useState("???");
+    const [location, setLocation] = useState("서울");
     const [hobbyType, setHobbyType] = useState([]);
     const [hobby, setHobby] = useState([]);
     const navigate = useNavigate();
