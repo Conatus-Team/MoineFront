@@ -19,7 +19,7 @@ const PostEditor =({isEdit, originData, groupId}) => {
     const [content, setContent] = useState("");
     const author = JSON.parse(sessionStorage.getItem('user')).userNickname;
     // const [author, setAuthor] = useState(`${sessionStorage.getItem("user").userNickname}`);
-    const [title, setTitle] = useState("title");
+    const [title, setTitle] = useState("제목");
     //const [groupName, setGroupName] =useState(originData.groupName);
     let id=0;
 
@@ -130,7 +130,7 @@ const PostEditor =({isEdit, originData, groupId}) => {
             <h4>내용 </h4>
             <div className="post_content">
             <textarea
-            placeholder="please enter the content"
+            placeholder="내용을 입력해 주세요"
             ref={contentRef}
             value = {content}
             onChange = {(e) => setContent(e.target.value)}/>
